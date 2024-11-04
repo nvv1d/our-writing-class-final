@@ -92,7 +92,6 @@
     <span>Designed by <strong><a href="mailto:navid.khiyavi@azaruniv.ac.ir" style="color: #1e90ff; text-decoration: none;">Navid Khiyavi</a></strong> for the <strong>TEFL M.A. Practicum Course, 2024 ©</strong></span>
   </p>
 </section>
-
 <style>
 /* Keyframe animation for sparkle effect */
 @keyframes sparkle {
@@ -106,19 +105,9 @@
   color: #f1f1f1;
 }
 
-/* Sparkle dots distributed evenly throughout the text */
+/* Create multiple sparkle points across the text */
 .shining-text span::before,
-.shining-text span::after,
-.shining-text span strong::before,
-.shining-text span strong::after,
-.shining-text span strong:nth-of-type(1)::before,
-.shining-text span strong:nth-of-type(1)::after,
-.shining-text span strong:nth-of-type(2)::before,
-.shining-text span strong:nth-of-type(2)::after,
-.shining-text span strong:nth-of-type(3)::before,
-.shining-text span strong:nth-of-type(3)::after,
-.shining-text span strong:nth-of-type(4)::before,
-.shining-text span strong:nth-of-type(4)::after {
+.shining-text span::after {
   content: '';
   position: absolute;
   border-radius: 50%;
@@ -126,7 +115,7 @@
   animation: sparkle 2s infinite ease-in-out;
 }
 
-/* Sparkles for "Designed by" */
+/* First set of sparkles */
 .shining-text span::before {
   width: 4px;
   height: 4px;
@@ -137,107 +126,122 @@
 }
 
 .shining-text span::after {
-  width: 4px;
-  height: 4px;
+  width: 5px;
+  height: 5px;
   background-color: #ffecb3;
   top: 80%;
-  left: 10%;
+  left: 15%;
   animation-delay: 0.4s;
 }
 
-/* Sparkles around "Navid Khiyavi" */
+/* Add more sparkle points throughout the text */
+.shining-text span::after {
+  width: 4px;
+  height: 4px;
+  background-color: #ffe082;
+  top: 30%;
+  left: 25%;
+  animation-delay: 0.6s;
+}
+
+.shining-text span strong:nth-of-type(1)::before,
+.shining-text span strong:nth-of-type(1)::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  animation: sparkle 2s infinite ease-in-out;
+}
+
 .shining-text span strong:nth-of-type(1)::before {
   width: 3px;
   height: 3px;
-  background-color: #fff8dc;
-  top: 30%;
-  left: 25%;
-  animation-delay: 0.8s;
+  background-color: #ffe082;
+  top: 15%;
+  left: 35%;
+  animation-delay: 0.5s;
 }
 
 .shining-text span strong:nth-of-type(1)::after {
   width: 4px;
   height: 4px;
   background-color: #fdd835;
-  top: 70%;
-  left: 30%;
+  top: 85%;
+  left: 45%;
+  animation-delay: 1s;
+}
+
+.shining-text span strong:nth-of-type(2)::before,
+.shining-text span strong:nth-of-type(2)::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  animation: sparkle 2s infinite ease-in-out;
+}
+
+.shining-text span strong:nth-of-type(2)::before {
+  width: 4px;
+  height: 4px;
+  background-color: #ffd700;
+  top: 50%;
+  left: 55%;
   animation-delay: 1.2s;
 }
 
-/* Sparkles near "for the" */
+.shining-text span strong:nth-of-type(2)::after {
+  width: 5px;
+  height: 5px;
+  background-color: #ffecb3;
+  top: 30%;
+  left: 65%;
+  animation-delay: 0.8s;
+}
+
+/* Additional sparkles near the end */
 .shining-text span strong:nth-of-type(2)::before {
   width: 3px;
   height: 3px;
-  background-color: #ffe082;
-  top: 40%;
-  left: 45%;
-  animation-delay: 1s;
+  background-color: #fff9c4;
+  top: 60%;
+  left: 75%;
+  animation-delay: 1.5s;
 }
 
 .shining-text span strong:nth-of-type(2)::after {
   width: 4px;
   height: 4px;
-  background-color: #ffeb3b;
-  top: 80%;
-  left: 50%;
-  animation-delay: 1.6s;
-}
-
-/* Sparkles near "TEFL" */
-.shining-text span strong:nth-of-type(3)::before {
-  width: 3px;
-  height: 3px;
-  background-color: #ffc107;
-  top: 25%;
-  left: 60%;
-  animation-delay: 1.4s;
-}
-
-.shining-text span strong:nth-of-type(3)::after {
-  width: 4px;
-  height: 4px;
-  background-color: #ffe57f;
-  top: 90%;
-  left: 65%;
+  background-color: #ffd740;
+  top: 70%;
+  left: 85%;
   animation-delay: 1.9s;
 }
 
-/* Sparkles near "M.A. Practicum Course, 2024 ©" */
-.shining-text span strong:nth-of-type(4)::before {
+/* Final sparkles */
+.shining-text span strong::before {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
   width: 3px;
   height: 3px;
-  background-color: #ffd740;
-  top: 30%;
-  left: 75%;
-  animation-delay: 1.7s;
-}
-
-.shining-text span strong:nth-of-type(4)::after {
-  width: 5px;
-  height: 5px;
-  background-color: #fff9c4;
-  top: 50%;
-  left: 85%;
-  animation-delay: 2.1s;
-}
-
-/* Final sparkles for additional even distribution */
-.shining-text span strong::before {
-  width: 4px;
-  height: 4px;
-  background-color: #ffeb3b;
-  top: 10%;
-  left: 90%;
-  animation-delay: 1.5s;
+  background-color: #ffc107;
+  top: 40%;
+  left: 95%;
+  opacity: 0;
+  animation: sparkle 2s infinite ease-in-out 1.3s;
 }
 
 .shining-text span strong::after {
-  width: 5px;
-  height: 5px;
-  background-color: #ffecb3;
-  top: 70%;
-  left: 95%;
-  animation-delay: 2.3s;
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  width: 4px;
+  height: 4px;
+  background-color: #ffe57f;
+  top: 50%;
+  right: 5%;
+  opacity: 0;
+  animation: sparkle 2s infinite ease-in-out 2s;
 }
 </style>
 
