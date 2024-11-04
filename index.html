@@ -28,7 +28,31 @@
     <meta name="theme-color" content="#e3b377">
     <meta property="og:title" content="Copy of Page 18">
     <meta property="og:type" content="website">
-  <meta data-intl-tel-input-cdn-path="intlTelInput/"></head>
+  <meta data-intl-tel-input-cdn-path="intlTelInput/">  <style>
+    /* Disable text selection across the entire page */
+    body {
+      -webkit-user-select: none; /* Chrome, Safari */
+      -moz-user-select: none;    /* Firefox */
+      -ms-user-select: none;     /* IE10+/Edge */
+      user-select: none;         /* Standard */
+    }
+
+    /* Disable dragging of images */
+    img {
+      pointer-events: none;
+      -webkit-user-drag: none;
+      user-drag: none;
+    }
+
+    /* Disable copy action on text elements */
+    p, h1, h2, h3, h4, h5, h6 {
+      -webkit-user-select: none; /* Chrome, Safari */
+      -moz-user-select: none;    /* Firefox */
+      -ms-user-select: none;     /* IE10+/Edge */
+      user-select: none;         /* Standard */
+    }
+  </style>
+</head>
   <body data-home-page="https://website6379576.nicepage.io/Copy-of-Page-18.html?version=ffe8a8d3-3611-839d-2d49-f1a0fde02c43" data-home-page-title="Copy of Page 18" data-path-to-root="/" data-include-products="false" class="u-body u-xl-mode" data-lang="en"> 
     <section class="u-align-center u-clearfix u-container-align-center u-valign-top-sm u-valign-top-xs u-section-1" id="sec-64e1">
       <div class="u-expanded-width u-grey-10 u-shape u-shape-rectangle u-shape-1"></div>
@@ -63,10 +87,6 @@
         </div>
       </div>
     </section>
-    
-    
-    
-    
 <section class="u-backlink u-clearfix u-grey-80" style="padding: 10px; background-color: #333; color: #f1f1f1; text-align: center;">
   <p class="u-text shining-text" style="font-size: 1.1rem; font-weight: bold;">
     <span>Designed by <strong><a href="mailto:navid.khiyavi@azaruniv.ac.ir" style="color: #f1f1f1; text-decoration: none;">Navid Khiyavi</a></strong> for the <strong>TEFL M.A. Practicum Course, 2024 ©</strong></span>
@@ -237,4 +257,18 @@ document.addEventListener('keydown', function(e) {
   }
 });
 </script>
+	    <script>
+    // Disable right-click context menu
+    document.addEventListener('contextmenu', function(event) {
+      event.preventDefault();
+    });
+
+    // Disable keyboard shortcuts for copying, printing, and other actions
+    document.addEventListener('keydown', function(event) {
+      // Block common copy shortcuts: Ctrl+C, Ctrl+X, Ctrl+S, Ctrl+P
+      if ((event.ctrlKey || event.metaKey) && (event.key === 'c' || event.key === 'x' || event.key === 's' || event.key === 'p')) {
+        event.preventDefault();
+      }
+    });
+  </script>
 </body></html>
