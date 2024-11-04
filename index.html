@@ -62,11 +62,55 @@
     
     
     
-    <section class="u-backlink u-clearfix u-grey-80" style="padding: 10px; background-color: #333; color: #f1f1f1; text-align: center;">
-  <p class="u-text" style="font-size: 1.1rem; font-weight: bold;">
+<section class="u-backlink u-clearfix u-grey-80" style="padding: 10px; background-color: #333; color: #f1f1f1; text-align: center;">
+  <p class="u-text shining-text" style="font-size: 1.1rem; font-weight: bold;">
     <span>Designed by <strong>Navid Khiyavi</strong> for the <strong>TEFL M.A. Practicum Course, 1402</strong></span>
   </p>
 </section>
+
+<style>
+/* Keyframe animation for subtle sparkle effect */
+@keyframes subtle-sparkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Shining effect for the text */
+.shining-text span {
+  position: relative;
+  color: #f1f1f1;
+}
+
+/* Star sparkle effect using :after pseudo-elements */
+.shining-text span::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background-color: #fff;
+  border-radius: 50%;
+  opacity: 0;
+  animation: subtle-sparkle 2s infinite ease-in-out;
+  transform: translate(-50%, -50%);
+}
+
+/* Customize sparkle positions and delays for more dynamic effect */
+.shining-text span strong:nth-of-type(1)::after {
+  top: 30%;
+  left: 20%;
+  background-color: #ffd700; /* Golden color for subtlety */
+  animation-delay: 0s;
+}
+
+.shining-text span strong:nth-of-type(2)::after {
+  top: 70%;
+  left: 80%;
+  background-color: #ffecb3; /* Light yellow for contrast */
+  animation-delay: 1s;
+}
+</style>
 
   
 </body></html>
