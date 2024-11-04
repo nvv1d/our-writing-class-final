@@ -69,56 +69,64 @@
     
 <section class="u-backlink u-clearfix u-grey-80" style="padding: 10px; background-color: #333; color: #f1f1f1; text-align: center;">
   <p class="u-text shining-text" style="font-size: 1.1rem; font-weight: bold;">
-    <span>Designed by <strong><a href="mailto:navid.khiyavi@azaruniv.ac.ir" style="color: #f1f1f1; text-decoration: none;">Navid Khiyavi</a></strong> for the <strong>TEFL M.A. Practicum Course, 2024 &copy;</strong></span>
+    <span>Designed by <strong><a href="mailto:navid.khiyavi@azaruniv.ac.ir" style="color: #f1f1f1; text-decoration: none;">Navid Khiyavi</a></strong> for the <strong>TEFL M.A. Practicum Course, 2024 &#169;</strong></span>
   </p>
 </section>
 
 <style>
-/* Keyframe animation for subtle sparkle effect */
+/* Keyframe animation for sparkle effect */
 @keyframes sparkle {
   0%, 100% { opacity: 0; transform: scale(0.8); }
   50% { opacity: 1; transform: scale(1.5); }
 }
 
 /* Shining effect for the text */
-.shining-text span {
+.shining-text {
   position: relative;
   color: #f1f1f1;
 }
 
-/* Star sparkle effect using :after pseudo-elements */
-.shining-text span::after {
+/* Sparkle effect on pseudo-elements for more dynamic positions */
+.shining-text span strong::before,
+.shining-text span strong::after {
   content: '';
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   background-color: #ffffff;
   border-radius: 50%;
   opacity: 0;
-  animation: sparkle 1.8s infinite ease-in-out;
-  transform: translate(-50%, -50%);
+  animation: sparkle 2s infinite ease-in-out;
 }
 
-/* Customize sparkle positions and delays for dynamic effect */
+/* Custom positions and colors for each sparkle */
+.shining-text span strong:nth-of-type(1)::before {
+  top: 0;
+  left: 5px;
+  background-color: #ffd700; /* Gold color */
+  animation-delay: 0.3s;
+}
+
 .shining-text span strong:nth-of-type(1)::after {
-  top: 20%;
-  left: 25%;
-  background-color: #fffacd; /* Brighter yellow */
-  animation-delay: 0s;
+  top: 10px;
+  left: 25px;
+  background-color: #ffecb3; /* Light yellow */
+  animation-delay: 1s;
+}
+
+.shining-text span strong:nth-of-type(2)::before {
+  top: 50%;
+  left: 50%;
+  background-color: #ffffff;
+  animation-delay: 1.5s;
 }
 
 .shining-text span strong:nth-of-type(2)::after {
-  top: 70%;
-  left: 75%;
-  background-color: #ffffe0; /* Light yellow for contrast */
-  animation-delay: 0.8s;
+  bottom: 5px;
+  right: 5px;
+  background-color: #ffffe0;
+  animation-delay: 0.6s;
 }
 </style>
 
-
-
-
-  
 </body></html>
