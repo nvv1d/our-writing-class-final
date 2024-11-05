@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <title>Submit Assignment</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/confetti-js@0.0.18/dist/index.min.css">
+  <style>
+    /* Disable text selection across the entire page */
+    body {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    /* Disable dragging of images */
+    img {
+      pointer-events: none;
+      -webkit-user-drag: none;
+      user-drag: none;
+    }
+
+    /* Disable copy action on text elements */
+    p, h1, h2, h3, h4, h5, h6 {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    .title {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 1.5rem;
+    }
+
+    .description {
+      text-align: justify;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      color: #333;
+      letter-spacing: 0.2px;
+    }
+
+    .topic {
+      background-color: rgba(227, 179, 119, 0.2);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .topic-title {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: #e3b377;
+      margin-bottom: 0.5rem;
+    }
+
+    .text-area {
+      width: 100%;
+      height: 300px;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-family: inherit;
+      resize: none;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .text-area:focus {
+      border-color: #e3b377;
+    }
+
+    .submit-button {
+      background-color: #e3b377;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      display: block;
+      margin-top: 1.5rem;
+      border: none;
+      cursor: pointer;
+    }
+
+    .submit-button:hover {
+      background-color: #d6a462;
+    }
+
+    .submit-message {
+      text-align: center;
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: #2c3e50;
+      margin-top: 1.5rem;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">Submit Your Assignment</h1>
+    <p class="description">
+      Howdy, writer! Welcome to the assignment submission page. This is your chance to shine and share your narrative writing with the class. I'm so excited to read your work and provide feedback. Just pour your heart into the text area below, and hit that submit button when you're ready. Let's do this!
+    </p>
+    <div class="topic">
+      <h2 class="topic-title">Topic: XXX</h2>
+      <p>Craft your narrative based on the topic above.</p>
+    </div>
+    <textarea class="text-area" placeholder="Start writing your narrative here..."></textarea>
+    <button class="submit-button">Submit Assignment</button>
+    <div class="submit-message">
+      <i class="fas fa-check-circle text-green-500 mr-2"></i>
+      Your assignment has been submitted! Can't wait to dive in.
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.18/dist/index.min.js"></script>
+  <script>
+    // Security scripts
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    }, false);
+
+    document.addEventListener('keydown', function(e) {
+      if (e.ctrlKey && e.key === 'u') {
+        e.preventDefault();
+      }
+      if ((e.ctrlKey && e.shiftKey && e.key === 'I') || e.key === 'F12') {
+        e.preventDefault();
+      }
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'x' || e.key === 's' || e.key === 'p')) {
+        e.preventDefault();
+      }
+    });
+
+    // Confetti animation on submit
+    const submitButton = document.querySelector('.submit-button');
+    const submitMessage = document.querySelector('.submit-message');
+
+    submitButton.addEventListener('click', () => {
+      const confetti = new ConfettiGenerator({
+        target: 'body',
+        props: {
+          particleCount: 100,
+          angle: 60,
+          spread: 55,
+          startVelocity: 50,
+          decay: 0.9,
+          width: '10px',
+          height: '10px',
+          colors: ['#e3b377', '#d6a462', '#2c3e50'],
+          ticks: 250
+        }
+      });
+
+      confetti.render();
+      setTimeout(() => {
+        confetti.clear();
+        submitMessage.style.display = 'block';
+      }, 3000);
+    });
+  </script>
+</body>
+</html>
