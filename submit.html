@@ -5,7 +5,6 @@
   <meta charset="utf-8">
   <title>Submit Your Assignment</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/confetti-js@0.0.18/dist/index.min.css">
   <!-- React and dependencies -->
   <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
@@ -270,25 +269,23 @@ Finally, conclude by sharing the resolution or lesson learned."></textarea>
         setSubmissionStatus("success"); // Display success message
 
         // Confetti effect to repeat twice
-        const confetti = new ConfettiGenerator({
-          target: 'confetti-canvas',
-          particleCount: 100,
-          angle: 60,
-          spread: 55,
-          startVelocity: 50,
-          decay: 0.9,
-          width: '10px',
-          height: '10px',
-          colors: ['#4CAF50', '#2E7D32', '#A5D6A7'],
-          ticks: 250
-        });
-
-        confetti.render();
-        setTimeout(() => {
-          confetti.clear();
-          confetti.render();
-          setTimeout(() => confetti.clear(), 3000);
-        }, 3000);
+const confettiSettings = {
+  target: 'confetti-canvas',
+  max: 150,
+  size: 1.5,
+  animate: true,
+  props: ['circle', 'square', 'triangle', 'line'],
+  colors: [[165,104,246],[230,61,135],[0,199,228],[253,214,126]],
+  clock: 25,
+  rotate: true,
+  start_from_edge: true,
+  respawn: true
+};
+const confetti = new ConfettiGenerator(confettiSettings);
+confetti.render();
+setTimeout(() => {
+  confetti.clear();
+}, 3000);
 
         console.log('Successfully sent to Telegram!');
       } catch (error) {
@@ -334,6 +331,6 @@ Finally, conclude by sharing the resolution or lesson learned."></textarea>
     document.getElementById('submit-button-root')
   );
 </script>
-<canvas id="confetti-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></canvas>
+<canvas id="confetti-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999;"></canvas>
 </body>
 </html>
