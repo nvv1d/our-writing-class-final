@@ -233,33 +233,30 @@ Finally, conclude by sharing the resolution or lesson learned."></textarea>
       }
     };
 
-    return (
-      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-        <button 
-          className="submit-button" 
-          onClick={handleSubmit}
-          disabled={isSubmitting}
-          style={{ opacity: isSubmitting ? 0.7 : 1 }}
-        >
-          {isSubmitting ? 'Submitting...' : 'Submit Assignment'}
-        </button>
-        {submissionStatus && (
-<span style={{
+  return (
+    &lt;div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}&gt;
+      &lt;button 
+        className="submit-button" 
+        onClick={handleSubmit}
+        disabled={isSubmitting}
+        style={{ opacity: isSubmitting ? 0.7 : 1 }}
+      &gt;
+        {isSubmitting ? 'Submitting...' : 'Submit Assignment'}
+      &lt;/button&gt;
+      {submissionStatus && (
+&lt;span style={{
   color: submissionStatus === "success" ? "#4CAF50" : "#f44336",
   fontWeight: '600',
   fontSize: '16px',
-  display: 'flex',
-  justifyContent: 'center',
-  gap: '10px',
+  display: 'inline-flex', // Changed from 'flex' to 'inline-flex'
   alignItems: 'center',
-  height: '100%',  // Ensures alignment with the button height
-  marginLeft: '8px'  // Adds space between button and text
-}}>
+  marginLeft: '8px'
+}}&gt;
   {submissionStatus === "success" ? "Submitted Successfully!" : "Please write something before submitting!"}
-</span>
-        )}
-      </div>
-    );
+&lt;/span&gt;
+      )}
+    &lt;/div&gt;
+  );
   };
 
   // Render the React component
