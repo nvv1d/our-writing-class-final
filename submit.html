@@ -183,7 +183,7 @@ Finally, conclude by sharing the resolution or lesson learned."></textarea>
       const textareaValue = document.querySelector('.text-area').value;
 
       if (!textareaValue.trim()) {
-        setSubmissionStatus("error"); // Display error message
+        setSubmissionStatus("empty"); // Display "Please write something" message
         return;
       }
 
@@ -191,8 +191,8 @@ Finally, conclude by sharing the resolution or lesson learned."></textarea>
       setSubmissionStatus(null);
 
       try {
-        const botToken = '7815257977:AAFAMpcCTnr7F-b5-Jy_LKpVegTPIIOUW8k';
-        const chatId = '-1002202270365';
+        const botToken = 'your_bot_token_here';
+        const chatId = 'your_chat_id_here';
 
         await axios.post(`https://api.telegram.org/bot${botToken}/sendMessage`, {
           chat_id: chatId,
@@ -227,7 +227,7 @@ Finally, conclude by sharing the resolution or lesson learned."></textarea>
         console.log('Successfully sent to Telegram!');
       } catch (error) {
         console.error('Error:', error);
-        setSubmissionStatus("error"); // Display error message
+        setSubmissionStatus("error"); // Display error message if submission fails
       } finally {
         setIsSubmitting(false);
       }
@@ -249,9 +249,10 @@ Finally, conclude by sharing the resolution or lesson learned."></textarea>
             fontWeight: '600',
             fontSize: '16px',
             display: 'flex',
-            alignItems: 'center'
+            alignItems: 'center',
+            transform: 'translateY(4px)' // Adjusts alignment lower
           }}>
-            {submissionStatus === "success" ? "Submitted Successfully!" : "Submission Failed!"}
+            {submissionStatus === "success" ? "Submitted Successfully!" : "Please write something before submitting!"}
           </span>
         )}
       </div>
