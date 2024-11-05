@@ -244,16 +244,17 @@ Finally, conclude by sharing the resolution or lesson learned."></textarea>
           {isSubmitting ? 'Submitting...' : 'Submit Assignment'}
         </button>
         {submissionStatus && (
-          <span style={{
-            color: submissionStatus === "success" ? "#4CAF50" : "#f44336",
-            fontWeight: '600',
-            fontSize: '16px',
-            display: 'flex',
-            alignItems: 'center',
-            transform: 'translateY(4px)' // Adjusts alignment lower
-          }}>
-            {submissionStatus === "success" ? "Submitted Successfully!" : "Please write something before submitting!"}
-          </span>
+<span style={{
+  color: submissionStatus === "success" ? "#4CAF50" : "#f44336",
+  fontWeight: '600',
+  fontSize: '16px',
+  display: 'flex',
+  alignItems: 'center',
+  height: '100%',  // Ensures alignment with the button height
+  marginLeft: '8px'  // Adds space between button and text
+}}>
+  {submissionStatus === "success" ? "Submitted Successfully!" : "Please write something before submitting!"}
+</span>
         )}
       </div>
     );
