@@ -139,6 +139,73 @@
       display: inline-block;
       margin-left: 1rem;
     }
+
+        /* Disable text selection across the entire page */
+    body {
+      -webkit-user-select: none; /* Chrome, Safari */
+      -moz-user-select: none;    /* Firefox */
+      -ms-user-select: none;     /* IE10+/Edge */
+      user-select: none;         /* Standard */
+    }
+
+    /* Disable dragging of images */
+    img {
+      pointer-events: none;
+      -webkit-user-drag: none;
+      user-drag: none;
+    }
+
+    /* Disable copy action on text elements */
+    p, h1, h2, h3, h4, h5, h6 {
+      -webkit-user-select: none; /* Chrome, Safari */
+      -moz-user-select: none;    /* Firefox */
+      -ms-user-select: none;     /* IE10+/Edge */
+      user-select: none;         /* Standard */
+    }
+	    /* Updated styles for the text content */
+    .u-text-4, .u-text-6, .u-text-8 {
+      text-align: justify;
+      line-height: 1.6;
+      margin: 20px 0;
+      padding: 0 15px;
+      font-size: 1rem;
+      color: #333;
+      letter-spacing: 0.2px;
+    }
+	      /* Card styles enhancement */
+    .u-list-item {
+      transition: transform 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Header styles */
+    .u-text-3, .u-text-5, .u-text-7 {
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    // Disable Ctrl+Shift+I, F12 to prevent "inspect element"
+document.addEventListener('keydown', function(e) {
+  if ((e.ctrlKey && e.shiftKey && e.key === 'I') || e.key === 'F12') {
+    e.preventDefault();
+  }
+});
+</script>
+	    <script>
+    // Disable right-click context menu
+    document.addEventListener('contextmenu', function(event) {
+      event.preventDefault();
+    });
+
+    // Disable keyboard shortcuts for copying, printing, and other actions
+    document.addEventListener('keydown', function(event) {
+      // Block common copy shortcuts: Ctrl+C, Ctrl+X, Ctrl+S, Ctrl+P
+      if ((event.ctrlKey || event.metaKey) && (event.key === 'c' || event.key === 'x' || event.key === 's' || event.key === 'p')) {
+        event.preventDefault();
+      }
+    });
   </style>
 </head>
 <body>
