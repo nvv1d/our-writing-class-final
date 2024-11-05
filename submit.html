@@ -13,6 +13,7 @@
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
+      background-color: rgba(247, 247, 247, 0.8);
     }
 
     /* Disable dragging of images */
@@ -71,7 +72,7 @@
 
     .text-area {
       width: 100%;
-      height: 300px;
+      height: 400px;
       padding: 1rem;
       border: 1px solid #ccc;
       border-radius: 0.5rem;
@@ -80,6 +81,12 @@
       resize: none;
       outline: none;
       transition: border-color 0.3s ease;
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .text-area::placeholder {
+      color: #ccc;
+      font-style: italic;
     }
 
     .text-area:focus {
@@ -123,7 +130,14 @@
       <h2 class="topic-title">Topic: XXX</h2>
       <p>Craft your narrative based on the topic above.</p>
     </div>
-    <textarea class="text-area" placeholder="Start writing your narrative here..."></textarea>
+    <textarea class="text-area" placeholder="
+Firstly, introduce your main character and the setting...
+
+Next, describe the conflict or challenge they are facing...
+
+Then, explain how the character tries to overcome the obstacle...
+
+Finally, conclude by sharing the resolution or lesson learned."></textarea>
     <button class="submit-button">Submit Assignment</button>
     <div class="submit-message">
       <i class="fas fa-check-circle text-green-500 mr-2"></i>
