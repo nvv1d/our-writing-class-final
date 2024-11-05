@@ -6,8 +6,12 @@
   <title>Submit Assignment ✍🏻</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/confetti-js@0.0.18/dist/index.min.css">
+  <!-- React and dependencies -->
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <style>
-    /* Disable text selection across the entire page */
     body {
       -webkit-user-select: none;
       -moz-user-select: none;
@@ -16,14 +20,12 @@
       background-color: rgba(247, 247, 247, 0.8);
     }
 
-    /* Disable dragging of images */
     img {
       pointer-events: none;
       -webkit-user-drag: none;
       user-drag: none;
     }
 
-    /* Disable copy action on text elements */
     p, h1, h2, h3, h4, h5, h6 {
       -webkit-user-select: none;
       -moz-user-select: none;
@@ -137,16 +139,100 @@ Next, describe the conflict or challenge they are facing...
 Then, explain how the character tries to overcome the obstacle...
 
 Finally, conclude by sharing the resolution or lesson learned."></textarea>
-    <button class="submit-button">Submit Assignment</button>
-    <div class="submit-message">
-      <i class="fas fa-check-circle text-green-500 mr-2"></i>
-      Your assignment has been submitted! Can't wait to dive in.
-    </div>
+    
+    <!-- React root div -->
+    <div id="submit-button-root"></div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.18/dist/index.min.js"></script>
+  
+  <!-- React component -->
+  <script type="text/babel">
+    const TelegramIntegration = () => {
+      const [submittedText, setSubmittedText] = React.useState('');
+      const [isSubmitting, setIsSubmitting] = React.useState(false);
+
+      const handleSubmit = async () => {
+        const textareaValue = document.querySelector('.text-area').value;
+        
+        if (!textareaValue.trim()) {
+          alert('Please write something before submitting!');
+          return;
+        }
+
+        setIsSubmitting(true);
+
+        try {
+          const botToken = '7815257977:AAFAMpcCTnr7F-b5-Jy_LKpVegTPIIOUW8k';
+          const chatId = '-1002202270365';
+
+          await axios.post(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+            chat_id: chatId,
+            text: textareaValue,
+            parse_mode: 'HTML'
+          });
+
+          setSubmittedText(textareaValue);
+
+          // Trigger confetti
+          const confetti = new ConfettiGenerator({
+            target: 'body',
+            props: {
+              particleCount: 100,
+              angle: 60,
+              spread: 55,
+              startVelocity: 50,
+              decay: 0.9,
+              width: '10px',
+              height: '10px',
+              colors: ['#e3b377', '#d6a462', '#2c3e50'],
+              ticks: 250
+            }
+          });
+
+          confetti.render();
+          setTimeout(() => {
+            confetti.clear();
+          }, 3000);
+
+          console.log('Successfully sent to Telegram!');
+        } catch (error) {
+          console.error('Error:', error);
+          alert('There was an error submitting your assignment. Please try again.');
+        } finally {
+          setIsSubmitting(false);
+        }
+      };
+
+      return (
+        <div>
+          <button 
+            className="submit-button" 
+            onClick={handleSubmit}
+            disabled={isSubmitting}
+            style={{ opacity: isSubmitting ? 0.7 : 1 }}
+          >
+            {isSubmitting ? 'Submitting...' : 'Submit Assignment'}
+          </button>
+          {submittedText && (
+            <div className="submit-message" style={{ display: 'block' }}>
+              <i className="fas fa-check-circle text-green-500 mr-2"></i>
+              Your assignment has been submitted successfully!
+            </div>
+          )}
+        </div>
+      );
+    };
+
+    // Render the React component
+    ReactDOM.render(
+      <TelegramIntegration />,
+      document.getElementById('submit-button-root')
+    );
+  </script>
+
+  <!-- Security scripts -->
   <script>
-    // Security scripts
     document.addEventListener('contextmenu', function(e) {
       e.preventDefault();
     }, false);
@@ -161,33 +247,6 @@ Finally, conclude by sharing the resolution or lesson learned."></textarea>
       if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'x' || e.key === 's' || e.key === 'p')) {
         e.preventDefault();
       }
-    });
-
-    // Confetti animation on submit
-    const submitButton = document.querySelector('.submit-button');
-    const submitMessage = document.querySelector('.submit-message');
-
-    submitButton.addEventListener('click', () => {
-      const confetti = new ConfettiGenerator({
-        target: 'body',
-        props: {
-          particleCount: 100,
-          angle: 60,
-          spread: 55,
-          startVelocity: 50,
-          decay: 0.9,
-          width: '10px',
-          height: '10px',
-          colors: ['#e3b377', '#d6a462', '#2c3e50'],
-          ticks: 250
-        }
-      });
-
-      confetti.render();
-      setTimeout(() => {
-        confetti.clear();
-        submitMessage.style.display = 'block';
-      }, 3000);
     });
   </script>
 </body>
