@@ -221,14 +221,6 @@ Finally, conclude by sharing the resolution or lesson learned."></textarea>
           setTimeout(() => {
             confetti.clear();
           }, 3000);
-
-          console.log('Successfully sent to Telegram!');
-        } catch (error) {
-          console.error('Error:', error);
-          alert('There was an error submitting your assignment. Please try again.');
-        } finally {
-          setIsSubmitting(false);
-        }
       };
 
       return (
