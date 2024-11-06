@@ -50,3 +50,12 @@ async function handler(req, res) {
 }
 
 export default allowCors(handler);
+export default function handler(req, res) {
+  if (req.method === 'POST') {
+    // Handle POST request logic
+    res.status(200).json({ message: "Assignment submitted successfully!" });
+  } else {
+    res.setHeader('Allow', ['POST']);
+    res.status(405).json({ error: "Method Not Allowed" });
+  }
+}
