@@ -239,62 +239,63 @@ Finally, conclude by sharing the resolution or lesson learned."></textarea>
   
   <!-- React component -->
 <script type="text/babel">
-  const TelegramIntegration = () => {
-    const [submittedText, setSubmittedText] = React.useState('');
-    const [isSubmitting, setIsSubmitting] = React.useState(false);
-    const [submissionStatus, setSubmissionStatus] = React.useState(null); // Tracks success or error
+const TelegramIntegration = () => {
+  const [submittedText, setSubmittedText] = React.useState('');
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [submissionStatus, setSubmissionStatus] = React.useState(null);
 
-    const handleSubmit = async () => {
-      const textareaValue = document.querySelector('.text-area').value;
+  const handleSubmit = async () => {
+    const textareaValue = document.querySelector('.text-area').value;
 
-      if (!textareaValue.trim()) {
-        setSubmissionStatus("empty"); // Display "Please write something" message
-        return;
+    if (!textareaValue.trim()) {
+      setSubmissionStatus("empty");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmissionStatus(null);
+
+    try {
+      const response = await fetch('/api/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ text: textareaValue })
+      });
+
+      if (!response.ok) {
+        throw new Error('Submission failed');
       }
 
-      setIsSubmitting(true);
-      setSubmissionStatus(null);
+      setSubmittedText(textareaValue);
+      setSubmissionStatus("success");
 
-      try {
-        const botToken = '7815257977:AAFAMpcCTnr7F-b5-Jy_LKpVegTPIIOUW8k';
-        const chatId = '-1002202270365';
+      const confettiSettings = {
+        target: 'confetti-canvas',
+        max: 150,
+        size: 1.5,
+        animate: true,
+        props: ['circle', 'square', 'triangle', 'line'],
+        colors: [[165,104,246],[230,61,135],[0,199,228],[253,214,126]],
+        clock: 25,
+        rotate: true,
+        start_from_edge: true,
+        respawn: true
+      };
+      const confetti = new ConfettiGenerator(confettiSettings);
+      confetti.render();
+      setTimeout(() => {
+        confetti.clear();
+      }, 3000);
 
-        await axios.post(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-          chat_id: chatId,
-          text: textareaValue,
-          parse_mode: 'HTML'
-        });
-
-        setSubmittedText(textareaValue);
-        setSubmissionStatus("success"); // Display success message
-
-        // Confetti effect to repeat twice
-const confettiSettings = {
-  target: 'confetti-canvas',
-  max: 150,
-  size: 1.5,
-  animate: true,
-  props: ['circle', 'square', 'triangle', 'line'],
-  colors: [[165,104,246],[230,61,135],[0,199,228],[253,214,126]],
-  clock: 25,
-  rotate: true,
-  start_from_edge: true,
-  respawn: true
-};
-const confetti = new ConfettiGenerator(confettiSettings);
-confetti.render();
-setTimeout(() => {
-  confetti.clear();
-}, 3000);
-
-        console.log('Successfully sent to Telegram!');
-      } catch (error) {
-        console.error('Error:', error);
-        setSubmissionStatus("error"); // Display error message if submission fails
-      } finally {
-        setIsSubmitting(false);
-      }
-    };
+    } catch (error) {
+      console.error('Error:', error);
+      setSubmissionStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
     return (
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
