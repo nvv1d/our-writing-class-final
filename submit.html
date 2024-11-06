@@ -35,21 +35,17 @@
     .container {
       max-width: 800px;
       margin: 0 auto;
-      padding: 0 2rem 2rem 2rem;
+      padding: 2rem;
       background-color: #ffffff;
       border-radius: 10px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .header-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 1rem;
-      margin-bottom: 1.5rem;
+      position: relative;
     }
 
     .home-button {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
       background-color: #e3b377;
       color: white;
       padding: 8px 16px;
@@ -69,9 +65,8 @@
       font-size: 2rem;
       font-weight: 600;
       color: #2c3e50;
-      text-align: center;
-      flex-grow: 1;
-      margin-right: 76px;
+      margin-bottom: 1.5rem;
+      padding-top: 2rem;
     }
 
     .description {
@@ -144,6 +139,53 @@
       margin-left: 1rem;
     }
 
+        /* Disable text selection across the entire page */
+    body {
+      -webkit-user-select: none; /* Chrome, Safari */
+      -moz-user-select: none;    /* Firefox */
+      -ms-user-select: none;     /* IE10+/Edge */
+      user-select: none;         /* Standard */
+    }
+
+    /* Disable dragging of images */
+    img {
+      pointer-events: none;
+      -webkit-user-drag: none;
+      user-drag: none;
+    }
+
+    /* Disable copy action on text elements */
+    p, h1, h2, h3, h4, h5, h6 {
+      -webkit-user-select: none; /* Chrome, Safari */
+      -moz-user-select: none;    /* Firefox */
+      -ms-user-select: none;     /* IE10+/Edge */
+      user-select: none;         /* Standard */
+    }
+	    /* Updated styles for the text content */
+    .u-text-4, .u-text-6, .u-text-8 {
+      text-align: justify;
+      line-height: 1.6;
+      margin: 20px 0;
+      padding: 0 15px;
+      font-size: 1rem;
+      color: #333;
+      letter-spacing: 0.2px;
+    }
+	      /* Card styles enhancement */
+    .u-list-item {
+      transition: transform 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Header styles */
+    .u-text-3, .u-text-5, .u-text-7 {
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+	      /* Add styling for dropdowns */
     .dropdown {
       width: 100%;
       padding: 0.75rem;
@@ -169,39 +211,37 @@
       display: block;
     }
   </style>
-  <script>
-    // Disable right-click context menu
-    document.addEventListener('contextmenu', function(e) {
-      e.preventDefault();
-    }, false);
+	<script>
+// Disable right-click context menu
+document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+}, false);
 
-    // Disable Ctrl+U to prevent "view page source"
-    document.addEventListener('keydown', function(e) {
-      if (e.ctrlKey && e.key === 'u') {
-        e.preventDefault();
-      }
-    });
+// Disable Ctrl+U to prevent "view page source"
+document.addEventListener('keydown', function(e) {
+  if (e.ctrlKey && e.key === 'u') {
+    e.preventDefault();
+  }
+});
 
-    // Disable Ctrl+Shift+I, F12 to prevent "inspect element"
-    document.addEventListener('keydown', function(e) {
-      if ((e.ctrlKey && e.shiftKey && e.key === 'I') || e.key === 'F12') {
-        e.preventDefault();
-      }
-    });
-  </script>
+// Disable Ctrl+Shift+I, F12 to prevent "inspect element"
+document.addEventListener('keydown', function(e) {
+  if ((e.ctrlKey && e.shiftKey && e.key === 'I') || e.key === 'F12') {
+    e.preventDefault();
+  }
+});
+</script>
 </head>
 <body>
   <div class="container">
-    <div class="header-container">
-      <a href="https://our-writing-class.vercel.app/" class="home-button">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-          <polyline points="9 22 9 12 15 12 15 22"></polyline>
-        </svg>
-        Home
-      </a>
-      <h1 class="title">Submit Your Assignment ✍🏻</h1>
-    </div>
+    <a href="https://our-writing-class.vercel.app/" class="home-button">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+      </svg>
+      Home
+    </a>
+    <h1 class="title">Submit Your Assignment ✍🏻</h1>
     <p class="description">
       Howdy, writer! Welcome to the assignment submission page. This is your chance to shine and share your narrative writing with the class. I'm so excited to read your work and provide feedback. Just pour your heart into the text area below, and hit that submit button when you're ready. Let's do this!
     </p>
@@ -214,21 +254,13 @@
     <label class="dropdown-label" for="name-dropdown">Name:</label>
     <select id="name-dropdown" class="dropdown">
       <option value="" disabled selected>Select your name</option>
-      <option>Ali Tahavvory</option>
-      <option>AmirAli Hashemi</option>
-      <option>Asra Bakhtar</option>
-      <option>Ata Aghamali</option>
-      <option>Farzane Hamdi</option>
-      <option>Leyla Ne'mati</option>
-      <option>Maryam Germchi</option>
-      <option>Nahid Mohammadi</option>
-      <option>Sana Ja'farkhani</option>
-      <option>Sahar Seraj</option>
-      <option>Tohid Sabbagh</option>
-      <option>Zahra Sa'adatKhah</option>
-      <option>Zahra ---</option>
+      <option>Student 1</option>
+      <option>Student 2</option>
+      <option>Student 3</option>
+      <!-- Add up to 14 student names here -->
+      <option>Student 14</option>
     </select>
-
+	  
     <div class="topic">
       <h2 class="topic-title">Topic: ---</h2>
       <p>Craft your narrative based on the topic above.</p>
@@ -240,69 +272,68 @@ Next, describe the conflict or challenge they are facing...
 Then, explain how the character tries to overcome the obstacle...
 
 Finally, conclude by sharing the resolution or lesson learned."></textarea>
-
+    
     <!-- React root div -->
     <div id="submit-button-root"></div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.18/dist/index.min.js"></script>
-
-<!-- React component with fixed validation -->
+  
+  <!-- React component -->
 <script type="text/babel">
   const TelegramIntegration = () => {
     const [submittedText, setSubmittedText] = React.useState('');
     const [isSubmitting, setIsSubmitting] = React.useState(false);
     const [submissionStatus, setSubmissionStatus] = React.useState(null);
 
-    const handleSubmit = async () => {
-      const textareaValue = document.querySelector('.text-area').value.trim();
-      const nameDropdown = document.getElementById('name-dropdown').value;
-      const classDropdown = document.getElementById('class-dropdown').value;
+const handleSubmit = async () => {
+  const textareaValue = document.querySelector('.text-area').value.trim();
+  const nameDropdown = document.getElementById('name-dropdown').value;
+  const classDropdown = document.getElementById('class-dropdown').value;
 
-      // Clear previous status before new submission attempt
-      setSubmissionStatus(null);
+  // Validation: Check if required fields are filled
+  if (!textareaValue) {
+    setSubmissionStatus("empty");
+    return;
+  }
+  if (!nameDropdown) {
+    setSubmissionStatus("nameEmpty");
+    return;
+  }
 
-      // Validation checks
-      if (!textareaValue) {
-        setSubmissionStatus("empty");
-        return;
-      }
-      if (!nameDropdown) {
-        setSubmissionStatus("nameEmpty");
-        return;
-      }
+  setIsSubmitting(true);
+  setSubmissionStatus(null); // Clear any previous messages
 
-      setIsSubmitting(true);
+  try {
+    const response = await axios.post('/api/submitAssignment', {
+      message: `Class: ${classDropdown}\nName: ${nameDropdown}\n\n${textareaValue}`, // Include class and name
+    });
 
-      try {
-        const response = await axios.post('/api/submitAssignment', {
-          message: `Class: ${classDropdown}\nName: ${nameDropdown}\n\n${textareaValue}`,
-        });
+    // Check the response to confirm success
+    if (response.status === 200 || response.data.ok) {
+      setSubmittedText(textareaValue);
+      setSubmissionStatus("success");
 
-        if (response.data.success) {
-          setSubmittedText(textareaValue);
-          setSubmissionStatus("success");
-
-          // Trigger confetti effect
-          const confettiSettings = { target: 'confetti-canvas' };
-          const confetti = new ConfettiGenerator(confettiSettings);
-          confetti.render();
-          setTimeout(() => confetti.clear(), 3000);
-        } else {
-          setSubmissionStatus("error");
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        setSubmissionStatus("error");
-      } finally {
-        setIsSubmitting(false);
-      }
-    };
+      // Trigger confetti effect
+      const confettiSettings = { /* confetti config */ };
+      const confetti = new ConfettiGenerator(confettiSettings);
+      confetti.render();
+      setTimeout(() => confetti.clear(), 3000);
+    } else {
+      setSubmissionStatus("error");
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    setSubmissionStatus("error");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
     return (
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-        <button
-          className="submit-button"
+        <button 
+          className="submit-button" 
           onClick={handleSubmit}
           disabled={isSubmitting}
           style={{ opacity: isSubmitting ? 0.7 : 1 }}
@@ -317,14 +348,12 @@ Finally, conclude by sharing the resolution or lesson learned."></textarea>
           }}>
             {submissionStatus === "success" ? "Submitted Successfully!" :
              submissionStatus === "nameEmpty" ? "Please select your name!" :
-             submissionStatus === "empty" ? "Please write something before submitting!" :
-             "An error occurred while submitting."}
+             "Please write something before submitting!"}
           </span>
         )}
       </div>
     );
   };
-
   // Render the React component
   ReactDOM.render(
     <TelegramIntegration />,
