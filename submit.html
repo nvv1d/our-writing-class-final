@@ -45,7 +45,7 @@
     .home-button {
       position: absolute;
       top: 1rem;
-      left: 2rem;  /* Changed from 1rem to 4rem to move it more to the right */
+      left: 2rem;
       background-color: #e3b377;
       color: white;
       padding: 8px 16px;
@@ -55,7 +55,7 @@
       display: flex;
       align-items: center;
       gap: 4px;
-}
+    }
 
     .home-button:hover {
       background-color: #d6a462;
@@ -139,53 +139,6 @@
       margin-left: 1rem;
     }
 
-        /* Disable text selection across the entire page */
-    body {
-      -webkit-user-select: none; /* Chrome, Safari */
-      -moz-user-select: none;    /* Firefox */
-      -ms-user-select: none;     /* IE10+/Edge */
-      user-select: none;         /* Standard */
-    }
-
-    /* Disable dragging of images */
-    img {
-      pointer-events: none;
-      -webkit-user-drag: none;
-      user-drag: none;
-    }
-
-    /* Disable copy action on text elements */
-    p, h1, h2, h3, h4, h5, h6 {
-      -webkit-user-select: none; /* Chrome, Safari */
-      -moz-user-select: none;    /* Firefox */
-      -ms-user-select: none;     /* IE10+/Edge */
-      user-select: none;         /* Standard */
-    }
-	    /* Updated styles for the text content */
-    .u-text-4, .u-text-6, .u-text-8 {
-      text-align: justify;
-      line-height: 1.6;
-      margin: 20px 0;
-      padding: 0 15px;
-      font-size: 1rem;
-      color: #333;
-      letter-spacing: 0.2px;
-    }
-	      /* Card styles enhancement */
-    .u-list-item {
-      transition: transform 0.3s ease;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Header styles */
-    .u-text-3, .u-text-5, .u-text-7 {
-      margin-top: 1.5rem;
-      margin-bottom: 1rem;
-      font-weight: 600;
-      color: #2c3e50;
-    }
-
-	      /* Add styling for dropdowns */
     .dropdown {
       width: 100%;
       padding: 0.75rem;
@@ -211,26 +164,26 @@
       display: block;
     }
   </style>
-	<script>
-// Disable right-click context menu
-document.addEventListener('contextmenu', function(e) {
-  e.preventDefault();
-}, false);
+  <script>
+    // Disable right-click context menu
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    }, false);
 
-// Disable Ctrl+U to prevent "view page source"
-document.addEventListener('keydown', function(e) {
-  if (e.ctrlKey && e.key === 'u') {
-    e.preventDefault();
-  }
-});
+    // Disable Ctrl+U to prevent "view page source"
+    document.addEventListener('keydown', function(e) {
+      if (e.ctrlKey && e.key === 'u') {
+        e.preventDefault();
+      }
+    });
 
-// Disable Ctrl+Shift+I, F12 to prevent "inspect element"
-document.addEventListener('keydown', function(e) {
-  if ((e.ctrlKey && e.shiftKey && e.key === 'I') || e.key === 'F12') {
-    e.preventDefault();
-  }
-});
-</script>
+    // Disable Ctrl+Shift+I, F12 to prevent "inspect element"
+    document.addEventListener('keydown', function(e) {
+      if ((e.ctrlKey && e.shiftKey && e.key === 'I') || e.key === 'F12') {
+        e.preventDefault();
+      }
+    });
+  </script>
 </head>
 <body>
   <div class="container">
@@ -254,13 +207,22 @@ document.addEventListener('keydown', function(e) {
     <label class="dropdown-label" for="name-dropdown">Name:</label>
     <select id="name-dropdown" class="dropdown">
       <option value="" disabled selected>Select your name</option>
-      <option>Student 1</option>
-      <option>Student 2</option>
-      <option>Student 3</option>
-      <!-- Add up to 14 student names here -->
-      <option>Student 14</option>
+      <option>Dr. Behzadpoor</option>
+      <option>Ali Tahavvory</option>
+      <option>AmirAli Hashemi</option>
+      <option>Asra Bakhtar</option>
+      <option>Ata Aghamali</option>
+      <option>Farzane Hamdi</option>
+      <option>Leyla Ne'mati</option>
+      <option>Maryam Germchi</option>
+      <option>Nahid Mohammadi</option>
+      <option>Sana Ja'farkhani</option>
+      <option>Sahar Seraj</option>
+      <option>Tohid Sabbagh</option>
+      <option>Zahra Sa'adatKhah</option>
+      <option>Zahra ---</option>
     </select>
-	  
+
     <div class="topic">
       <h2 class="topic-title">Topic: ---</h2>
       <p>Craft your narrative based on the topic above.</p>
@@ -272,68 +234,69 @@ Next, describe the conflict or challenge they are facing...
 Then, explain how the character tries to overcome the obstacle...
 
 Finally, conclude by sharing the resolution or lesson learned."></textarea>
-    
+
     <!-- React root div -->
     <div id="submit-button-root"></div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.18/dist/index.min.js"></script>
-  
-  <!-- React component -->
+
+<!-- React component with fixed validation -->
 <script type="text/babel">
   const TelegramIntegration = () => {
     const [submittedText, setSubmittedText] = React.useState('');
     const [isSubmitting, setIsSubmitting] = React.useState(false);
     const [submissionStatus, setSubmissionStatus] = React.useState(null);
 
-const handleSubmit = async () => {
-  const textareaValue = document.querySelector('.text-area').value.trim();
-  const nameDropdown = document.getElementById('name-dropdown').value;
-  const classDropdown = document.getElementById('class-dropdown').value;
+    const handleSubmit = async () => {
+      const textareaValue = document.querySelector('.text-area').value.trim();
+      const nameDropdown = document.getElementById('name-dropdown').value;
+      const classDropdown = document.getElementById('class-dropdown').value;
 
-  // Validation: Check if required fields are filled
-  if (!textareaValue) {
-    setSubmissionStatus("empty");
-    return;
-  }
-  if (!nameDropdown) {
-    setSubmissionStatus("nameEmpty");
-    return;
-  }
+      // Clear previous status before new submission attempt
+      setSubmissionStatus(null);
 
-  setIsSubmitting(true);
-  setSubmissionStatus(null); // Clear any previous messages
+      // Validation checks
+      if (!textareaValue) {
+        setSubmissionStatus("empty");
+        return;
+      }
+      if (!nameDropdown) {
+        setSubmissionStatus("nameEmpty");
+        return;
+      }
 
-  try {
-    const response = await axios.post('/api/submitAssignment', {
-      message: `Class: ${classDropdown}\nName: ${nameDropdown}\n\n${textareaValue}`, // Include class and name
-    });
+      setIsSubmitting(true);
 
-    // Check the response to confirm success
-    if (response.status === 200 || response.data.ok) {
-      setSubmittedText(textareaValue);
-      setSubmissionStatus("success");
+      try {
+        const response = await axios.post('/api/submitAssignment', {
+          message: `Class: ${classDropdown}\nName: ${nameDropdown}\n\n${textareaValue}`,
+        });
 
-      // Trigger confetti effect
-      const confettiSettings = { /* confetti config */ };
-      const confetti = new ConfettiGenerator(confettiSettings);
-      confetti.render();
-      setTimeout(() => confetti.clear(), 3000);
-    } else {
-      setSubmissionStatus("error");
-    }
-  } catch (error) {
-    console.error('Error:', error);
-    setSubmissionStatus("error");
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+        if (response.data.success) {
+          setSubmittedText(textareaValue);
+          setSubmissionStatus("success");
+
+          // Trigger confetti effect
+          const confettiSettings = { target: 'confetti-canvas' };
+          const confetti = new ConfettiGenerator(confettiSettings);
+          confetti.render();
+          setTimeout(() => confetti.clear(), 3000);
+        } else {
+          setSubmissionStatus("error");
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        setSubmissionStatus("error");
+      } finally {
+        setIsSubmitting(false);
+      }
+    };
 
     return (
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-        <button 
-          className="submit-button" 
+        <button
+          className="submit-button"
           onClick={handleSubmit}
           disabled={isSubmitting}
           style={{ opacity: isSubmitting ? 0.7 : 1 }}
@@ -348,12 +311,14 @@ const handleSubmit = async () => {
           }}>
             {submissionStatus === "success" ? "Submitted Successfully!" :
              submissionStatus === "nameEmpty" ? "Please select your name!" :
-             "Please write something before submitting!"}
+             submissionStatus === "empty" ? "Please write something before submitting!" :
+             "An error occurred while submitting."}
           </span>
         )}
       </div>
     );
   };
+
   // Render the React component
   ReactDOM.render(
     <TelegramIntegration />,
