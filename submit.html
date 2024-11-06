@@ -289,6 +289,7 @@ Finally, conclude by sharing the resolution or lesson learned."></textarea>
     const handleSubmit = async () => {
       const textareaValue = document.querySelector('.text-area').value;
       const nameDropdown = document.getElementById('name-dropdown').value;
+      const classDropdown = document.getElementById('class-dropdown').value;
 
       if (!textareaValue.trim()) {
         setSubmissionStatus("empty");
@@ -307,13 +308,14 @@ Finally, conclude by sharing the resolution or lesson learned."></textarea>
         const botToken = '7815257977:AAFAMpcCTnr7F-b5-Jy_LKpVegTPIIOUW8k';
         const chatId = '-1002202270365';
 
-        await axios.post('/api/submitAssignment', {
-          message: `${nameDropdown}: ${textareaValue}`, // Include selected name
+        const response = await axios.post('/api/submitAssignment', {
+          message: `Class: ${classDropdown}\nName: ${nameDropdown}\n\n${textareaValue}`, // Include class and name
         });
 
-        setSubmittedText(textareaValue);
-        setSubmissionStatus("success");
-
+        if (response.status === 200) {
+          setSubmittedText(textareaValue);
+          setSubmissionStatus("success");
+		
         // Confetti effect
         const confettiSettings = { /* confetti config */ };
         const confetti = new ConfettiGenerator(confettiSettings);
