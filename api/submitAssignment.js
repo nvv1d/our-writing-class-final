@@ -20,7 +20,7 @@ const allowCors = fn => async (req, res) => {
 
 async function handler(req, res) {
   console.log('Request method:', req.method); // Debugging: Check request method
-  
+
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Method Not Allowed' });
     return;
