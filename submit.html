@@ -300,7 +300,15 @@ Finally, conclude by sharing the resolution or lesson learned."></textarea>
         setSubmissionStatus("nameEmpty"); // Handle empty name
         return;
       }
-
+  // Validation: Check if required fields are filled
+  if (!textareaValue) {
+    setSubmissionStatus("empty");
+    return;
+  }
+  if (!nameDropdown) {
+    setSubmissionStatus("nameEmpty");
+    return;
+  }
       setIsSubmitting(true);
       setSubmissionStatus(null);
 
@@ -312,10 +320,10 @@ Finally, conclude by sharing the resolution or lesson learned."></textarea>
           message: `Class: ${classDropdown}\nName: ${nameDropdown}\n\n${textareaValue}`, // Include class and name
         });
 
-        if (response.status === 200) {
-          setSubmittedText(textareaValue);
-          setSubmissionStatus("success");
-
+    // Confirm if the submission was successful by checking the response status
+    if (response.status === 200 || response.data.ok) {  // Adjust to response structure
+      setSubmittedText(textareaValue);
+      setSubmissionStatus("success");
           // Confetti effect
           const confettiSettings = { /* confetti config */ };
           const confetti = new ConfettiGenerator(confettiSettings);
