@@ -1,4 +1,3 @@
-// pages/api/submitAssignment.js
 import axios from 'axios';
 
 export const config = {
@@ -9,8 +8,8 @@ export const config = {
 
 const allowCors = fn => async (req, res) => {
   res.setHeader('Access-Control-Allow-Credentials', true);
-  res.setHeader('Access-Control-Allow-Origin', '*'); // Update with the specific origin if needed
-  res.setHeader('Access-Control-Allow-Methods', 'POST');
+  res.setHeader('Access-Control-Allow-Origin', '*'); // Update with specific origin if needed
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') {
     res.status(200).end();
@@ -20,6 +19,8 @@ const allowCors = fn => async (req, res) => {
 };
 
 async function handler(req, res) {
+  console.log('Request method:', req.method); // Debugging: Check request method
+  
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Method Not Allowed' });
     return;
@@ -32,8 +33,8 @@ async function handler(req, res) {
     return;
   }
 
-  const botToken = '7815257977:AAFAMpcCTnr7F-b5-Jy_LKpVegTPIIOUW8k';
-  const chatId = '-1002202270365';
+  const botToken = process.env.BOT_TOKEN; // Use environment variable for security
+  const chatId = process.env.CHAT_ID; // Assuming chat ID is also an env variable
 
   try {
     await axios.post(`https://api.telegram.org/bot${botToken}/sendMessage`, {
@@ -50,12 +51,3 @@ async function handler(req, res) {
 }
 
 export default allowCors(handler);
-export default function handler(req, res) {
-  if (req.method === 'POST') {
-    // Handle POST request logic
-    res.status(200).json({ message: "Assignment submitted successfully!" });
-  } else {
-    res.setHeader('Allow', ['POST']);
-    res.status(405).json({ error: "Method Not Allowed" });
-  }
-}
