@@ -42,18 +42,20 @@
       position: relative;
     }
 
-    .home-button {
+.home-button {
+      position: absolute;
+      top: 1rem;
+      left: 4rem;  /* Changed from 1rem to 4rem to move it more to the right */
       background-color: #e3b377;
       color: white;
       padding: 8px 16px;
       border-radius: 5px;
       text-decoration: none;
       transition: background-color 0.3s ease;
-      display: inline-block;
-      margin-top: 1.5rem;
-      border: none;
-      cursor: pointer;
-    }
+      display: flex;
+      align-items: center;
+      gap: 4px;
+}
 
     .home-button:hover {
       background-color: #d6a462;
