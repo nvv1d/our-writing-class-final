@@ -245,10 +245,10 @@ document.addEventListener('keydown', function(e) {
     <p class="description">
       Howdy, writer! Welcome to the assignment submission page. This is your chance to shine and share your narrative writing with the class. I'm so excited to read your work and provide feedback. Just pour your heart into the text area below, and hit that submit button when you're ready. Let's do this!
     </p>
-	      <!-- Class and Name dropdowns -->
+    <!-- Class and Name dropdowns -->
     <label class="dropdown-label" for="class-dropdown">Class:</label>
     <select id="class-dropdown" class="dropdown">
-      <option>TEFL 402</option>
+      <option value="TEFL 402">TEFL 402</option>
     </select>
 
     <label class="dropdown-label" for="name-dropdown">Name:</label>
@@ -260,6 +260,7 @@ document.addEventListener('keydown', function(e) {
       <!-- Add up to 14 student names here -->
       <option>Student 14</option>
     </select>
+	  
     <div class="topic">
       <h2 class="topic-title">Topic: ---</h2>
       <p>Craft your narrative based on the topic above.</p>
@@ -284,7 +285,6 @@ Finally, conclude by sharing the resolution or lesson learned."></textarea>
     const [submittedText, setSubmittedText] = React.useState('');
     const [isSubmitting, setIsSubmitting] = React.useState(false);
     const [submissionStatus, setSubmissionStatus] = React.useState(null);
-    const [selectedName, setSelectedName] = React.useState(''); // Track selected name
 
     const handleSubmit = async () => {
       const textareaValue = document.querySelector('.text-area').value;
@@ -295,7 +295,7 @@ Finally, conclude by sharing the resolution or lesson learned."></textarea>
         setSubmissionStatus("empty");
         return;
       }
-      
+
       if (!nameDropdown) {
         setSubmissionStatus("nameEmpty"); // Handle empty name
         return;
@@ -315,12 +315,15 @@ Finally, conclude by sharing the resolution or lesson learned."></textarea>
         if (response.status === 200) {
           setSubmittedText(textareaValue);
           setSubmissionStatus("success");
-		
-        // Confetti effect
-        const confettiSettings = { /* confetti config */ };
-        const confetti = new ConfettiGenerator(confettiSettings);
-        confetti.render();
-        setTimeout(() => confetti.clear(), 3000);
+
+          // Confetti effect
+          const confettiSettings = { /* confetti config */ };
+          const confetti = new ConfettiGenerator(confettiSettings);
+          confetti.render();
+          setTimeout(() => confetti.clear(), 3000);
+        } else {
+          setSubmissionStatus("error");
+        }
 
       } catch (error) {
         console.error('Error:', error);
@@ -346,13 +349,14 @@ Finally, conclude by sharing the resolution or lesson learned."></textarea>
             fontWeight: '600',
             fontSize: '16px'
           }}>
-            {submissionStatus === "success" ? "Submitted Successfully!" : submissionStatus === "nameEmpty" ? "Please select your name!" : "Please write something before submitting!"}
+            {submissionStatus === "success" ? "Submitted Successfully!" :
+             submissionStatus === "nameEmpty" ? "Please select your name!" :
+             "Please write something before submitting!"}
           </span>
         )}
       </div>
     );
   };
-
   // Render the React component
   ReactDOM.render(
     <TelegramIntegration />,
