@@ -18,6 +18,40 @@
       user-select: none;
       background-color: rgba(247, 247, 247, 0.8);
     }
+   /* Add new styles for dropdowns */
+    .dropdown-container {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .dropdown-group {
+      flex: 1;
+    }
+
+    .dropdown-label {
+      display: block;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #2c3e50;
+      margin-bottom: 0.5rem;
+    }
+
+    .dropdown-select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      background-color: white;
+      color: #333;
+      transition: border-color 0.3s ease;
+      outline: none;
+    }
+
+    .dropdown-select:focus {
+      border-color: #e3b377;
+    }
 
     img {
       pointer-events: none;
@@ -219,6 +253,9 @@ document.addEventListener('keydown', function(e) {
     <p class="description">
       Howdy, writer! Welcome to the assignment submission page. This is your chance to shine and share your narrative writing with the class. I'm so excited to read your work and provide feedback. Just pour your heart into the text area below, and hit that submit button when you're ready. Let's do this!
     </p>
+    <!-- React root div for dropdowns -->
+    <div id="dropdowns-root"></div>
+
     <div class="topic">
       <h2 class="topic-title">Topic: ---</h2>
       <p>Craft your narrative based on the topic above.</p>
@@ -233,10 +270,57 @@ Finally, conclude by sharing the resolution or lesson learned."></textarea>
     
     <!-- React root div -->
     <div id="submit-button-root"></div>
+
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.18/dist/index.min.js"></script>
-  
+
+	  <!-- React components -->
+  <script type="text/babel">
+    // Dropdowns component
+    const FormDropdowns = () => {
+      const studentNames = [
+        "Alice Smith",
+        "Bob Johnson",
+        "Charlie Brown",
+        "Diana Martinez",
+        "Edward Wilson",
+        "Frank Anderson",
+        "Grace Lee",
+        "Henry Davis",
+        "Isabel Rodriguez",
+        "Jack Thompson",
+        "Kelly White",
+        "Liam Taylor",
+        "Maya Patel",
+        "Noah Garcia"
+      ];
+
+      return (
+        <div className="dropdown-container">
+          <div className="dropdown-group">
+            <label className="dropdown-label">Class</label>
+            <select className="dropdown-select">
+              <option value="TEFL402">TEFL 402</option>
+            </select>
+          </div>
+          <div className="dropdown-group">
+            <label className="dropdown-label">Name</label>
+            <select className="dropdown-select">
+              <option value="">Select your name</option>
+              {studentNames.map((name, index) => (
+                <option key={index} value={name}>{name}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+      );
+    };
+	      // Render the dropdowns component
+    ReactDOM.render(
+      <FormDropdowns />,
+      document.getElementById('dropdowns-root')
+    );
   <!-- React component -->
 <script type="text/babel">
   const TelegramIntegration = () => {
