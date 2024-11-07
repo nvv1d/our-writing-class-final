@@ -95,17 +95,20 @@
       z-index: -1;
     }
 
-    /* Glitter Sparkles */
-    .student-name::after {
-      content: url('https://em-content.zobj.net/source/telegram/386/sparkles_2728.webp'); /* URL of your sparkle image */
-      font-size: 1.8rem;
-      position: absolute;
-      top: 0;
-      left: -30%;
-      color: #e3b377;
-      animation: shine 3s linear infinite, sparkle 1s ease-in-out infinite;
-      opacity: 0.6;
-    }
+/* Glitter Sparkles with Image */
+.student-name::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -30%;
+  width: 1.8rem;  /* Set size for the sparkle image */
+  height: 1.8rem; /* Set size for the sparkle image */
+  background-image: url('https://em-content.zobj.net/source/telegram/386/sparkles_2728.webp'); /* Image URL */
+  background-size: contain;  /* Makes sure the image scales properly */
+  background-repeat: no-repeat;
+  animation: shine 3s linear infinite, sparkle 1s ease-in-out infinite;
+  opacity: 0.6;
+}
 
     /* Shimmering Glow Animation */
     @keyframes shine {
@@ -299,10 +302,10 @@
 
       <div class="hall-of-fame mt-16">
 <h3 class="title" style="display: inline-flex; align-items: center;">
-<img src="https://em-content.zobj.net/source/telegram/386/trophy_1f3c6.webp" 
+  Hall of Fame
+  <img src="https://em-content.zobj.net/source/telegram/386/trophy_1f3c6.webp" 
        alt="trophy" 
        style="width: 30px; height: 30px; margin-left: 8px;">
-  Hall of Fame
 </h3>
         <ol>
           <li><span>Week #1:</span> <b> [Student Name]</b></li>
