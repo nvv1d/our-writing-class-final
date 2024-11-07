@@ -14,17 +14,8 @@
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
+      overflow-x: hidden;
     }
-
-    img {
-      pointer-events: none;
-      -webkit-user-drag: none;
-      user-drag: none;
-    }
-
-    .bg-primary { background-color: #e3b377; }
-    .text-primary { color: #e3b377; }
-    .font-bold { font-weight: 600; }
 
     .featured-card {
       background-color: #fff;
@@ -63,7 +54,7 @@
       border-radius: 10px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       padding: 1.5rem;
-      margin-top: 50px; /* Added margin to prevent overlap */
+      margin-top: 50px;
       text-align: center;
       max-width: 600px;
       margin-left: auto;
@@ -93,6 +84,43 @@
       font-weight: bold;
       color: #e3b377;
     }
+
+    /* Fireworks particle effect */
+    .firework {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: linear-gradient(to right, #ffa500, #ff8c00, #ff7f50);
+      border-radius: 50%;
+      opacity: 0;
+      animation: firework-explode 1s ease-out forwards;
+    }
+
+    @keyframes firework-explode {
+      0% {
+        transform: scale(0.5);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(var(--x), var(--y)) scale(0);
+        opacity: 0;
+      }
+    }
+
+    /* Animated Crown Emoji */
+    .crown-emoji {
+      font-size: 2rem;
+      position: absolute;
+      top: -2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: float 2s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(-50%, 0); }
+      50% { transform: translate(-50%, -10px); }
+    }
   </style>
 </head>
 <body>
@@ -100,8 +128,7 @@
     <div class="container mx-auto px-4 py-8">
       <div class="featured-card">
         <h2>Student of the Week</h2>
-        <!-- Crown animation -->
-        <div style="font-size: 2rem; color: #e3b377; animation: emoji-float 3s ease-in-out infinite;">👑</div>
+        <div class="crown-emoji">👑</div>
         <p class="student-name">Jane Doe ✨</p>
         <p class="student-writing">
           [Student's writing will be added here]
@@ -111,35 +138,42 @@
       <div class="hall-of-fame mt-16">
         <h3>🏆 Hall of Fame</h3>
         <ol>
-          <li><span>Week #1:</span> - </li>
-          <li><span>Week #2:</span> - </li>
-          <li><span>Week #3:</span> - </li>
-          <li><span>Week #4:</span> - </li>
-          <li><span>Week #5:</span> - </li>
+          <li><span>Week #1:</span> John Smith</li>
+          <li><span>Week #2:</span> Emily Johnson</li>
+          <li><span>Week #3:</span> Michael Brown</li>
+          <li><span>Week #4:</span> Sarah Davis</li>
+          <li><span>Week #5:</span> David Wilson</li>
         </ol>
       </div>
     </div>
   </div>
 
   <script>
-    // Floating crown animation
-    document.addEventListener('DOMContentLoaded', function() {
-      const crown = document.querySelector('.featured-card .student-name');
-      crown.innerHTML = '👑 ' + crown.innerHTML;
-      crown.style.animation = 'emoji-float 3s ease-in-out infinite';
-    });
-    
-    // Simple CSS for animation
-    const style = document.createElement('style');
-    style.innerHTML = `
-      @keyframes emoji-float {
-        0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-10px); }
+    // Function to generate a firework explosion effect
+    function createFirework(x, y) {
+      const numParticles = 20; // Number of particles per firework
+      for (let i = 0; i < numParticles; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('firework');
+        particle.style.setProperty('--x', `${Math.random() * 100 - 50}px`);
+        particle.style.setProperty('--y', `${Math.random() * 100 - 50}px`);
+        particle.style.left = `${x}px`;
+        particle.style.top = `${y}px`;
+        document.body.appendChild(particle);
+
+        // Remove particle after animation ends
+        particle.addEventListener('animationend', () => particle.remove());
       }
-    `;
-    document.head.appendChild(style);
+    }
+
+    // Periodically trigger fireworks at random positions
+    setInterval(() => {
+      const x = Math.random() * window.innerWidth;
+      const y = Math.random() * window.innerHeight * 0.5; // Top half of the screen
+      createFirework(x, y);
+    }, 2000); // Interval in milliseconds
   </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
 </body>
