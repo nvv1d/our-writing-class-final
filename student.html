@@ -46,6 +46,8 @@
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       padding: 2rem;
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
 
     .featured-card h2 {
@@ -61,11 +63,17 @@
       color: #e3b377;
     }
 
+    .featured-card p.student-name::after {
+      content: "✨";
+      margin-left: 0.5rem;
+    }
+
     .featured-card p.student-writing {
       font-size: 1.2rem;
       line-height: 1.6;
       margin-bottom: 1.5rem;
       text-align: justify;
+      color: #333;
     }
 
     /* Leaderboard */
@@ -74,22 +82,29 @@
       border-radius: 10px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
     }
 
     .leaderboard h3 {
       font-size: 1.5rem;
       margin-bottom: 1rem;
       color: #2c3e50;
+      position: relative;
+      z-index: 1;
     }
 
     .leaderboard ol {
       list-style-type: decimal;
       padding-left: 1.5rem;
+      position: relative;
+      z-index: 1;
     }
 
     .leaderboard li {
       font-size: 1.1rem;
       margin-bottom: 0.5rem;
+      color: #333;
     }
 
     .leaderboard li span {
@@ -101,24 +116,24 @@
     @keyframes fireworks {
       0% {
         opacity: 0;
-        transform: scale(0.5);
+        transform: scale(0.5) rotate(0deg);
       }
       50% {
         opacity: 1;
-        transform: scale(1.2);
+        transform: scale(1.2) rotate(180deg);
       }
       100% {
         opacity: 0;
-        transform: scale(0.5);
+        transform: scale(0.5) rotate(360deg);
       }
     }
 
     .firework {
       position: absolute;
-      width: 10px;
-      height: 10px;
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
-      background-color: #ffd700;
+      background: linear-gradient(to right, #ffa500, #ff8c00, #ff7f50);
       animation: fireworks 2s infinite ease-in-out;
     }
   </style>
@@ -126,16 +141,17 @@
 <body>
   <div class="min-h-screen flex items-center justify-center relative overflow-hidden">
     <!-- Fireworks animation -->
-    <div class="firework" style="top: 20%; left: 10%;"></div>
-    <div class="firework" style="top: 30%; left: 80%;"></div>
-    <div class="firework" style="top: 50%; left: 50%;"></div>
+    <div class="firework" style="top: 15%; left: 10%;"></div>
+    <div class="firework" style="top: 35%; left: 80%;"></div>
+    <div class="firework" style="top: 55%; left: 45%;"></div>
+    <div class="firework" style="top: 75%; left: 65%;"></div>
 
     <div class="container mx-auto px-4 py-8">
       <div class="featured-card">
-        <h2>Student of the Week 🌟</h2>
+        <h2>Student of the Week</h2>
         <p class="student-name">Jane Doe</p>
         <p class="student-writing">
-          "This week's featured writing piece, 'The Power of Imagination', by Jane Doe, is a truly captivating exploration of the boundless potential of the human mind. Through her vivid descriptions and poetic language, Jane transports us to a world where the impossible becomes reality, and the limits of creativity are pushed to their very edge. Her work is a testament to the transformative power of the written word, and we are honored to showcase her exceptional talent."
+          [Student's writing will be added here]
         </p>
       </div>
 
@@ -148,6 +164,8 @@
           <li><span>4.</span> Sarah Davis</li>
           <li><span>5.</span> David Wilson</li>
         </ol>
+        <div class="firework" style="top: 20%; left: 90%;"></div>
+        <div class="firework" style="top: 80%; left: 10%;"></div>
       </div>
     </div>
   </div>
@@ -163,7 +181,7 @@
       setTimeout(() => {
         firework.remove();
       }, 2000);
-    }, 5000);
+    }, 3000);
   </script>
 </body>
 </html>
