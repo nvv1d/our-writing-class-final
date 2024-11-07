@@ -129,7 +129,7 @@
       animation: spotlight 4s infinite alternate;
     }
 
-    /* Spotlight effects */
+/* Spotlight Effect */
 .hall-of-fame {
   background-color: #fff;
   border-radius: 10px;
@@ -142,49 +142,24 @@
   margin-right: auto;
   position: relative;
   overflow: hidden;
-  animation: spotlight 4s infinite alternate;
+  animation: spotlight 3s ease-in-out infinite alternate;
 }
 
-.hall-of-fame::before,
-.hall-of-fame::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  width: 50%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.5);
-  z-index: 0;
-  pointer-events: none;
-  animation: beam 4s infinite alternate;
-}
-
-.hall-of-fame::before {
-  left: 0;
-  background: radial-gradient(circle at 100% 0%, rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0.1));
-}
-
-.hall-of-fame::after {
-  right: 0;
-  background: radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0.1));
-}
-
-/* Spotlight animation */
+/* Spotlight Keyframe Animation */
 @keyframes spotlight {
-  0% { background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.6), rgba(0, 0, 0, 0.05)); }
-  100% { background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0.05)); }
+  0% {
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.3) 10%, rgba(0, 0, 0, 0.05) 70%);
+    box-shadow: 0 0 20px rgba(255, 223, 84, 0.6);
+  }
+  50% {
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.5) 20%, rgba(0, 0, 0, 0.05) 60%);
+    box-shadow: 0 0 30px rgba(255, 223, 84, 0.7);
+  }
+  100% {
+    background: radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.3) 15%, rgba(0, 0, 0, 0.05) 80%);
+    box-shadow: 0 0 40px rgba(255, 223, 84, 0.8);
+  }
 }
-
-@keyframes beam {
-  0% { opacity: 0.6; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.1); }
-  100% { opacity: 0.6; transform: scale(1); }
-}
-
-    .hall-of-fame h3 {
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-      color: #2c3e50;
-    }
 
     /* Custom list styling to remove numbers */
     .hall-of-fame ol {
@@ -206,25 +181,43 @@
       margin-right: 0.3rem;
     }
 
- /* Fireworks particle effect */
+/* Fireworks particle effect */
 .firework {
   position: absolute;
-  width: 8px; /* Increase the size of the particles */
-  height: 8px; /* Increase the size of the particles */
-  background: linear-gradient(to right, #ffa500, #ff8c00, #ff7f50); /* Firework color */
+  width: 10px; /* Increased size of the fireworks */
+  height: 10px;
   border-radius: 50%;
   opacity: 1;
+  background: linear-gradient(to right, #ff4e00, #ffbb00, #ff4081); /* Firework explosion colors */
   animation: firework-explode 1s ease-out forwards;
+  transform-origin: center;
 }
 
+/* Keyframes for particle explosion */
 @keyframes firework-explode {
   0% {
-    transform: scale(1);
+    transform: scale(0.8) translate(0, 0);
     opacity: 1;
   }
   100% {
-    transform: translate(var(--x), var(--y)) scale(0);
+    transform: scale(0) translate(var(--x), var(--y));
     opacity: 0;
+  }
+}
+
+/* Animation for firework generation */
+@keyframes firework-shine {
+  0% {
+    opacity: 0.7;
+    transform: scale(1.2);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+  100% {
+    opacity: 0.7;
+    transform: scale(1.2);
   }
 }
 
@@ -277,15 +270,18 @@
   <script>
 // Function to generate a firework explosion effect
 function createFirework(x, y) {
-  const numParticles = 20; // Number of particles per firework
+  const numParticles = 40; // Increased number of particles for a larger explosion
   for (let i = 0; i < numParticles; i++) {
     const particle = document.createElement('div');
     particle.classList.add('firework');
-    particle.style.setProperty('--x', `${Math.random() * 100 - 50}px`);
-    particle.style.setProperty('--y', `${Math.random() * 100 - 50}px`);
+    particle.style.setProperty('--x', `${Math.random() * 200 - 100}px`); // Random spread in X-axis
+    particle.style.setProperty('--y', `${Math.random() * 200 - 100}px`); // Random spread in Y-axis
     particle.style.left = `${x}px`;
     particle.style.top = `${y}px`;
     document.body.appendChild(particle);
+
+    // Add the shine animation to give the firework some extra flare
+    particle.style.animation = `firework-shine 0.5s ease-in-out infinite, firework-explode 1s ease-out forwards`;
 
     // Remove particle after animation ends
     particle.addEventListener('animationend', () => particle.remove());
