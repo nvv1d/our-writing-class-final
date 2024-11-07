@@ -326,5 +326,25 @@
         document.querySelector('.featured-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 </script>
+        <script>
+    // Disable right-click context menu
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    }, false);
+
+    // Disable Ctrl+U to prevent "view page source"
+    document.addEventListener('keydown', function(e) {
+      if (e.ctrlKey && e.key === 'u') {
+        e.preventDefault();
+      }
+    });
+
+    // Disable Ctrl+Shift+I, F12 to prevent "inspect element"
+    document.addEventListener('keydown', function(e) {
+      if ((e.ctrlKey && e.shiftKey && e.key === 'I') || e.key === 'F12') {
+        e.preventDefault();
+      }
+    });
+  </script>
 </body>
 </html>
