@@ -193,22 +193,36 @@
 
   </style>
   <script>
-    // Disable right-click context menu
-    document.addEventListener('contextmenu', function(e) {
-      e.preventDefault();
-    }, false);
+// Disable right-click context menu
+document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+}, false);
 
-    // Disable Ctrl+U to prevent "view page source"
-    document.addEventListener('keydown', function(e) {
-      if (e.ctrlKey && e.key === 'u') {
-        e.preventDefault();
-      }
+// Disable Ctrl+U to prevent "view page source"
+document.addEventListener('keydown', function(e) {
+  if (e.ctrlKey && e.key === 'u') {
+    e.preventDefault();
+  }
+});
+
+// Disable Ctrl+Shift+I, F12 to prevent "inspect element"
+document.addEventListener('keydown', function(e) {
+  if ((e.ctrlKey && e.shiftKey && e.key === 'I') || e.key === 'F12') {
+    e.preventDefault();
+  }
+});
+</script>
+	    <script>
+    // Disable right-click context menu
+    document.addEventListener('contextmenu', function(event) {
+      event.preventDefault();
     });
 
-    // Disable Ctrl+Shift+I, F12 to prevent "inspect element"
-    document.addEventListener('keydown', function(e) {
-      if ((e.ctrlKey && e.shiftKey && e.key === 'I') || e.key === 'F12') {
-        e.preventDefault();
+    // Disable keyboard shortcuts for copying, printing, and other actions
+    document.addEventListener('keydown', function(event) {
+      // Block common copy shortcuts: Ctrl+C, Ctrl+X, Ctrl+S, Ctrl+P
+      if ((event.ctrlKey || event.metaKey) && (event.key === 'c' || event.key === 'x' || event.key === 's' || event.key === 'p')) {
+        event.preventDefault();
       }
     });
   </script>
