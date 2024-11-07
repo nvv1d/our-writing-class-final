@@ -9,6 +9,9 @@
   <title>Student of the Week</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.16/tailwind.min.css">
   <style>
+        html {
+    scroll-behavior: smooth;
+}
     body {
       font-family: 'Montserrat', sans-serif;
       background-color: rgba(227, 179, 119, 0.1);
@@ -157,6 +160,20 @@
       }
     }
 
+.hall-of-fame li {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: black;
+    display: flex;
+    align-items: center;
+}
+
+.hall-of-fame li::before {
+    content: "🏅";
+    margin-right: 8px;
+    font-size: 1.2rem;
+    color: #e3b377;
+}
     /* Custom list styling */
     .hall-of-fame ol {
       list-style: none;
@@ -193,6 +210,37 @@
       0%, 100% { transform: translate(-50%, 0); }
       50% { transform: translate(-50%, -10px); }
     }
+        @media (max-width: 640px) {
+    /* Featured Card Adjustments */
+    .featured-card {
+        padding: 1rem;
+        text-align: left; /* Left-align text for better readability */
+    }
+
+    /* Font size adjustments for headings and student name */
+    .featured-card h2 {
+        font-size: 1.5rem;
+    }
+    
+    .student-name {
+        font-size: 1.25rem;
+    }
+
+    /* Hall of Fame section adjustments */
+    .hall-of-fame {
+        padding: 1rem;
+    }
+
+    .hall-of-fame h3 {
+        font-size: 1.5rem;
+    }
+
+    /* Font size adjustments for list items */
+    .hall-of-fame li {
+        font-size: 1rem;
+    }
+}
+
   </style>
 </head>
 <body>
@@ -203,7 +251,7 @@
               <br> <!-- Adds space between the title and the crown emoji -->
         <!-- Container to group the crown and student name -->
         <div class="student-container">
-          <div class="crown-emoji">👑</div>
+          <div class="crown-emoji" aria-label="Crown emoji">👑</div>
           
           <p class="student-name">   [Student Name]</p>
         </div>
@@ -229,5 +277,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+      <script>
+    // Scrolls to the featured-card section on mobile devices
+    if (window.innerWidth <= 640) {
+        document.querySelector('.featured-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+</script>
 </body>
 </html>
