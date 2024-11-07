@@ -1,35 +1,45 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { ProgressBar } from '@/components/ui/progress-bar';
 import { Table, TableHead, TableBody, TableRow, TableCell } from '@/components/ui/table';
 
 const StudentPage = () => {
-  // Sample user data
-  const user = {
+  const [userData, setUserData] = useState({
     name: 'John Doe',
     class: 'TEFL 402',
     assignmentsSubmitted: 7,
     totalAssignments: 10,
-    badges: [
-      { id: 1, title: 'First Assignment Submitted', description: 'You\'ve completed your first assignment!' },
-      { id: 2, title: 'Writing Prodigy', description: 'Awarded for exceptional narrative writing.' },
-      { id: 3, title: 'Class Participation', description: 'Great job engaging with your peers!' },
-    ],
+    badges: 3,
     ranking: 5,
+    leaderboard: [
+      { rank: 1, name: 'John Doe', assignmentsSubmitted: 10, badges: 5 },
+      { rank: 2, name: 'Jane Smith', assignmentsSubmitted: 8, badges: 4 },
+      { rank: 3, name: 'Bob Johnson', assignmentsSubmitted: 7, badges: 3 },
+      { rank: 4, name: 'Sarah Lee', assignmentsSubmitted: 6, badges: 2 },
+      { rank: 5, name: 'Michael Chen', assignmentsSubmitted: 5, badges: 1 },
+    ],
+  });
+
+  const [challenges, setChallenges] = useState([
+    {
+      title: 'Creative Writing Challenge',
+      description: 'Write a 500-word short story based on the provided prompt. Deadline: 2 weeks.',
+      accepted: false,
+    },
+  ]);
+
+  const handleChallengeAccept = (index) => {
+    setChallenges((prevChallenges) => {
+      const updatedChallenges = [...prevChallenges];
+      updatedChallenges[index].accepted = true;
+      return updatedChallenges;
+    });
   };
 
-  // Sample leaderboard data
-  const leaderboard = [
-    { rank: 1, name: 'John Doe', assignmentsSubmitted: 10, badgesEarned: 5 },
-    { rank: 2, name: 'Jane Smith', assignmentsSubmitted: 8, badgesEarned: 4 },
-    { rank: 3, name: 'Bob Johnson', assignmentsSubmitted: 7, badgesEarned: 3 },
-    { rank: 4, name: 'Sarah Lee', assignmentsSubmitted: 6, badgesEarned: 2 },
-    { rank: 5, name: 'Michael Chen', assignmentsSubmitted: 5, badgesEarned: 1 },
-  ];
-
   return (
-    <div className="container mx-auto p-8">
+    <div className="container">
       <a href="https://our-writing-class.vercel.app/" className="home-button">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
@@ -37,73 +47,83 @@ const StudentPage = () => {
         </svg>
         Home
       </a>
-
       <h1 className="title">Welcome to the Student Page 👨‍🎓</h1>
       <p className="description">
         Hi there, students! This is your dedicated page to track your progress, earn achievements, and collaborate with your classmates. Let's dive in and make the most of our writing journey together.
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <Card>
-          <CardHeader>
-            <CardTitle>Your Profile</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex items-center mb-4">
-              <img src="/api/placeholder/80/80" alt="Profile Picture" className="rounded-full w-16 h-16 mr-4" />
-              <div>
-                <h3 className="font-medium text-lg">{user.name}</h3>
-                <p className="text-gray-500">{user.class}</p>
-              </div>
+      <Card className="mb-8">
+        <CardHeader>
+          <CardTitle>Your Profile</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex items-center mb-4">
+            <img src="/api/placeholder/80/80" alt="Profile Picture" className="rounded-full w-16 h-16 mr-4" />
+            <div>
+              <h3 className="font-medium text-lg">{userData.name}</h3>
+              <p className="text-gray-500">{userData.class}</p>
             </div>
-            <div className="flex justify-between items-center">
-              <div>
-                <h3 className="font-medium text-lg">Achievements</h3>
-                <div className="flex gap-2 mt-2">
-                  {user.badges.map((badge) => (
-                    <Badge key={badge.id}>{badge.title}</Badge>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <h3 className="font-medium text-lg">Ranking</h3>
-                <p className="text-gray-500 text-xl font-bold">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="inline-block mr-2">
-                    <path d="M1 3h6l3.63 10.47a2 2 0 0 0 1.93 1.53h6.11"></path>
-                    <path d="M1 3 v15"></path>
-                    <path d="M23 3 v15"></path>
+          </div>
+          <div className="flex justify-between items-center">
+            <div>
+              <h3 className="font-medium text-lg">Achievements</h3>
+              <div className="flex gap-2 mt-2">
+                <Badge>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="inline-block mr-1">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                    <path d="M2 17l10 5 10-5"></path>
+                    <path d="M2 12l10 5 10-5"></path>
                   </svg>
-                  {user.ranking}
-                </p>
+                  Submitted {userData.assignmentsSubmitted} Assignments
+                </Badge>
+                <Badge>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="inline-block mr-1">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                    <path d="M2 17l10 5 10-5"></path>
+                    <path d="M2 12l10 5 10-5"></path>
+                  </svg>
+                  Earned {userData.badges} Badges
+                </Badge>
               </div>
             </div>
-          </CardContent>
-        </Card>
+            <div>
+              <h3 className="font-medium text-lg">Ranking</h3>
+              <p className="text-gray-500 text-xl font-bold">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="inline-block mr-2">
+                  <path d="M1 3h6l3.63 10.47a2 2 0 0 0 1.93 1.53h6.11"></path>
+                  <path d="M1 3 v15"></path>
+                  <path d="M23 3 v15"></path>
+                </svg>
+                {userData.ranking}th
+              </p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Your Assignments</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex justify-between items-center mb-4">
-              <div>
-                <h3 className="font-medium text-lg">Assignments Submitted</h3>
-                <p className="text-gray-500">{user.assignmentsSubmitted} out of {user.totalAssignments}</p>
-              </div>
-              <ProgressBar value={user.assignmentsSubmitted / user.totalAssignments * 100} />
+      <Card className="mb-8">
+        <CardHeader>
+          <CardTitle>Your Assignments</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex justify-between items-center mb-4">
+            <div>
+              <h3 className="font-medium text-lg">Assignments Submitted</h3>
+              <p className="text-gray-500">{userData.assignmentsSubmitted} out of {userData.totalAssignments}</p>
             </div>
-            <div className="flex justify-between items-center">
-              <div>
-                <h3 className="font-medium text-lg">Assignments Remaining</h3>
-                <p className="text-gray-500">{user.totalAssignments - user.assignmentsSubmitted} left</p>
-              </div>
-              <ProgressBar value={(user.totalAssignments - user.assignmentsSubmitted) / user.totalAssignments * 100} />
+            <ProgressBar value={(userData.assignmentsSubmitted / userData.totalAssignments) * 100} />
+          </div>
+          <div className="flex justify-between items-center">
+            <div>
+              <h3 className="font-medium text-lg">Assignments Remaining</h3>
+              <p className="text-gray-500">{userData.totalAssignments - userData.assignmentsSubmitted} left</p>
             </div>
-          </CardContent>
-        </Card>
-      </div>
+            <ProgressBar value={(1 - userData.assignmentsSubmitted / userData.totalAssignments) * 100} />
+          </div>
+        </CardContent>
+      </Card>
 
-      <Card className="mt-8">
+      <Card className="mb-8">
         <CardHeader>
           <CardTitle>Class Leaderboard</CardTitle>
         </CardHeader>
@@ -118,12 +138,12 @@ const StudentPage = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {leaderboard.map((student) => (
+              {userData.leaderboard.map((student) => (
                 <TableRow key={student.rank}>
                   <TableCell>{student.rank}</TableCell>
                   <TableCell>{student.name}</TableCell>
                   <TableCell>{student.assignmentsSubmitted}</TableCell>
-                  <TableCell>{student.badgesEarned}</TableCell>
+                  <TableCell>{student.badges}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -131,35 +151,48 @@ const StudentPage = () => {
         </CardContent>
       </Card>
 
-      <Card className="mt-8">
+      <Card className="mb-8">
         <CardHeader>
           <CardTitle>Your Achievements</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {user.badges.map((badge) => (
-              <div key={badge.id} className="bg-gray-200 rounded-lg p-4 flex flex-col items-center">
-                <img src="/api/placeholder/64/64" alt={badge.title} className="w-16 h-16 mb-2" />
-                <h3 className="font-medium text-lg">{badge.title}</h3>
-                <p className="text-gray-500 text-sm">{badge.description}</p>
-              </div>
-            ))}
+          <div className="flex flex-wrap gap-4">
+            <div className="bg-gray-200 rounded-lg p-4 flex flex-col items-center">
+              <img src="/api/placeholder/64/64" alt="Badge 1" className="w-16 h-16 mb-2" />
+              <h3 className="font-medium text-lg">First Assignment Submitted</h3>
+              <p className="text-gray-500 text-sm">You've completed your first assignment!</p>
+            </div>
+            <div className="bg-gray-200 rounded-lg p-4 flex flex-col items-center">
+              <img src="/api/placeholder/64/64" alt="Badge 2" className="w-16 h-16 mb-2" />
+              <h3 className="font-medium text-lg">Writing Prodigy</h3>
+              <p className="text-gray-500 text-sm">Awarded for exceptional narrative writing.</p>
+            </div>
+            <div className="bg-gray-200 rounded-lg p-4 flex flex-col items-center">
+              <img src="/api/placeholder/64/64" alt="Badge 3" className="w-16 h-16 mb-2" />
+              <h3 className="font-medium text-lg">Class Participation</h3>
+              <p className="text-gray-500 text-sm">Great job engaging with your peers!</p>
+            </div>
           </div>
         </CardContent>
       </Card>
 
-      <Card className="mt-8">
+      <Card className="mb-8">
         <CardHeader>
           <CardTitle>Upcoming Challenges</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="bg-gray-200 rounded-lg p-4">
-            <h3 className="font-medium text-lg">Creative Writing Challenge</h3>
-            <p className="text-gray-500 mb-4">Write a 500-word short story based on the provided prompt. Deadline: 2 weeks.</p>
-            <button className="submit-button">
-              Accept Challenge
-            </button>
-          </div>
+          {challenges.map((challenge, index) => (
+            <div key={index} className="bg-gray-200 rounded-lg p-4">
+              <h3 className="font-medium text-lg">{challenge.title}</h3>
+              <p className="text-gray-500 mb-4">{challenge.description}</p>
+              {!challenge.accepted && (
+                <Button onClick={() => handleChallengeAccept(index)}>Accept Challenge</Button>
+              )}
+              {challenge.accepted && (
+                <p className="text-green-500">Challenge accepted!</p>
+              )}
+            </div>
+          ))}
         </CardContent>
       </Card>
     </div>
