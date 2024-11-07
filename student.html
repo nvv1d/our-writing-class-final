@@ -47,24 +47,65 @@
       overflow: hidden;
     }
 
-    /* More sophisticated star shine effect */
-    .student-name::after {
-      content: "✨";
-      font-size: 2rem;
-      position: absolute;
-      top: 0;
-      left: -30%;
-      color: #e3b377;
-      animation: shine 4s ease-in-out infinite;
-    }
+/* Enhanced Star Shine Effect */
+.student-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #e3b377;
+  position: relative;
+  overflow: hidden;
+}
 
-    @keyframes shine {
-      0% { left: -30%; opacity: 0; }
-      25% { left: 10%; opacity: 1; }
-      50% { left: 50%; opacity: 1; }
-      75% { left: 90%; opacity: 0; }
-      100% { left: 130%; opacity: 0; }
-    }
+/* Create a glow effect around the text */
+.student-name::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background: radial-gradient(circle, rgba(255, 223, 84, 0.5) 10%, rgba(255, 255, 255, 0) 70%);
+  filter: blur(8px);
+  animation: glowing 2s infinite alternate;
+  z-index: -1; /* Keep it behind the text */
+}
+
+/* Glitter Sparkles */
+.student-name::after {
+  content: "✨";
+  font-size: 1.8rem;
+  position: absolute;
+  top: 0;
+  left: -30%;
+  color: #e3b377;
+  animation: shine 3s linear infinite, sparkle 1s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+/* Shimmering Glow Animation */
+@keyframes shine {
+  0% { left: -30%; opacity: 0; }
+  50% { left: 50%; opacity: 1; }
+  100% { left: 130%; opacity: 0; }
+}
+
+/* Random sparkling particles */
+@keyframes sparkle {
+  0% { transform: translateX(0) translateY(0); opacity: 0.6; }
+  50% { transform: translateX(5px) translateY(-5px); opacity: 1; }
+  100% { transform: translateX(0) translateY(0); opacity: 0.6; }
+}
+
+/* Glowing effect for the name with soft halo */
+@keyframes glowing {
+  0% {
+    box-shadow: 0 0 10px rgba(227, 179, 119, 0.6), 0 0 20px rgba(227, 179, 119, 0.4), 0 0 30px rgba(227, 179, 119, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(227, 179, 119, 0.8), 0 0 30px rgba(227, 179, 119, 0.5), 0 0 45px rgba(227, 179, 119, 0.4);
+  }
+}
 
     .student-writing {
       font-size: 1.2rem;
@@ -85,33 +126,42 @@
       margin-right: auto;
       position: relative;
       overflow: hidden;
-      animation: spotlight 3s ease-in-out infinite alternate;
+      animation: spotlight 4s infinite alternate;
     }
 
-    /* Improved spotlight effect */
-    @keyframes spotlight {
-      0% {
-        background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.3) 10%, rgba(0, 0, 0, 0.05) 70%);
-        box-shadow: 0 0 20px rgba(255, 223, 84, 0.6);
-      }
-      50% {
-        background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.5) 20%, rgba(0, 0, 0, 0.05) 60%);
-        box-shadow: 0 0 30px rgba(255, 223, 84, 0.7);
-      }
-      100% {
-        background: radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.3) 15%, rgba(0, 0, 0, 0.05) 80%);
-        box-shadow: 0 0 40px rgba(255, 223, 84, 0.8);
-      }
-    }
+/* Spotlight Effect */
+.hall-of-fame {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-top: 50px;
+  text-align: center;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  overflow: hidden;
+  animation: spotlight 3s ease-in-out infinite alternate;
+}
 
-    .hall-of-fame h3 {
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-      color: #2c3e50;
-      font-weight: bold;  /* Make the title bold */
-    }
+/* Spotlight Keyframe Animation */
+@keyframes spotlight {
+  0% {
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.3) 10%, rgba(0, 0, 0, 0.05) 70%);
+    box-shadow: 0 0 20px rgba(255, 223, 84, 0.6);
+  }
+  50% {
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.5) 20%, rgba(0, 0, 0, 0.05) 60%);
+    box-shadow: 0 0 30px rgba(255, 223, 84, 0.7);
+  }
+  100% {
+    background: radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.3) 15%, rgba(0, 0, 0, 0.05) 80%);
+    box-shadow: 0 0 40px rgba(255, 223, 84, 0.8);
+  }
+}
 
-    /* Custom list styling for Hall of Fame with unbold "Week #" */
+    /* Custom list styling to remove numbers */
     .hall-of-fame ol {
       list-style: none;
       padding-left: 0;
@@ -122,11 +172,68 @@
       font-size: 1.1rem;
       margin-bottom: 0.5rem;
       color: #333;
-      font-weight: normal;  /* Unbold the "Week #" label */
     }
 
-    .hall-of-fame li span {
-      font-weight: bold;  /* Keep the student's name bold, but unbold the "Week #" */
+    .hall-of-fame li::before {
+      content: "Week #";
+      font-weight: bold;
+      color: #e3b377;
+      margin-right: 0.3rem;
+    }
+
+/* Fireworks particle effect */
+.firework {
+  position: absolute;
+  width: 10px; /* Increased size of the fireworks */
+  height: 10px;
+  border-radius: 50%;
+  opacity: 1;
+  background: linear-gradient(to right, #ff4e00, #ffbb00, #ff4081); /* Firework explosion colors */
+  animation: firework-explode 1s ease-out forwards;
+  transform-origin: center;
+}
+
+/* Keyframes for particle explosion */
+@keyframes firework-explode {
+  0% {
+    transform: scale(0.8) translate(0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0) translate(var(--x), var(--y));
+    opacity: 0;
+  }
+}
+
+/* Animation for firework generation */
+@keyframes firework-shine {
+  0% {
+    opacity: 0.7;
+    transform: scale(1.2);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+  100% {
+    opacity: 0.7;
+    transform: scale(1.2);
+  }
+}
+
+    /* Animated Crown Emoji */
+    .crown-emoji {
+      font-size: 2rem;
+      position: absolute;
+      top: -2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: float 2s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(-50%, 0); }
+      50% { transform: translate(-50%, -10px); }
     }
   </style>
 </head>
@@ -138,7 +245,8 @@
         <!-- Container to group the crown and student name -->
         <div class="student-container">
           <div class="crown-emoji">👑</div>
-          <p class="student-name">[Student Name]</p>
+          
+          <p class="student-name">   [Student Name]</p>
         </div>
         <p class="font-bold">This week's featured student, [Student Name], has impressed us all with their exceptional writing skills and creative flair. Their piece, titled '[Title]', captures the essence of our class theme in a truly inspiring way. We're thrilled to showcase their talent and celebrate their achievement.</p>
         <p class="student-writing">
@@ -149,18 +257,43 @@
       <div class="hall-of-fame mt-16">
         <h3>🏆 Hall of Fame</h3>
         <ol>
-          <li><span>1:</span> [Student Name]</li>
-          <li><span>2:</span> ---</li>
-          <li><span>3:</span> ---</li>
-          <li><span>4:</span> ---</li>
-          <li><span>5:</span> ---</li>
+          <li><span>1:</span> [Student Name] </li>
+          <li><span>2:</span> --- </li>
+          <li><span>3:</span> --- </li>
+          <li><span>4:</span> --- </li>
+          <li><span>5:</span> --- </li>
         </ol>
       </div>
     </div>
   </div>
 
   <script>
-    // Removed firework effect entirely
+// Function to generate a firework explosion effect
+function createFirework(x, y) {
+  const numParticles = 40; // Increased number of particles for a larger explosion
+  for (let i = 0; i < numParticles; i++) {
+    const particle = document.createElement('div');
+    particle.classList.add('firework');
+    particle.style.setProperty('--x', `${Math.random() * 200 - 100}px`); // Random spread in X-axis
+    particle.style.setProperty('--y', `${Math.random() * 200 - 100}px`); // Random spread in Y-axis
+    particle.style.left = `${x}px`;
+    particle.style.top = `${y}px`;
+    document.body.appendChild(particle);
+
+    // Add the shine animation to give the firework some extra flare
+    particle.style.animation = `firework-shine 0.5s ease-in-out infinite, firework-explode 1s ease-out forwards`;
+
+    // Remove particle after animation ends
+    particle.addEventListener('animationend', () => particle.remove());
+  }
+}
+
+// Periodically trigger fireworks at random positions
+setInterval(() => {
+  const x = Math.random() * window.innerWidth;  // Random horizontal position
+  const y = Math.random() * window.innerHeight * 0.5; // Top half of the screen
+  createFirework(x, y);
+}, 2000); // Interval in milliseconds
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
