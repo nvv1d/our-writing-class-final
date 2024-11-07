@@ -6,8 +6,10 @@
   <title>Student of the Week</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.16/tailwind.min.css">
   <style>
-    /* Disable text selection and image dragging */
     body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: rgba(227, 179, 119, 0.1);
+      color: #333;
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
@@ -20,26 +22,10 @@
       user-drag: none;
     }
 
-    /* Color scheme and typography */
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background-color: rgba(227, 179, 119, 0.1); /* Semi-transparent orange background */
-      color: #333;
-    }
+    .bg-primary { background-color: #e3b377; }
+    .text-primary { color: #e3b377; }
+    .font-bold { font-weight: 600; }
 
-    .bg-primary {
-      background-color: #e3b377;
-    }
-
-    .text-primary {
-      color: #e3b377;
-    }
-
-    .font-bold {
-      font-weight: 600;
-    }
-
-    /* Featured Student Card */
     .featured-card {
       background-color: #fff;
       border-radius: 10px;
@@ -64,11 +50,6 @@
       position: relative;
     }
 
-    .featured-card p.student-name::after {
-      content: "✨";
-      margin-left: 0.5rem;
-    }
-
     .featured-card p.student-writing {
       font-size: 1.2rem;
       line-height: 1.6;
@@ -77,16 +58,16 @@
       color: #333;
     }
 
-    /* Hall of Fame */
     .hall-of-fame {
       background-color: #fff;
       border-radius: 10px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       padding: 1.5rem;
-      position: relative;
+      margin-top: 50px; /* Added margin to prevent overlap */
       text-align: center;
       max-width: 600px;
-      margin: 0 auto;
+      margin-left: auto;
+      margin-right: auto;
       overflow: hidden;
     }
 
@@ -94,15 +75,11 @@
       font-size: 1.8rem;
       margin-bottom: 1rem;
       color: #2c3e50;
-      position: relative;
-      z-index: 1;
     }
 
     .hall-of-fame ol {
       list-style-type: decimal;
       padding-left: 1.5rem;
-      position: relative;
-      z-index: 1;
       text-align: left;
     }
 
@@ -116,125 +93,54 @@
       font-weight: bold;
       color: #e3b377;
     }
-
-    /* Fireworks Animation */
-    .firework {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background: radial-gradient(circle, #ff8c00, #ffa500, transparent);
-      border-radius: 50%;
-      animation: explode 2s ease-in-out infinite;
-      opacity: 0;
-    }
-
-    @keyframes explode {
-      0% {
-        opacity: 1;
-        transform: scale(0.3) translateY(0);
-      }
-      50% {
-        opacity: 0.8;
-        transform: scale(1.5) translateY(-30px);
-      }
-      100% {
-        opacity: 0;
-        transform: scale(0.1) translateY(-80px);
-      }
-    }
   </style>
 </head>
 <body>
   <div class="min-h-screen flex items-center justify-center relative overflow-hidden">
-    <!-- Fireworks animation -->
-    <div class="firework" style="top: 15%; left: 10%;"></div>
-    <div class="firework" style="top: 35%; left: 80%;"></div>
-    <div class="firework" style="top: 55%; left: 45%;"></div>
-    <div class="firework" style="top: 75%; left: 65%;"></div>
-
     <div class="container mx-auto px-4 py-8">
       <div class="featured-card">
         <h2>Student of the Week</h2>
-        <!-- Crown emoji that floats above the student's name -->
-        <div class="crown" style="font-size: 50px; margin-bottom: -30px; animation: emoji-float 3s infinite ease-in-out;">👑</div>
-        <p class="student-name">Jane Doe</p>
+        <!-- Crown animation -->
+        <div style="font-size: 2rem; color: #e3b377; animation: emoji-float 3s ease-in-out infinite;">👑</div>
+        <p class="student-name">Jane Doe ✨</p>
         <p class="student-writing">
           [Student's writing will be added here]
         </p>
       </div>
 
-      <div class="hall-of-fame mt-8">
-        <h3>Hall of Fame</h3>
+      <div class="hall-of-fame mt-16">
+        <h3>🏆 Hall of Fame</h3>
         <ol>
-          <li><span>Week #1:</span> John Smith</li>
-          <li><span>Week #2:</span> Emily Johnson</li>
-          <li><span>Week #3:</span> Michael Brown</li>
-          <li><span>Week #4:</span> Sarah Davis</li>
-          <li><span>Week #5:</span> David Wilson</li>
+          <li><span>Week #1:</span> - </li>
+          <li><span>Week #2:</span> - </li>
+          <li><span>Week #3:</span> - </li>
+          <li><span>Week #4:</span> - </li>
+          <li><span>Week #5:</span> - </li>
         </ol>
       </div>
     </div>
   </div>
 
-  <!-- JavaScript for Fireworks Animation -->
   <script>
-    // Dynamic Fireworks creation
-    setInterval(() => {
-      const firework = document.createElement('div');
-      firework.classList.add('firework');
-      firework.style.top = `${Math.floor(Math.random() * 80)}%`;
-      firework.style.left = `${Math.floor(Math.random() * 100)}%`;
-      document.body.appendChild(firework);
-      setTimeout(() => {
-        firework.remove();
-      }, 2000);
-    }, 3000);
+    // Floating crown animation
+    document.addEventListener('DOMContentLoaded', function() {
+      const crown = document.querySelector('.featured-card .student-name');
+      crown.innerHTML = '👑 ' + crown.innerHTML;
+      crown.style.animation = 'emoji-float 3s ease-in-out infinite';
+    });
+    
+    // Simple CSS for animation
+    const style = document.createElement('style');
+    style.innerHTML = `
+      @keyframes emoji-float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+      }
+    `;
+    document.head.appendChild(style);
   </script>
-
-  <!-- React Code for Floating Crown -->
-  <script type="text/babel">
-    import React, { useState, useEffect } from 'react';
-
-    const AnimatedEmoji = () => {
-      const [isVisible, setIsVisible] = useState(false);
-      const [isAnimating, setIsAnimating] = useState(false);
-
-      useEffect(() => {
-        setIsVisible(true);
-        setIsAnimating(true);
-
-        const timer = setTimeout(() => {
-          setIsAnimating(false);
-        }, 500);
-
-        return () => clearTimeout(timer);
-      }, []);
-
-      return (
-        <div className="fixed inset-0 flex items-center justify-center pointer-events-none z-50">
-          <div
-            className={`transform transition-all duration-500 ease-out ${
-              isVisible ? 'opacity-100' : 'opacity-0'
-            } ${isAnimating ? 'scale-150' : 'scale-100'}`}
-            style={{
-              fontSize: '160px',
-              textShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-              animation: isVisible ? 'emoji-float 3s ease-in-out infinite' : 'none',
-            }}
-          >
-            👑
-            <style jsx>{`
-              @keyframes emoji-float {
-                0%, 100% { transform: translateY(0px); }
-                50% { transform: translateY(-20px); }
-              }
-            `}</style>
-          </div>
-        </div>
-      );
-    };
-
-    export default AnimatedEmoji;
-  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
 </body>
 </html>
