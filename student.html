@@ -33,18 +33,21 @@
       color: #2c3e50;
     }
 
-    .featured-card p.student-name {
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin-bottom: 1rem;
-      color: #e3b377;
+    .student-container {
       position: relative;
+      display: inline-block;
+      margin-bottom: 1rem;
     }
 
-    .featured-card p.student-writing {
+    .student-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #e3b377;
+    }
+
+    .student-writing {
       font-size: 1.2rem;
       line-height: 1.6;
-      margin-bottom: 1.5rem;
       text-align: justify;
       color: #333;
     }
@@ -111,7 +114,7 @@
     .crown-emoji {
       font-size: 2rem;
       position: absolute;
-      top: -2rem;
+      top: -2rem; /* Adjusts the crown’s position above the name */
       left: 50%;
       transform: translateX(-50%);
       animation: float 2s ease-in-out infinite;
@@ -128,8 +131,11 @@
     <div class="container mx-auto px-4 py-8">
       <div class="featured-card">
         <h2>Student of the Week</h2>
-        <div class="crown-emoji">👑</div>
-        <p class="student-name">Jane Doe ✨</p>
+        <!-- Container to group the crown and student name -->
+        <div class="student-container">
+          <div class="crown-emoji">👑</div>
+          <p class="student-name">Jane Doe ✨</p>
+        </div>
         <p class="student-writing">
           [Student's writing will be added here]
         </p>
@@ -173,7 +179,7 @@
       createFirework(x, y);
     }, 2000); // Interval in milliseconds
   </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
 </body>
