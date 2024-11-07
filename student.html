@@ -43,6 +43,25 @@
       font-size: 1.5rem;
       font-weight: bold;
       color: #e3b377;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Star Shine Effect */
+    .student-name::after {
+      content: "✨";
+      font-size: 1.8rem;
+      position: absolute;
+      top: 0;
+      left: -30%;
+      color: #e3b377;
+      animation: shine 3s linear infinite;
+    }
+
+    @keyframes shine {
+      0% { left: -30%; opacity: 0; }
+      50% { left: 50%; opacity: 1; }
+      100% { left: 130%; opacity: 0; }
     }
 
     .student-writing {
@@ -62,7 +81,15 @@
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
+      position: relative;
       overflow: hidden;
+      animation: spotlight 4s infinite alternate;
+    }
+
+    /* Spotlight Effect */
+    @keyframes spotlight {
+      0% { background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.6), rgba(0, 0, 0, 0.05)); }
+      100% { background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0.05)); }
     }
 
     .hall-of-fame h3 {
@@ -71,9 +98,10 @@
       color: #2c3e50;
     }
 
+    /* Custom list styling to remove numbers */
     .hall-of-fame ol {
-      list-style-type: decimal;
-      padding-left: 1.5rem;
+      list-style: none;
+      padding-left: 0;
       text-align: left;
     }
 
@@ -83,9 +111,11 @@
       color: #333;
     }
 
-    .hall-of-fame li span {
+    .hall-of-fame li::before {
+      content: "Week #";
       font-weight: bold;
       color: #e3b377;
+      margin-right: 0.3rem;
     }
 
     /* Fireworks particle effect */
@@ -114,7 +144,7 @@
     .crown-emoji {
       font-size: 2rem;
       position: absolute;
-      top: -2rem; /* Adjusts the crown’s position above the name */
+      top: -2rem;
       left: 50%;
       transform: translateX(-50%);
       animation: float 2s ease-in-out infinite;
@@ -144,11 +174,11 @@
       <div class="hall-of-fame mt-16">
         <h3>🏆 Hall of Fame</h3>
         <ol>
-          <li><span>Week #1:</span> John Smith</li>
-          <li><span>Week #2:</span> Emily Johnson</li>
-          <li><span>Week #3:</span> Michael Brown</li>
-          <li><span>Week #4:</span> Sarah Davis</li>
-          <li><span>Week #5:</span> David Wilson</li>
+          <li><span>1:</span> John Smith</li>
+          <li><span>2:</span> Emily Johnson</
+          <li><span>3:</span> Michael Brown</li>
+          <li><span>4:</span> Sarah Davis</li>
+          <li><span>5:</span> David Wilson</li>
         </ol>
       </div>
     </div>
