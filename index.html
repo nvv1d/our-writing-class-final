@@ -18,13 +18,14 @@
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
     <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Arimo:400,400i,500,500i,600,600i,700,700i">
     
-    
+
     
     <script type="application/ld+json">{
 		"@context": "http://schema.org",
 		"@type": "Organization",
 		"name": ""
-}</script>
+}
+    </script>
     <meta name="theme-color" content="#e3b377">
     <meta property="og:title" content="Copy of Page 18">
     <meta property="og:type" content="website">
@@ -120,92 +121,7 @@
 .u-image-1, .u-image-2, .u-image-3 {
   margin-bottom: 20px;
 }
-
-	      /* Sign In Button in top right */
-    .signin-btn {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background-color: #2c3e50;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 5px;
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: background-color 0.3s ease;
-    }
-
-    .signin-btn:hover {
-      background-color: #34495e;
-    }
-
-    /* Modal styles */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.5);
-    }
-
-    .modal-content {
-      background-color: #fefefe;
-      margin: 10% auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 80%;
-      max-width: 400px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    .close-btn {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-    }
-
-    .close-btn:hover, .close-btn:focus {
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    .auth-form input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    .auth-form button {
-      width: 100%;
-      padding: 10px;
-      background-color: #2c3e50;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .auth-form button:hover {
-      background-color: #34495e;
-    }
-
-    .auth-form h2 {
-      text-align: center;
-      color: #2c3e50;
-      margin-bottom: 20px;
-    }
-  </style>
+	  
 </head>
 	<body class="u-body u-xl-mode">
   <!-- Sign In button at the top-right -->
@@ -216,6 +132,11 @@
     <div class="modal-content">
       <span class="close-btn" id="close-modal">&times;</span>
 
+	          <!-- Toggle between Sign Up and Login -->
+      <div style="text-align: center; margin-bottom: 20px;">
+        <button class="toggle-btn" id="show-signup">Sign Up</button>
+        <button class="toggle-btn" id="show-login">Login</button>
+      </div>
       <!-- Sign-Up Form -->
       <div class="auth-form" id="signup-section">
         <h2>Sign Up</h2>
@@ -279,12 +200,11 @@
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
 
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getAuth } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
 
   // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -299,11 +219,10 @@
   };
 
   // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-  import { getAuth } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-  const auth = getAuth(app);
-</script>
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+  </script>
 
   <script>
     // Toggle modal display
@@ -325,6 +244,17 @@
       }
     };
 
+	     // Toggle between Sign Up and Login forms
+    document.getElementById("show-signup").addEventListener("click", function () {
+      document.getElementById("signup-section").style.display = "block";
+      document.getElementById("login-section").style.display = "none";
+    });
+
+    document.getElementById("show-login").addEventListener("click", function () {
+      document.getElementById("signup-section").style.display = "none";
+      document.getElementById("login-section").style.display = "block";
+    });
+	  
     // Sign Up Form
     document.getElementById('signup-form').addEventListener('submit', function (e) {
       e.preventDefault();
@@ -365,6 +295,7 @@
     };
   </script>
 <style>
+	
 /* Keyframe animation for sparkle effect */
 @keyframes sparkle {
   0%, 100% { opacity: 0; transform: scale(0.5); }
@@ -515,8 +446,107 @@
   opacity: 0;
   animation: sparkle 2s infinite ease-in-out 2s;
 }
-</style>
 
+	  
+    .signin-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #2c3e50;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .signin-btn:hover {
+      background-color: #34495e;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 10% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 400px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .close-btn {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close-btn:hover, .close-btn:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .auth-form input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .auth-form button {
+      width: 100%;
+      padding: 10px;
+      background-color: #2c3e50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .auth-form button:hover {
+      background-color: #34495e;
+    }
+
+    .auth-form h2 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+
+    /* Toggle buttons for switching between Sign Up and Login forms */
+    .toggle-btn {
+      background-color: #2c3e50;
+      color: white;
+      padding: 5px 15px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      margin: 0 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .toggle-btn:hover {
+      background-color: #34495e;
+    }
+</style>
 
 <script>
 // Disable right-click context menu
@@ -552,4 +582,5 @@ document.addEventListener('keydown', function(e) {
       }
     });
   </script>
-</body></html>
+</body>
+</html>
