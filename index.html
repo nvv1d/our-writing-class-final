@@ -121,8 +121,122 @@
   margin-bottom: 20px;
 }
 
+	      /* Sign In Button in top right */
+    .signin-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #2c3e50;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .signin-btn:hover {
+      background-color: #34495e;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 10% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 400px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .close-btn {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close-btn:hover, .close-btn:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .auth-form input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .auth-form button {
+      width: 100%;
+      padding: 10px;
+      background-color: #2c3e50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .auth-form button:hover {
+      background-color: #34495e;
+    }
+
+    .auth-form h2 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
   </style>
 </head>
+	<body class="u-body u-xl-mode">
+  <!-- Sign In button at the top-right -->
+  <button class="signin-btn" id="signin-btn">Sign In</button>
+
+  <!-- Modal for Sign In/Sign Up -->
+  <div class="modal" id="auth-modal">
+    <div class="modal-content">
+      <span class="close-btn" id="close-modal">&times;</span>
+
+      <!-- Sign-Up Form -->
+      <div class="auth-form" id="signup-section">
+        <h2>Sign Up</h2>
+        <form id="signup-form">
+          <input type="email" id="signup-email" placeholder="Email" required />
+          <input type="password" id="signup-password" placeholder="Password" required />
+          <button type="submit">Sign Up</button>
+        </form>
+      </div>
+
+      <!-- Login Form -->
+      <div class="auth-form" id="login-section" style="display:none;">
+        <h2>Login</h2>
+        <form id="login-form">
+          <input type="email" id="login-email" placeholder="Email" required />
+          <input type="password" id="login-password" placeholder="Password" required />
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
   <body data-home-page="https://website6379576.nicepage.io/Copy-of-Page-18.html?version=ffe8a8d3-3611-839d-2d49-f1a0fde02c43" data-home-page-title="Copy of Page 18" data-path-to-root="/" data-include-products="false" class="u-body u-xl-mode" data-lang="en"> 
     <section class="u-align-center u-clearfix u-container-align-center u-valign-top-sm u-valign-top-xs u-section-1" id="sec-64e1">
       <div class="u-expanded-width u-grey-10 u-shape u-shape-rectangle u-shape-1"></div>
@@ -162,6 +276,93 @@
     <span>Designed by <strong><a href="mailto:navid.khiyavi@azaruniv.ac.ir" style="color: #1e90ff; text-decoration: none;">Navid Khiyavi</a></strong> for the <strong>TEFL M.A. Practicum Course, 2024 ©</strong></span>
   </p>
 </section>
+	    <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDvEZSUhXU5WAVoiSSHZQV37OBlX_YdjDQ",
+    authDomain: "our-writing-class.firebaseapp.com",
+    projectId: "our-writing-class",
+    storageBucket: "our-writing-class.firebasestorage.app",
+    messagingSenderId: "890902172266",
+    appId: "1:890902172266:web:84805634b0cf904b7f3013",
+    measurementId: "G-9V6PZNHMJ1"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+
+  <script>
+    // Toggle modal display
+    const modal = document.getElementById("auth-modal");
+    const signinBtn = document.getElementById("signin-btn");
+    const closeModal = document.getElementById("close-modal");
+
+    signinBtn.onclick = function () {
+      modal.style.display = "block";
+    };
+
+    closeModal.onclick = function () {
+      modal.style.display = "none";
+    };
+
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    };
+
+    // Sign Up Form
+    document.getElementById('signup-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+
+      auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          alert('Sign Up Successful');
+          modal.style.display = "none"; // Close modal after sign-up
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+    });
+
+    // Login Form
+    document.getElementById('login-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+
+      auth.signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          alert('Login Successful');
+          modal.style.display = "none"; // Close modal after login
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+    });
+
+    // Close modal if clicked outside
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    };
+  </script>
 <style>
 /* Keyframe animation for sparkle effect */
 @keyframes sparkle {
