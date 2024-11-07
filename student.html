@@ -1,204 +1,183 @@
-import React from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Avatar } from '@/components/ui/avatar';
-import { Alert, AlertDescription, AlertTitle, AlertDialog, AlertDialogAction } from '@/components/ui/alert';
-import { Heading, Paragraph } from '@/components/ui/typography';
-import { Table, TableHead, TableBody, TableRow, TableCell } from '@/components/ui/table';
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <title>Student Page</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
+  <!-- React and dependencies -->
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <style>
+    /* Reuse styles from submit.html */
+    /* ... */
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="https://our-writing-class.vercel.app/" class="home-button">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+      </svg>
+      Home
+    </a>
+    <h1 class="title">Welcome to the Student Page 👨‍🎓</h1>
+    <p class="description">
+      Hi there, students! This is your dedicated page to track your progress, earn achievements, and collaborate with your classmates. Let's dive in and make the most of our writing journey together.
+    </p>
 
-const StudentPage = () => {
-  return (
-    <div className="container mx-auto py-8">
-      <div className="flex justify-between items-center mb-4">
-        <a href="https://our-writing-class.vercel.app/" className="flex items-center text-gray-500 hover:text-gray-700 transition-colors">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-            <polyline points="9 22 9 12 15 12 15 22" />
-          </svg>
-          Home
-        </a>
+    <!-- Profile Section -->
+    <div class="profile-section">
+      <h2 class="topic-title">Your Profile</h2>
+      <div class="flex items-center mb-4">
+        <img src="/api/placeholder/80/80" alt="Profile Picture" class="rounded-full w-16 h-16 mr-4" />
+        <div>
+          <h3 class="font-medium text-lg">John Doe</h3>
+          <p class="text-gray-500">TEFL 402</p>
+        </div>
       </div>
-
-      <Heading as="h1" className="mb-4">Welcome to the Student Page 👨‍🎓</Heading>
-      <Paragraph className="text-gray-600 mb-8">
-        Hi there, students! This is your dedicated page to track your progress, earn achievements, and collaborate with your classmates. Let's dive in and make the most of our writing journey together.
-      </Paragraph>
-
-      {/* Profile Section */}
-      <Card className="mb-8">
-        <CardHeader>
-          <CardTitle>Your Profile</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="flex items-center mb-4">
-            <Avatar src="/api/placeholder/80/80" alt="Profile Picture" className="mr-4" />
-            <div>
-              <Heading as="h3" className="font-medium">John Doe</Heading>
-              <Paragraph className="text-gray-500">TEFL 402</Paragraph>
+      <div class="flex justify-between items-center">
+        <div>
+          <h3 class="font-medium text-lg">Achievements</h3>
+          <div class="flex gap-2 mt-2">
+            <div class="bg-gray-200 rounded-full px-3 py-1 text-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-1">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                <path d="M2 17l10 5 10-5"></path>
+                <path d="M2 12l10 5 10-5"></path>
+              </svg>
+              Submitted 7 Assignments
+            </div>
+            <div class="bg-gray-200 rounded-full px-3 py-1 text-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-1">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                <path d="M2 17l10 5 10-5"></path>
+                <path d="M2 12l10 5 10-5"></path>
+              </svg>
+              Earned 3 Badges
             </div>
           </div>
-          <div className="flex justify-between items-center">
-            <div>
-              <Heading as="h3" className="font-medium">Achievements</Heading>
-              <div className="flex gap-2 mt-2">
-                <Alert variant="subtle" className="bg-gray-200 rounded-full px-3 py-1 text-sm">
-                  <AlertTitle>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="inline-block mr-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                      <path d="M2 17l10 5 10-5" />
-                      <path d="M2 12l10 5 10-5" />
-                    </svg>
-                    Submitted 7 Assignments
-                  </AlertTitle>
-                </Alert>
-                <Alert variant="subtle" className="bg-gray-200 rounded-full px-3 py-1 text-sm">
-                  <AlertTitle>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="inline-block mr-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                      <path d="M2 17l10 5 10-5" />
-                      <path d="M2 12l10 5 10-5" />
-                    </svg>
-                    Earned 3 Badges
-                  </AlertTitle>
-                </Alert>
-              </div>
-            </div>
-            <div>
-              <Heading as="h3" className="font-medium">Ranking</Heading>
-              <Paragraph className="text-gray-500 text-xl font-bold">
-                <svg xmlns="http://www.w3.org/2000/svg" className="inline-block mr-2 h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M1 3h6l3.63 10.47a2 2 0 0 0 1.93 1.53h6.11" />
-                  <path d="M1 3 v15" />
-                  <path d="M23 3 v15" />
-                </svg>
-                5th
-              </Paragraph>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Assignments and Progress */}
-      <Card className="mb-8">
-        <CardHeader>
-          <CardTitle>Your Assignments</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="flex justify-between items-center mb-4">
-            <div>
-              <Heading as="h3" className="font-medium">Assignments Submitted</Heading>
-              <Paragraph className="text-gray-500">7 out of 10</Paragraph>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-2.5">
-              <div className="bg-[#e3b377] h-2.5 rounded-full" style={{ width: '70%' }} />
-            </div>
-          </div>
-          <div className="flex justify-between items-center">
-            <div>
-              <Heading as="h3" className="font-medium">Assignments Remaining</Heading>
-              <Paragraph className="text-gray-500">3 left</Paragraph>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-2.5">
-              <div className="bg-[#e3b377] h-2.5 rounded-full" style={{ width: '30%' }} />
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Leaderboard */}
-      <Card className="mb-8">
-        <CardHeader>
-          <CardTitle>Class Leaderboard</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Rank</TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>Assignments Submitted</TableCell>
-                <TableCell>Badges Earned</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <TableRow>
-                <TableCell>1</TableCell>
-                <TableCell>John Doe</TableCell>
-                <TableCell>10</TableCell>
-                <TableCell>5</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>2</TableCell>
-                <TableCell>Jane Smith</TableCell>
-                <TableCell>8</TableCell>
-                <TableCell>4</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>3</TableCell>
-                <TableCell>Bob Johnson</TableCell>
-                <TableCell>7</TableCell>
-                <TableCell>3</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>4</TableCell>
-                <TableCell>Sarah Lee</TableCell>
-                <TableCell>6</TableCell>
-                <TableCell>2</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>5</TableCell>
-                <TableCell>Michael Chen</TableCell>
-                <TableCell>5</TableCell>
-                <TableCell>1</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
-
-      {/* Badges and Achievements */}
-      <Card className="mb-8">
-        <CardHeader>
-          <CardTitle>Your Achievements</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="flex flex-wrap gap-4">
-            <Alert variant="subtle" className="bg-gray-200 rounded-lg p-4 flex flex-col items-center">
-              <Avatar src="/api/placeholder/64/64" alt="Badge 1" className="mb-2" />
-              <Heading as="h3" className="font-medium">First Assignment Submitted</Heading>
-              <Paragraph className="text-gray-500 text-sm">You've completed your first assignment!</Paragraph>
-            </Alert>
-            <Alert variant="subtle" className="bg-gray-200 rounded-lg p-4 flex flex-col items-center">
-              <Avatar src="/api/placeholder/64/64" alt="Badge 2" className="mb-2" />
-              <Heading as="h3" className="font-medium">Writing Prodigy</Heading>
-              <Paragraph className="text-gray-500 text-sm">Awarded for exceptional narrative writing.</Paragraph>
-            </Alert>
-            <Alert variant="subtle" className="bg-gray-200 rounded-lg p-4 flex flex-col items-center">
-              <Avatar src="/api/placeholder/64/64" alt="Badge 3" className="mb-2" />
-              <Heading as="h3" className="font-medium">Class Participation</Heading>
-              <Paragraph className="text-gray-500 text-sm">Great job engaging with your peers!</Paragraph>
-            </Alert>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Challenges and Quests */}
-      <Card className="mb-8">
-        <CardHeader>
-          <CardTitle>Upcoming Challenges</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Alert variant="subtle" className="bg-gray-200 rounded-lg p-4">
-            <AlertTitle className="font-medium">Creative Writing Challenge</AlertTitle>
-            <AlertDescription className="text-gray-500 mb-4">
-              Write a 500-word short story based on the provided prompt. Deadline: 2 weeks.
-            </AlertDescription>
-            <Button>Accept Challenge</Button>
-          </Alert>
-        </CardContent>
-      </Card>
+        </div>
+        <div>
+          <h3 class="font-medium text-lg">Ranking</h3>
+          <p class="text-gray-500 text-xl font-bold">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-2">
+              <path d="M1 3h6l3.63 10.47a2 2 0 0 0 1.93 1.53h6.11"></path>
+              <path d="M1 3 v15"></path>
+              <path d="M23 3 v15"></path>
+            </svg>
+            5th
+          </p>
+        </div>
+      </div>
     </div>
-  );
-};
 
-export default StudentPage;
+    <!-- Assignments and Progress -->
+    <div class="mt-8">
+      <h2 class="topic-title">Your Assignments</h2>
+      <div class="flex justify-between items-center mb-4">
+        <div>
+          <h3 class="font-medium text-lg">Assignments Submitted</h3>
+          <p class="text-gray-500">7 out of 10</p>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-2.5">
+          <div class="bg-e3b377 h-2.5 rounded-full" style="width: 70%"></div>
+        </div>
+      </div>
+      <div class="flex justify-between items-center">
+        <div>
+          <h3 class="font-medium text-lg">Assignments Remaining</h3>
+          <p class="text-gray-500">3 left</p>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-2.5">
+          <div class="bg-e3b377 h-2.5 rounded-full" style="width: 30%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Leaderboard -->
+    <div class="mt-8">
+      <h2 class="topic-title">Class Leaderboard</h2>
+      <table class="w-full border-collapse">
+        <thead>
+          <tr>
+            <th class="p-2 border text-left">Rank</th>
+            <th class="p-2 border text-left">Name</th>
+            <th class="p-2 border text-left">Assignments Submitted</th>
+            <th class="p-2 border text-left">Badges Earned</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="p-2 border">1</td>
+            <td class="p-2 border">John Doe</td>
+            <td class="p-2 border">10</td>
+            <td class="p-2 border">5</td>
+          </tr>
+          <tr>
+            <td class="p-2 border">2</td>
+            <td class="p-2 border">Jane Smith</td>
+            <td class="p-2 border">8</td>
+            <td class="p-2 border">4</td>
+          </tr>
+          <tr>
+            <td class="p-2 border">3</td>
+            <td class="p-2 border">Bob Johnson</td>
+            <td class="p-2 border">7</td>
+            <td class="p-2 border">3</td>
+          </tr>
+          <tr>
+            <td class="p-2 border">4</td>
+            <td class="p-2 border">Sarah Lee</td>
+            <td class="p-2 border">6</td>
+            <td class="p-2 border">2</td>
+          </tr>
+          <tr>
+            <td class="p-2 border">5</td>
+            <td class="p-2 border">Michael Chen</td>
+            <td class="p-2 border">5</td>
+            <td class="p-2 border">1</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Badges and Achievements -->
+    <div class="mt-8">
+      <h2 class="topic-title">Your Achievements</h2>
+      <div class="flex flex-wrap gap-4">
+        <div class="bg-gray-200 rounded-lg p-4 flex flex-col items-center">
+          <img src="/api/placeholder/64/64" alt="Badge 1" class="w-16 h-16 mb-2" />
+          <h3 class="font-medium text-lg">First Assignment Submitted</h3>
+          <p class="text-gray-500 text-sm">You've completed your first assignment!</p>
+        </div>
+        <div class="bg-gray-200 rounded-lg p-4 flex flex-col items-center">
+          <img src="/api/placeholder/64/64" alt="Badge 2" class="w-16 h-16 mb-2" />
+          <h3 class="font-medium text-lg">Writing Prodigy</h3>
+          <p class="text-gray-500 text-sm">Awarded for exceptional narrative writing.</p>
+        </div>
+        <div class="bg-gray-200 rounded-lg p-4 flex flex-col items-center">
+          <img src="/api/placeholder/64/64" alt="Badge 3" class="w-16 h-16 mb-2" />
+          <h3 class="font-medium text-lg">Class Participation</h3>
+          <p class="text-gray-500 text-sm">Great job engaging with your peers!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Challenges and Quests -->
+    <div class="mt-8">
+      <h2 class="topic-title">Upcoming Challenges</h2>
+      <div class="bg-gray-200 rounded-lg p-4">
+        <h3 class="font-medium text-lg">Creative Writing Challenge</h3>
+        <p class="text-gray-500 mb-4">Write a 500-word short story based on the provided prompt. Deadline: 2 weeks.</p>
+        <button class="submit-button">
+          Accept Challenge
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
