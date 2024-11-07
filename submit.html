@@ -1,330 +1,204 @@
-<!DOCTYPE html>
-<html style="font-size: 16px;" lang="en">
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta charset="utf-8">
-  <title>Submit Your Assignment</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
-  <!-- React and dependencies -->
-  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
-  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
-  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <style>
-    body {
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      background-color: rgba(247, 247, 247, 0.8);
-    }
+import React from 'react';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Avatar } from '@/components/ui/avatar';
+import { Alert, AlertDescription, AlertTitle, AlertDialog, AlertDialogAction } from '@/components/ui/alert';
+import { Heading, Paragraph } from '@/components/ui/typography';
+import { Table, TableHead, TableBody, TableRow, TableCell } from '@/components/ui/table';
 
-    img {
-      pointer-events: none;
-      -webkit-user-drag: none;
-      user-drag: none;
-    }
-
-    p, h1, h2, h3, h4, h5, h6 {
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem;
-      background-color: #ffffff;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      position: relative;
-    }
-
-    .home-button {
-      position: absolute;
-      top: 1rem;
-      left: 2rem;
-      background-color: #e3b377;
-      color: white;
-      padding: 8px 16px;
-      border-radius: 5px;
-      text-decoration: none;
-      transition: background-color 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .home-button:hover {
-      background-color: #d6a462;
-    }
-
-    .title {
-      font-size: 2rem;
-      font-weight: 600;
-      color: #2c3e50;
-      margin-bottom: 1.5rem;
-      padding-top: 2rem;
-    }
-
-    .description {
-      text-align: justify;
-      line-height: 1.6;
-      margin-bottom: 2rem;
-      color: #333;
-      letter-spacing: 0.2px;
-    }
-
-    .topic {
-      background-color: rgba(227, 179, 119, 0.2);
-      border-radius: 0.5rem;
-      padding: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .topic-title {
-      font-size: 1.25rem;
-      font-weight: 500;
-      color: #e3b377;
-      margin-bottom: 0.5rem;
-    }
-
-    .text-area {
-      width: 100%;
-      height: 400px;
-      padding: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 0.5rem;
-      font-size: 1rem;
-      font-family: inherit;
-      resize: none;
-      outline: none;
-      transition: border-color 0.3s ease;
-      background-color: rgba(255, 255, 255, 0.8);
-    }
-
-    .text-area::placeholder {
-      color: #ccc;
-      font-style: italic;
-    }
-
-    .text-area:focus {
-      border-color: #e3b377;
-    }
-
-    .submit-button {
-      background-color: #e3b377;
-      color: white;
-      padding: 12px 24px;
-      border-radius: 5px;
-      text-decoration: none;
-      transition: background-color 0.3s ease;
-      display: inline-block;
-      margin-top: 1.5rem;
-      border: none;
-      cursor: pointer;
-    }
-
-    .submit-button:hover {
-      background-color: #d6a462;
-    }
-
-    .submit-message {
-      font-size: 1.25rem;
-      font-weight: 500;
-      color: #2c3e50;
-      display: inline-block;
-      margin-left: 1rem;
-    }
-
-    .dropdown {
-      width: 100%;
-      padding: 0.75rem;
-      border: 1px solid #ccc;
-      border-radius: 0.5rem;
-      font-size: 1rem;
-      font-family: inherit;
-      background-color: rgba(255, 255, 255, 0.8);
-      margin-bottom: 1rem;
-      transition: border-color 0.3s ease;
-      color: #2c3e50;
-    }
-
-    .dropdown:focus {
-      border-color: #e3b377;
-      outline: none;
-    }
-
-    .dropdown-label {
-      font-weight: 500;
-      color: #2c3e50;
-      margin-bottom: 0.25rem;
-      display: block;
-    }
-  </style>
-  <script>
-    // Disable right-click context menu
-    document.addEventListener('contextmenu', function(e) {
-      e.preventDefault();
-    }, false);
-
-    // Disable Ctrl+U to prevent "view page source"
-    document.addEventListener('keydown', function(e) {
-      if (e.ctrlKey && e.key === 'u') {
-        e.preventDefault();
-      }
-    });
-
-    // Disable Ctrl+Shift+I, F12 to prevent "inspect element"
-    document.addEventListener('keydown', function(e) {
-      if ((e.ctrlKey && e.shiftKey && e.key === 'I') || e.key === 'F12') {
-        e.preventDefault();
-      }
-    });
-  </script>
-</head>
-<body>
-  <div class="container">
-    <a href="https://our-writing-class.vercel.app/" class="home-button">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-        <polyline points="9 22 9 12 15 12 15 22"></polyline>
-      </svg>
-      Home
-    </a>
-    <h1 class="title">Submit Your Assignment ✍🏻</h1>
-    <p class="description">
-      Howdy, writer! Welcome to the assignment submission page. This is your chance to shine and share your narrative writing with the class. I'm so excited to read your work and provide feedback. Just pour your heart into the text area below, and hit that submit button when you're ready. Let's do this!
-    </p>
-    <!-- Class and Name dropdowns -->
-    <label class="dropdown-label" for="class-dropdown">Class:</label>
-    <select id="class-dropdown" class="dropdown">
-      <option value="TEFL 402">TEFL 402</option>
-    </select>
-
-    <label class="dropdown-label" for="name-dropdown">Name:</label>
-    <select id="name-dropdown" class="dropdown">
-      <option value="" disabled selected>Select your name</option>
-      <option>Dr. Behzadpoor</option>
-      <option>Ali Tahavvory</option>
-      <option>AmirAli Hashemi</option>
-      <option>Asra Bakhtar</option>
-      <option>Ata Aghamali</option>
-      <option>Farzane Hamdi</option>
-      <option>Leyla Ne'mati</option>
-      <option>Maryam Germchi</option>
-      <option>Nahid Mohammadi</option>
-      <option>Sana Ja'farkhani</option>
-      <option>Sahar Seraj</option>
-      <option>Tohid Sabbagh</option>
-      <option>Zahra Sa'adatKhah</option>
-      <option>Zahra ---</option>
-    </select>
-
-    <div class="topic">
-      <h2 class="topic-title">Topic: ---</h2>
-      <p>Craft your narrative based on the topic above.</p>
-    </div>
-    <textarea class="text-area" placeholder="Firstly, introduce your main character and the setting...
-
-Next, describe the conflict or challenge they are facing...
-
-Then, explain how the character tries to overcome the obstacle...
-
-Finally, conclude by sharing the resolution or lesson learned."></textarea>
-
-    <!-- React root div -->
-    <div id="submit-button-root"></div>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.18/dist/index.min.js"></script>
-
-<!-- React component with fixed validation -->
-<script type="text/babel">
-  const TelegramIntegration = () => {
-    const [submittedText, setSubmittedText] = React.useState('');
-    const [isSubmitting, setIsSubmitting] = React.useState(false);
-    const [submissionStatus, setSubmissionStatus] = React.useState(null);
-
-    const handleSubmit = async () => {
-      const textareaValue = document.querySelector('.text-area').value.trim();
-      const nameDropdown = document.getElementById('name-dropdown').value;
-      const classDropdown = document.getElementById('class-dropdown').value;
-
-      // Clear previous status before new submission attempt
-      setSubmissionStatus(null);
-
-      // Validation checks
-      if (!textareaValue) {
-        setSubmissionStatus("empty");
-        return;
-      }
-      if (!nameDropdown) {
-        setSubmissionStatus("nameEmpty");
-        return;
-      }
-
-      setIsSubmitting(true);
-
-      try {
-        const response = await axios.post('/api/submitAssignment', {
-          message: `Class: ${classDropdown}\nName: ${nameDropdown}\n\n${textareaValue}`,
-        });
-
-        if (response.data.success) {
-          setSubmittedText(textareaValue);
-          setSubmissionStatus("success");
-
-          // Trigger confetti effect
-          const confettiSettings = { target: 'confetti-canvas' };
-          const confetti = new ConfettiGenerator(confettiSettings);
-          confetti.render();
-          setTimeout(() => confetti.clear(), 3000);
-        } else {
-          setSubmissionStatus("error");
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        setSubmissionStatus("error");
-      } finally {
-        setIsSubmitting(false);
-      }
-    };
-
-    return (
-      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-        <button
-          className="submit-button"
-          onClick={handleSubmit}
-          disabled={isSubmitting}
-          style={{ opacity: isSubmitting ? 0.7 : 1 }}
-        >
-          {isSubmitting ? 'Submitting...' : 'Submit Assignment'}
-        </button>
-        {submissionStatus && (
-          <span style={{
-            color: submissionStatus === "success" ? "#4CAF50" : "#f44336",
-            fontWeight: '600',
-            fontSize: '16px'
-          }}>
-            {submissionStatus === "success" ? "Submitted Successfully!" :
-             submissionStatus === "nameEmpty" ? "Please select your name!" :
-             submissionStatus === "empty" ? "Please write something before submitting!" :
-             "An error occurred while submitting."}
-          </span>
-        )}
+const StudentPage = () => {
+  return (
+    <div className="container mx-auto py-8">
+      <div className="flex justify-between items-center mb-4">
+        <a href="https://our-writing-class.vercel.app/" className="flex items-center text-gray-500 hover:text-gray-700 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+            <polyline points="9 22 9 12 15 12 15 22" />
+          </svg>
+          Home
+        </a>
       </div>
-    );
-  };
 
-  // Render the React component
-  ReactDOM.render(
-    <TelegramIntegration />,
-    document.getElementById('submit-button-root')
+      <Heading as="h1" className="mb-4">Welcome to the Student Page 👨‍🎓</Heading>
+      <Paragraph className="text-gray-600 mb-8">
+        Hi there, students! This is your dedicated page to track your progress, earn achievements, and collaborate with your classmates. Let's dive in and make the most of our writing journey together.
+      </Paragraph>
+
+      {/* Profile Section */}
+      <Card className="mb-8">
+        <CardHeader>
+          <CardTitle>Your Profile</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex items-center mb-4">
+            <Avatar src="/api/placeholder/80/80" alt="Profile Picture" className="mr-4" />
+            <div>
+              <Heading as="h3" className="font-medium">John Doe</Heading>
+              <Paragraph className="text-gray-500">TEFL 402</Paragraph>
+            </div>
+          </div>
+          <div className="flex justify-between items-center">
+            <div>
+              <Heading as="h3" className="font-medium">Achievements</Heading>
+              <div className="flex gap-2 mt-2">
+                <Alert variant="subtle" className="bg-gray-200 rounded-full px-3 py-1 text-sm">
+                  <AlertTitle>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="inline-block mr-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                      <path d="M2 17l10 5 10-5" />
+                      <path d="M2 12l10 5 10-5" />
+                    </svg>
+                    Submitted 7 Assignments
+                  </AlertTitle>
+                </Alert>
+                <Alert variant="subtle" className="bg-gray-200 rounded-full px-3 py-1 text-sm">
+                  <AlertTitle>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="inline-block mr-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                      <path d="M2 17l10 5 10-5" />
+                      <path d="M2 12l10 5 10-5" />
+                    </svg>
+                    Earned 3 Badges
+                  </AlertTitle>
+                </Alert>
+              </div>
+            </div>
+            <div>
+              <Heading as="h3" className="font-medium">Ranking</Heading>
+              <Paragraph className="text-gray-500 text-xl font-bold">
+                <svg xmlns="http://www.w3.org/2000/svg" className="inline-block mr-2 h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M1 3h6l3.63 10.47a2 2 0 0 0 1.93 1.53h6.11" />
+                  <path d="M1 3 v15" />
+                  <path d="M23 3 v15" />
+                </svg>
+                5th
+              </Paragraph>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Assignments and Progress */}
+      <Card className="mb-8">
+        <CardHeader>
+          <CardTitle>Your Assignments</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex justify-between items-center mb-4">
+            <div>
+              <Heading as="h3" className="font-medium">Assignments Submitted</Heading>
+              <Paragraph className="text-gray-500">7 out of 10</Paragraph>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-2.5">
+              <div className="bg-[#e3b377] h-2.5 rounded-full" style={{ width: '70%' }} />
+            </div>
+          </div>
+          <div className="flex justify-between items-center">
+            <div>
+              <Heading as="h3" className="font-medium">Assignments Remaining</Heading>
+              <Paragraph className="text-gray-500">3 left</Paragraph>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-2.5">
+              <div className="bg-[#e3b377] h-2.5 rounded-full" style={{ width: '30%' }} />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Leaderboard */}
+      <Card className="mb-8">
+        <CardHeader>
+          <CardTitle>Class Leaderboard</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Rank</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Assignments Submitted</TableCell>
+                <TableCell>Badges Earned</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                <TableCell>1</TableCell>
+                <TableCell>John Doe</TableCell>
+                <TableCell>10</TableCell>
+                <TableCell>5</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>2</TableCell>
+                <TableCell>Jane Smith</TableCell>
+                <TableCell>8</TableCell>
+                <TableCell>4</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>3</TableCell>
+                <TableCell>Bob Johnson</TableCell>
+                <TableCell>7</TableCell>
+                <TableCell>3</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>4</TableCell>
+                <TableCell>Sarah Lee</TableCell>
+                <TableCell>6</TableCell>
+                <TableCell>2</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>5</TableCell>
+                <TableCell>Michael Chen</TableCell>
+                <TableCell>5</TableCell>
+                <TableCell>1</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
+
+      {/* Badges and Achievements */}
+      <Card className="mb-8">
+        <CardHeader>
+          <CardTitle>Your Achievements</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex flex-wrap gap-4">
+            <Alert variant="subtle" className="bg-gray-200 rounded-lg p-4 flex flex-col items-center">
+              <Avatar src="/api/placeholder/64/64" alt="Badge 1" className="mb-2" />
+              <Heading as="h3" className="font-medium">First Assignment Submitted</Heading>
+              <Paragraph className="text-gray-500 text-sm">You've completed your first assignment!</Paragraph>
+            </Alert>
+            <Alert variant="subtle" className="bg-gray-200 rounded-lg p-4 flex flex-col items-center">
+              <Avatar src="/api/placeholder/64/64" alt="Badge 2" className="mb-2" />
+              <Heading as="h3" className="font-medium">Writing Prodigy</Heading>
+              <Paragraph className="text-gray-500 text-sm">Awarded for exceptional narrative writing.</Paragraph>
+            </Alert>
+            <Alert variant="subtle" className="bg-gray-200 rounded-lg p-4 flex flex-col items-center">
+              <Avatar src="/api/placeholder/64/64" alt="Badge 3" className="mb-2" />
+              <Heading as="h3" className="font-medium">Class Participation</Heading>
+              <Paragraph className="text-gray-500 text-sm">Great job engaging with your peers!</Paragraph>
+            </Alert>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Challenges and Quests */}
+      <Card className="mb-8">
+        <CardHeader>
+          <CardTitle>Upcoming Challenges</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Alert variant="subtle" className="bg-gray-200 rounded-lg p-4">
+            <AlertTitle className="font-medium">Creative Writing Challenge</AlertTitle>
+            <AlertDescription className="text-gray-500 mb-4">
+              Write a 500-word short story based on the provided prompt. Deadline: 2 weeks.
+            </AlertDescription>
+            <Button>Accept Challenge</Button>
+          </Alert>
+        </CardContent>
+      </Card>
+    </div>
   );
-</script>
-<canvas id="confetti-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999;"></canvas>
-</body>
-</html>
+};
+
+export default StudentPage;
