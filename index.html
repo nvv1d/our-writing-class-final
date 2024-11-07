@@ -138,7 +138,7 @@
               <a href="/submit.html" class="u-active-none u-border-2 u-border-active-black u-border-hover-black u-border-no-left u-border-no-right u-border-no-top u-border-palette-2-base u-btn u-button-style u-hover-none u-none u-text-body-color u-btn-1">Continue</a>
 	    </div>
           </div>
-          <div class="u-container-style u-list-item u-repeater-item u-white u-list-item-2">
+          <div class="u-container-style u-list-item u-repeater-item u-white u-list-item-2" id="student-of-the-week">
             <div class="u-container-layout u-similar-container u-container-layout-2">
               <img alt="" class="u-bottom-left-radius-20 u-expanded-width u-image u-image-round u-top-right-radius-20 u-image-2" data-image-width="1200" data-image-height="1002" src="/images/kj.jpg">
               <h3 class="u-text u-text-default u-text-5">Student of the Week 🌟</h3>
@@ -163,6 +163,17 @@
   </p>
 </section>
 <style>
+	html {
+  scroll-behavior: smooth;
+}
+
+@media (max-width: 768px) {
+  /* Ensure smooth scroll works well on mobile */
+  #student-of-the-week {
+    scroll-margin-top: 60px; /* Adjust the value as needed */
+  }
+}
+
 /* Keyframe animation for sparkle effect */
 @keyframes sparkle {
   0%, 100% { opacity: 0; transform: scale(0.5); }
@@ -313,6 +324,41 @@
   opacity: 0;
   animation: sparkle 2s infinite ease-in-out 2s;
 }
+	/* Mobile readability adjustments */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;  /* Slightly smaller font for mobile */
+    line-height: 1.5; /* Increased line-height for better readability */
+  }
+
+  .u-text-4, .u-text-6, .u-text-8 {
+    font-size: 1.2rem;  /* Adjust text size */
+    line-height: 1.8;   /* More space between lines */
+    margin: 15px 0;     /* Adjust margins for better spacing */
+    padding: 0 10px;    /* Add padding for mobile view */
+  }
+
+  .u-text-3, .u-text-5, .u-text-7 {
+    font-size: 1.5rem;  /* Increase header size for mobile */
+  }
+
+  .u-btn-1, .u-btn-2, .u-btn-3 {
+    padding: 10px 20px; /* Adjust button padding */
+    font-size: 1.1rem;   /* Adjust button text size */
+  }
+
+  .u-image-1, .u-image-2, .u-image-3 {
+    width: 100%; /* Make images responsive */
+    height: auto;
+  }
+
+  /* Reduce margins for sections on smaller screens */
+  .u-section-1 {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+}
+
 </style>
 
 
