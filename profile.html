@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="keywords" content="Our Writing Class">
+  <meta name="description" content="">
+  <title>User Profile</title>
+  <link rel="stylesheet" href="nicepage.css" media="screen">
+  <link rel="stylesheet" href="index.css" media="screen">
+  <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+  <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Arimo:400,400i,500,500i,600,600i,700,700i">
+  <style>
+    /* Reset some default styles */
+    body, h1, h2, h3, p, button {
+      margin: 0;
+      padding: 0;
+      font-family: inherit;
+    }
+
+    /* Profile container styles */
+    .profile-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #f1f1f1;
+      padding: 2rem;
+      min-height: 100vh;
+    }
+
+    /* Profile card styles */
+    .profile-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    /* Profile header styles */
+    .profile-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .profile-header h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    /* Profile content styles */
+    .profile-content p {
+      font-size: 1.1rem;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    /* Sign-out button styles */
+    .sign-out-btn {
+      background-color: #e3b377;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .sign-out-btn:hover {
+      background-color: #d7a256;
+    }
+  </style>
+</head>
+<body>
+  <div class="profile-container">
+    <div class="profile-card">
+      <div class="profile-header">
+        <h1>User Profile</h1>
+      </div>
+      <div class="profile-content">
+        <p>Name: John Doe</p>
+        <p>Email: john.doe@example.com</p>
+        <button class="sign-out-btn">Sign Out</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { signOut } from './auth.js';
+
+    const signOutBtn = document.querySelector('.sign-out-btn');
+    signOutBtn.addEventListener('click', () => {
+      signOut();
+      // Redirect to the index.html page or perform other actions
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>
