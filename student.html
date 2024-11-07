@@ -31,7 +31,7 @@
     }
 
     .featured-card h2 {
-      font-size: 2rem;
+      font-size: 1.75rem; /* Smaller font for title */
       margin-bottom: 1rem;
       color: #2c3e50;
     }
@@ -50,71 +50,72 @@
       overflow: hidden;
     }
 
-/* Enhanced Star Shine Effect */
-.student-name {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #e3b377;
-  position: relative;
-  overflow: hidden;
-}
+    /* Enhanced Star Shine Effect */
+    .student-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #e3b377;
+      position: relative;
+      overflow: hidden;
+    }
 
-/* Create a glow effect around the text */
-.student-name::before {
-  content: "";
-  position: absolute;
-  top: -8px;
-  left: -8px;
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  background: radial-gradient(circle, rgba(255, 223, 84, 0.5) 10%, rgba(255, 255, 255, 0) 70%);
-  filter: blur(8px);
-  animation: glowing 2s infinite alternate;
-  z-index: -1; /* Keep it behind the text */
-}
+    /* Create a glow effect around the text */
+    .student-name::before {
+      content: "";
+      position: absolute;
+      top: -8px;
+      left: -8px;
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      background: radial-gradient(circle, rgba(255, 223, 84, 0.5) 10%, rgba(255, 255, 255, 0) 70%);
+      filter: blur(8px);
+      animation: glowing 2s infinite alternate;
+      z-index: -1;
+    }
 
-/* Glitter Sparkles */
-.student-name::after {
-  content: "✨";
-  font-size: 1.8rem;
-  position: absolute;
-  top: 0;
-  left: -30%;
-  color: #e3b377;
-  animation: shine 3s linear infinite, sparkle 1s ease-in-out infinite;
-  opacity: 0.6;
-}
+    /* Glitter Sparkles */
+    .student-name::after {
+      content: "✨";
+      font-size: 1.8rem;
+      position: absolute;
+      top: 0;
+      left: -30%;
+      color: #e3b377;
+      animation: shine 3s linear infinite, sparkle 1s ease-in-out infinite;
+      opacity: 0.6;
+    }
 
-/* Shimmering Glow Animation */
-@keyframes shine {
-  0% { left: -30%; opacity: 0; }
-  50% { left: 50%; opacity: 1; }
-  100% { left: 130%; opacity: 0; }
-}
+    /* Shimmering Glow Animation */
+    @keyframes shine {
+      0% { left: -30%; opacity: 0; }
+      50% { left: 50%; opacity: 1; }
+      100% { left: 130%; opacity: 0; }
+    }
 
-/* Random sparkling particles */
-@keyframes sparkle {
-  0% { transform: translateX(0) translateY(0); opacity: 0.6; }
-  50% { transform: translateX(5px) translateY(-5px); opacity: 1; }
-  100% { transform: translateX(0) translateY(0); opacity: 0.6; }
-}
+    /* Random sparkling particles */
+    @keyframes sparkle {
+      0% { transform: translateX(0) translateY(0); opacity: 0.6; }
+      50% { transform: translateX(5px) translateY(-5px); opacity: 1; }
+      100% { transform: translateX(0) translateY(0); opacity: 0.6; }
+    }
 
-/* Glowing effect for the name with soft halo */
-@keyframes glowing {
-  0% {
-    box-shadow: 0 0 10px rgba(227, 179, 119, 0.6), 0 0 20px rgba(227, 179, 119, 0.4), 0 0 30px rgba(227, 179, 119, 0.3);
-  }
-  100% {
-    box-shadow: 0 0 15px rgba(227, 179, 119, 0.8), 0 0 30px rgba(227, 179, 119, 0.5), 0 0 45px rgba(227, 179, 119, 0.4);
-  }
-}
+    /* Glowing effect for the name with soft halo */
+    @keyframes glowing {
+      0% {
+        box-shadow: 0 0 10px rgba(227, 179, 119, 0.6), 0 0 20px rgba(227, 179, 119, 0.4), 0 0 30px rgba(227, 179, 119, 0.3);
+      }
+      100% {
+        box-shadow: 0 0 15px rgba(227, 179, 119, 0.8), 0 0 30px rgba(227, 179, 119, 0.5), 0 0 45px rgba(227, 179, 119, 0.4);
+      }
+    }
 
     .student-writing {
-      font-size: 1.2rem;
+      font-size: 1rem; /* Smaller font */
       line-height: 1.6;
       text-align: justify;
       color: #333;
+      font-weight: normal; /* Regular weight for description */
     }
 
     .hall-of-fame {
@@ -129,42 +130,34 @@
       margin-right: auto;
       position: relative;
       overflow: hidden;
-      animation: spotlight 4s infinite alternate;
+      animation: spotlight 3s ease-in-out infinite alternate;
     }
 
-/* Spotlight Effect */
-.hall-of-fame {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 1.5rem;
-  margin-top: 50px;
-  text-align: center;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-  overflow: hidden;
-  animation: spotlight 3s ease-in-out infinite alternate;
-}
+    /* Spotlight Effect */
+    .hall-of-fame h3 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #2c3e50;
+      margin-bottom: 1rem; /* Space between title and names */
+    }
 
-/* Spotlight Keyframe Animation */
-@keyframes spotlight {
-  0% {
-    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.3) 10%, rgba(0, 0, 0, 0.05) 70%);
-    box-shadow: 0 0 20px rgba(255, 223, 84, 0.6);
-  }
-  50% {
-    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.5) 20%, rgba(0, 0, 0, 0.05) 60%);
-    box-shadow: 0 0 30px rgba(255, 223, 84, 0.7);
-  }
-  100% {
-    background: radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.3) 15%, rgba(0, 0, 0, 0.05) 80%);
-    box-shadow: 0 0 40px rgba(255, 223, 84, 0.8);
-  }
-}
+    /* Spotlight Keyframe Animation */
+    @keyframes spotlight {
+      0% {
+        background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.3) 10%, rgba(0, 0, 0, 0.05) 70%);
+        box-shadow: 0 0 20px rgba(255, 223, 84, 0.6);
+      }
+      50% {
+        background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.5) 20%, rgba(0, 0, 0, 0.05) 60%);
+        box-shadow: 0 0 30px rgba(255, 223, 84, 0.7);
+      }
+      100% {
+        background: radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.3) 15%, rgba(0, 0, 0, 0.05) 80%);
+        box-shadow: 0 0 40px rgba(255, 223, 84, 0.8);
+      }
+    }
 
-    /* Custom list styling to remove numbers */
+    /* Custom list styling */
     .hall-of-fame ol {
       list-style: none;
       padding-left: 0;
@@ -174,14 +167,16 @@
     .hall-of-fame li {
       font-size: 1.1rem;
       margin-bottom: 0.5rem;
-      color: #333;
+      color: black; /* Black color for Week # text */
     }
 
-    .hall-of-fame li::before {
-      content: "Week #";
-      font-weight: bold;
-      color: #e3b377;
-      margin-right: 0.3rem;
+    .hall-of-fame li span {
+      font-weight: normal; /* Unbold the Week # */
+      color: black;
+    }
+
+    .hall-of-fame li b {
+      color: #e3b377; /* Orange color for student names */
     }
 
     /* Animated Crown Emoji */
@@ -211,7 +206,7 @@
           
           <p class="student-name">   [Student Name]</p>
         </div>
-        <p class="font-bold">This week's featured student, [Student Name], has impressed us all with their exceptional writing skills and creative flair. Their piece, titled '[Title]', captures the essence of our class theme in a truly inspiring way. We're thrilled to showcase their talent and celebrate their achievement.</p>
+        <p class="font-normal text-sm">This week's featured student, [Student Name], has impressed us all with their exceptional writing skills and creative flair. Their piece, titled '[Title]', captures the essence of our class theme in a truly inspiring way. We're thrilled to showcase their talent and celebrate their achievement.</p>
         <p class="student-writing">
           [Student's writing will be added here]
         </p>
@@ -220,11 +215,11 @@
       <div class="hall-of-fame mt-16">
         <h3>🏆 Hall of Fame</h3>
         <ol>
-          <li><span>1:</span> [Student Name] </li>
-          <li><span>2:</span> --- </li>
-          <li><span>3:</span> --- </li>
-          <li><span>4:</span> --- </li>
-          <li><span>5:</span> --- </li>
+          <li><span>1:</span> <b>[Student Name]</b> </li>
+          <li><span>2:</span> <b>---</b> </li>
+          <li><span>3:</span> <b>---</b> </li>
+          <li><span>4:</span> <b>---</b> </li>
+          <li><span>5:</span> <b>---</b> </li>
         </ol>
       </div>
     </div>
