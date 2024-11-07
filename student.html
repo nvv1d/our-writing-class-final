@@ -28,11 +28,11 @@
     }
 
     .bg-primary {
-      background-color: #ffa500;
+      background-color: #e3b377;
     }
 
     .text-primary {
-      color: #ffa500;
+      color: #e3b377;
     }
 
     .font-bold {
@@ -60,15 +60,12 @@
       font-size: 1.5rem;
       font-weight: bold;
       margin-bottom: 1rem;
-      color: #ffa500;
-      position: relative;
+      color: #e3b377;
     }
 
     .featured-card p.student-name::after {
-      content: "🌟";
+      content: "✨";
       margin-left: 0.5rem;
-      font-size: 1.2rem;
-      vertical-align: middle;
     }
 
     .featured-card p.student-writing {
@@ -112,7 +109,7 @@
 
     .leaderboard li span {
       font-weight: bold;
-      color: #ffa500;
+      color: #e3b377;
     }
 
     /* Fireworks animation */
@@ -133,8 +130,8 @@
 
     .firework {
       position: absolute;
-      width: 30px;
-      height: 30px;
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
       background: linear-gradient(to right, #ffa500, #ff8c00, #ff7f50);
       animation: fireworks 2s infinite ease-in-out;
@@ -142,7 +139,7 @@
   </style>
 </head>
 <body>
-  <div class="min-h-screen flex items-center justify-center relative overflow-hidden bg-primary opacity-90">
+  <div class="min-h-screen flex items-center justify-center relative overflow-hidden">
     <!-- Fireworks animation -->
     <div class="firework" style="top: 15%; left: 10%;"></div>
     <div class="firework" style="top: 35%; left: 80%;"></div>
@@ -153,18 +150,13 @@
       <div class="featured-card">
         <h2>Student of the Week</h2>
         <p class="student-name">Jane Doe</p>
-        <div className="fixed inset-0 flex items-center justify-center pointer-events-none z-50">
-          <div className="transform transition-all duration-500 ease-out opacity-100 scale-100" style={{ fontSize: '80px', textShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', animation: 'emoji-float 3s ease-in-out infinite' }}>
-            👑
-          </div>
-        </div>
-        <p className="student-writing">
+        <p class="student-writing">
           [Student's writing will be added here]
         </p>
       </div>
 
-      <div className="leaderboard mt-8">
-        <h3>Hall of Fame</h3>
+      <div class="leaderboard mt-8">
+        <h3>Top Writers of the Week</h3>
         <ol>
           <li><span>1.</span> John Smith</li>
           <li><span>2.</span> Emily Johnson</li>
@@ -172,8 +164,8 @@
           <li><span>4.</span> Sarah Davis</li>
           <li><span>5.</span> David Wilson</li>
         </ol>
-        <div className="firework" style={{ top: '20%', left: '90%' }}></div>
-        <div className="firework" style={{ top: '80%', left: '10%' }}></div>
+        <div class="firework" style="top: 20%; left: 90%;"></div>
+        <div class="firework" style="top: 80%; left: 10%;"></div>
       </div>
     </div>
   </div>
