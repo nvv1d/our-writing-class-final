@@ -32,6 +32,24 @@
       position: relative;
       overflow: hidden;
     }
+            .home-button {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background-color: #e3b377;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 5px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: background-color 0.3s ease;
+    }
+
+    .home-button:hover {
+      background-color: #d6a462;
+    }
 
     .featured-card h2 {
       font-size: 1.75rem; /* Smaller font for title */
@@ -247,6 +265,14 @@
   <div class="min-h-screen flex items-center justify-center relative overflow-hidden">
     <div class="container mx-auto px-4 py-8">
       <div class="featured-card">
+                <!-- Home Button inside featured card -->
+    <a href="https://our-writing-class.vercel.app/" class="home-button">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+      </svg>
+      Home
+    </a>
         <h2>Student of the Week</h2>
               <br> <!-- Adds space between the title and the crown emoji -->
         <!-- Container to group the crown and student name -->
