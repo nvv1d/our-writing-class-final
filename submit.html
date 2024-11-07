@@ -166,6 +166,31 @@
       margin-bottom: 0.25rem;
       display: block;
     }
+        @media (max-width: 768px) {
+  .container {
+    padding: 1.5rem; /* Reduce padding for mobile */
+  }
+
+  .title {
+    font-size: 1.75rem; /* Reduce title font size for mobile */
+  }
+
+  .description {
+    font-size: 1rem;
+    line-height: 1.8; /* Slightly increase line height for better readability */
+  }
+
+  .dropdown,
+  .text-area,
+  .submit-button {
+    font-size: 1rem; /* Ensure font size is readable */
+  }
+
+  .submit-button {
+    padding: 10px 20px; /* Adjust button padding */
+  }
+}
+
   </style>
   <script>
     // Disable right-click context menu
@@ -327,6 +352,27 @@ Finally, conclude by sharing the resolution or lesson learned."></textarea>
     <TelegramIntegration />,
     document.getElementById('submit-button-root')
   );
+      // Function to smoothly scroll dropdown into view on mobile
+function smoothScrollToCenter(element) {
+  const rect = element.getBoundingClientRect();
+  const isMobile = window.innerWidth <= 768;
+
+  if (isMobile) {
+    window.scrollTo({
+      top: rect.top + window.scrollY - (window.innerHeight / 2) + (rect.height / 2),
+      behavior: "smooth",
+    });
+  }
+}
+
+// Attach event listeners to dropdowns
+document.getElementById('class-dropdown').addEventListener('focus', function () {
+  smoothScrollToCenter(this);
+});
+document.getElementById('name-dropdown').addEventListener('focus', function () {
+  smoothScrollToCenter(this);
+});
+
 </script>
 <canvas id="confetti-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999;"></canvas>
 </body>
