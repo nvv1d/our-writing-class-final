@@ -17,18 +17,29 @@
     <meta name="generator" content="Nicepage 6.21.1, nicepage.com">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
     <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Arimo:400,400i,500,500i,600,600i,700,700i">
-    
+  <!-- Clerk Integration Script -->
+  <script async src="https://cdn.clerk.dev/clerk.js"></script>
+  <script>
+    // Load Clerk with the frontend API key
+    window.Clerk = {
+      frontendApi: 'https://loyal-pipefish-54.clerk.accounts.dev', // Replace with your actual Clerk Frontend API key
+      async init() {
+        await Clerk.load();
+        Clerk.mountAuth({
+          mount: '#clerk-auth-button',
+          signInUrl: '/sign-in',
+          signUpUrl: '/sign-up',
+          userProfileUrl: '/user-profile'
+        });
+      }
+    };
+  </script>
     <script type="application/ld+json">{
 		"@context": "http://schema.org",
 		"@type": "Organization",
-		"name": ""
-}</script>
-	<script async src="https://cdn.clerk.dev/clerk.js"></script>
-<script>
-  window.Clerk = {
-    frontendApi: 'https://loyal-pipefish-54.clerk.accounts.dev', // Replace with your actual Clerk Frontend API key
-  };
-</script>
+		"name": ""}
+    </script>
+
 
     <meta name="theme-color" content="#e3b377">
     <meta property="og:title" content="Copy of Page 18">
@@ -135,8 +146,10 @@
       <div class="u-expanded-width u-grey-10 u-shape u-shape-rectangle u-shape-1"></div>
 <h5 class="u-custom-font u-font-montserrat u-text u-text-1">Welcome to</h5>
 <h1 class="u-text u-text-2">Our Writing Class</h1>
-	    <div id="clerk-auth-button" style="position: absolute; top: 10px; right: 10px;"></div>
-<script>
+   <!-- Clerk Authentication Button Container -->
+    <div id="clerk-auth-button" style="position: absolute; top: 10px; right: 10px;">
+      <!-- Sign-in button will be dynamically mounted here -->
+    </div>
   // Wait for Clerk to load
   document.addEventListener('DOMContentLoaded', function () {
     const signInBtn = document.getElementById('signInBtn');
