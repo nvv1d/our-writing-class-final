@@ -1,350 +1,353 @@
 <!DOCTYPE html>
-<html style="font-size: 16px;" lang="en">
-<head>
-	<script type="module">
-  import { Clerk } from "https://cdn.jsdelivr.net/npm/@clerk/clerk-js@4.3.1";
-  const clerk = new Clerk("YOUR_FRONTEND_API_KEY"); // Replace with your Frontend API key
-
-  // Initialize Clerk
-  clerk.load().then(() => {
-    // Here, you can check if the user is signed in and handle authentication.
-    if (clerk.user) {
-      // User is signed in
-      document.getElementById("login-container").innerHTML = `
-        <p>Welcome, ${clerk.user.fullName}</p>
-        <button onclick="clerk.signOut()">Sign Out</button>
-      `;
-    } else {
-      // User is not signed in, show sign-in/sign-up buttons
-      clerk.mountSignIn("#login-container"); // Mounts the Clerk sign-in UI
-      clerk.mountSignUp("#signup-container"); // Mounts the Clerk sign-up UI
-    }
-  });
-</script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta charset="utf-8">
-  <title>Submit Your Assignment</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
-  <!-- React and dependencies -->
-  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
-  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
-  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <style>
+<html style="font-size: 16px;" lang="en"><head>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Our Writing Class">
+    <meta name="description" content="">
+    <title>Our Writing Class</title>
+    <link rel="stylesheet" href="nicepage.css" media="screen">
+<link rel="stylesheet" href="index.css" media="screen">
+    <script class="u-script" type="text/javascript" src="jquery-1.9.1.min.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+    <meta name="generator" content="Nicepage 6.21.1, nicepage.com">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Arimo:400,400i,500,500i,600,600i,700,700i">
+    
+    
+    
+    <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": ""
+}</script>
+    <meta name="theme-color" content="#e3b377">
+    <meta property="og:title" content="Copy of Page 18">
+    <meta property="og:type" content="website">
+  <meta data-intl-tel-input-cdn-path="intlTelInput/">  <style>
+    /* Disable text selection across the entire page */
     body {
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      background-color: rgba(247, 247, 247, 0.8);
+      -webkit-user-select: none; /* Chrome, Safari */
+      -moz-user-select: none;    /* Firefox */
+      -ms-user-select: none;     /* IE10+/Edge */
+      user-select: none;         /* Standard */
     }
 
+    /* Disable dragging of images */
     img {
       pointer-events: none;
       -webkit-user-drag: none;
       user-drag: none;
     }
 
+    /* Disable copy action on text elements */
     p, h1, h2, h3, h4, h5, h6 {
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
+      -webkit-user-select: none; /* Chrome, Safari */
+      -moz-user-select: none;    /* Firefox */
+      -ms-user-select: none;     /* IE10+/Edge */
+      user-select: none;         /* Standard */
     }
-
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem;
-      background-color: #ffffff;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      position: relative;
-    }
-
-    .home-button {
-      position: absolute;
-      top: 1rem;
-      left: 2rem;
-      background-color: #e3b377;
-      color: white;
-      padding: 8px 16px;
-      border-radius: 5px;
-      text-decoration: none;
-      transition: background-color 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .home-button:hover {
-      background-color: #d6a462;
-    }
-
-    .title {
-      font-size: 2rem;
-      font-weight: 600;
-      color: #2c3e50;
-      margin-bottom: 1.5rem;
-      padding-top: 2rem;
-    }
-
-    .description {
+	    /* Updated styles for the text content */
+    .u-text-4, .u-text-6, .u-text-8 {
       text-align: justify;
       line-height: 1.6;
-      margin-bottom: 2rem;
+      margin: 20px 0;
+      padding: 0 15px;
+      font-size: 1rem;
       color: #333;
       letter-spacing: 0.2px;
     }
+	      /* Card styles enhancement */
+    .u-list-item {
+      transition: transform 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
 
-    .topic {
-      background-color: rgba(227, 179, 119, 0.2);
-      border-radius: 0.5rem;
-      padding: 1rem;
+    /* Header styles */
+    .u-text-3, .u-text-5, .u-text-7 {
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+	  
+    /* Continue button enhancement */
+    .u-btn-1, .u-btn-2, .u-btn-3 {
+      transition: all 0.3s ease;
+      margin-top: 1rem;
       margin-bottom: 1.5rem;
     }
 
-    .topic-title {
-      font-size: 1.25rem;
-      font-weight: 500;
-      color: #e3b377;
-      margin-bottom: 0.5rem;
+    .u-btn-1:hover, .u-btn-2:hover, .u-btn-3:hover {
+      background-color: rgba(0, 0, 0, 0.05);
     }
+	  /* Container layout adjustments */
+.u-container-layout {
+  padding: 20px !important; /* Consistent padding for all sides */
+}
 
-    .text-area {
-      width: 100%;
-      height: 400px;
-      padding: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 0.5rem;
-      font-size: 1rem;
-      font-family: inherit;
-      resize: none;
-      outline: none;
-      transition: border-color 0.3s ease;
-      background-color: rgba(255, 255, 255, 0.8);
-    }
+/* Header styling with consistent alignment */
+.u-text-3, .u-text-5, .u-text-7 {
+  margin: 20px 0 15px 0 !important;
+  padding: 0 !important;
+  font-weight: 600;
+  color: #2c3e50;
+}
 
-    .text-area::placeholder {
-      color: #ccc;
-      font-style: italic;
-    }
+/* Card body text alignment */
+.u-text-4, .u-text-6, .u-text-8 {
+  text-align: justify;
+  line-height: 1.6;
+  margin: 15px 0 !important;
+  padding: 0 !important;
+  font-size: 1rem;
+  color: #333;
+  letter-spacing: 0.2px;
+}
 
-    .text-area:focus {
-      border-color: #e3b377;
-    }
+/* Continue button alignment */
+.u-btn-1, .u-btn-2, .u-btn-3 {
+  margin: 15px 0 0 0 !important;
+  padding-left: 0 !important;
+  transition: all 0.3s ease;
+}
 
-    .submit-button {
-      background-color: #e3b377;
-      color: white;
-      padding: 12px 24px;
-      border-radius: 5px;
-      text-decoration: none;
-      transition: background-color 0.3s ease;
-      display: inline-block;
-      margin-top: 1.5rem;
-      border: none;
-      cursor: pointer;
-    }
+/* Image adjustments */
+.u-image-1, .u-image-2, .u-image-3 {
+  margin-bottom: 20px;
+}
 
-    .submit-button:hover {
-      background-color: #d6a462;
-    }
-
-    .submit-message {
-      font-size: 1.25rem;
-      font-weight: 500;
-      color: #2c3e50;
-      display: inline-block;
-      margin-left: 1rem;
-    }
-
-    .dropdown {
-      width: 100%;
-      padding: 0.75rem;
-      border: 1px solid #ccc;
-      border-radius: 0.5rem;
-      font-size: 1rem;
-      font-family: inherit;
-      background-color: rgba(255, 255, 255, 0.8);
-      margin-bottom: 1rem;
-      transition: border-color 0.3s ease;
-      color: #2c3e50;
-    }
-
-    .dropdown:focus {
-      border-color: #e3b377;
-      outline: none;
-    }
-
-    .dropdown-label {
-      font-weight: 500;
-      color: #2c3e50;
-      margin-bottom: 0.25rem;
-      display: block;
-    }
   </style>
-  <script>
-    // Disable right-click context menu
-    document.addEventListener('contextmenu', function(e) {
-      e.preventDefault();
-    }, false);
+</head>
+  <body data-home-page="https://website6379576.nicepage.io/Copy-of-Page-18.html?version=ffe8a8d3-3611-839d-2d49-f1a0fde02c43" data-home-page-title="Copy of Page 18" data-path-to-root="/" data-include-products="false" class="u-body u-xl-mode" data-lang="en"> 
+    <section class="u-align-center u-clearfix u-container-align-center u-valign-top-sm u-valign-top-xs u-section-1" id="sec-64e1">
+      <div class="u-expanded-width u-grey-10 u-shape u-shape-rectangle u-shape-1"></div>
+<h5 class="u-custom-font u-font-montserrat u-text u-text-1">Welcome to</h5>
+<h1 class="u-text u-text-2">Our Writing Class</h1>
+      <div class="u-list u-list-1">
+        <div class="u-repeater u-repeater-1">
+          <div class="u-container-style u-list-item u-repeater-item u-white u-list-item-1">
+            <div class="u-container-layout u-similar-container u-container-layout-1">
+              <img alt="" class="u-bottom-left-radius-20 u-expanded-width u-image u-image-round u-top-right-radius-20 u-image-1" data-image-width="800" data-image-height="800" src="/images/bn.jpg">
+              <h3 class="u-text u-text-default u-text-3">Submit Your Assignment ✍🏻</h3>
+              <p class="u-text u-text-4">After each class, come here to submit your written assignment based on the given topic. When you’re ready, click "Continue" below to enter the submission page. I can't wait to read what you've created! If you have any questions, feel free to reach out. Happy writing!</p>
+              <a href="/submit.html" class="u-active-none u-border-2 u-border-active-black u-border-hover-black u-border-no-left u-border-no-right u-border-no-top u-border-palette-2-base u-btn u-button-style u-hover-none u-none u-text-body-color u-btn-1">Continue</a>
+	    </div>
+          </div>
+          <div class="u-container-style u-list-item u-repeater-item u-white u-list-item-2">
+            <div class="u-container-layout u-similar-container u-container-layout-2">
+              <img alt="" class="u-bottom-left-radius-20 u-expanded-width u-image u-image-round u-top-right-radius-20 u-image-2" data-image-width="1200" data-image-height="1002" src="/images/kj.jpg">
+              <h3 class="u-text u-text-default u-text-5">Student of the Week 🌟</h3>
+              <p class="u-text u-text-6">This is a special place where we showcase outstanding student writing. Each week, selected works are highlighted here to celebrate creativity, effort, and skill. Take a moment to read these inspiring pieces and see what your classmates have accomplished. Who knows? Your work might be featured next!</p>
+              <a href="/student.html" class="u-active-none u-border-2 u-border-active-black u-border-hover-black u-border-no-left u-border-no-right u-border-no-top u-border-palette-2-base u-btn u-button-style u-hover-none u-none u-text-body-color u-btn-2">Continue</a>
+            </div>
+          </div>
+          <div class="u-container-style u-list-item u-repeater-item u-white u-list-item-3">
+            <div class="u-container-layout u-similar-container u-container-layout-3">
+              <img alt="" class="u-bottom-left-radius-20 u-expanded-width u-image u-image-round u-top-right-radius-20 u-image-3" data-image-width="1080" data-image-height="1080" src="/images/nn.jpg">
+              <h3 class="u-text u-text-default u-text-7">Weekly Reflection 🤔</h3>
+              <p class="u-text u-text-8">Share your thoughts on this week’s class! Your feedback helps make our class better for everyone. All responses are completely anonymous, so feel free to be honest. Click "Continue" to submit your feedback.</p>
+              <a href="" class="u-active-none u-border-2 u-border-active-black u-border-hover-black u-border-no-left u-border-no-right u-border-no-top u-border-palette-2-base u-btn u-button-style u-hover-none u-none u-text-body-color u-btn-3">Continue</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+<section class="u-backlink u-clearfix u-grey-80" style="padding: 10px; background-color: #333; color: #f1f1f1; text-align: center;">
+  <p class="u-text shining-text" style="font-size: 1.1rem; font-weight: bold;">
+    <span>Designed by <strong><a href="mailto:navid.khiyavi@azaruniv.ac.ir" style="color: #1e90ff; text-decoration: none;">Navid Khiyavi</a></strong> for the <strong>TEFL M.A. Practicum Course, 2024 ©</strong></span>
+  </p>
+</section>
+<style>
+/* Keyframe animation for sparkle effect */
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 0.8; transform: scale(1.2); }
+}
 
-    // Disable Ctrl+U to prevent "view page source"
-    document.addEventListener('keydown', function(e) {
-      if (e.ctrlKey && e.key === 'u') {
-        e.preventDefault();
-      }
+/* Shining effect for the text */
+.shining-text {
+  position: relative;
+  color: #f1f1f1;
+}
+
+/* Create multiple sparkle points across the text */
+.shining-text span::before,
+.shining-text span::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  animation: sparkle 2s infinite ease-in-out;
+}
+
+/* First set of sparkles */
+.shining-text span::before {
+  width: 4px;
+  height: 4px;
+  background-color: #ffd700;
+  top: 20%;
+  left: 5%;
+  animation-delay: 0s;
+}
+
+.shining-text span::after {
+  width: 5px;
+  height: 5px;
+  background-color: #ffecb3;
+  top: 80%;
+  left: 15%;
+  animation-delay: 0.4s;
+}
+
+/* Add more sparkle points throughout the text */
+.shining-text span::after {
+  width: 4px;
+  height: 4px;
+  background-color: #ffe082;
+  top: 30%;
+  left: 25%;
+  animation-delay: 0.6s;
+}
+
+.shining-text span strong:nth-of-type(1)::before,
+.shining-text span strong:nth-of-type(1)::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  animation: sparkle 2s infinite ease-in-out;
+}
+
+.shining-text span strong:nth-of-type(1)::before {
+  width: 3px;
+  height: 3px;
+  background-color: #ffe082;
+  top: 15%;
+  left: 35%;
+  animation-delay: 0.5s;
+}
+
+.shining-text span strong:nth-of-type(1)::after {
+  width: 4px;
+  height: 4px;
+  background-color: #fdd835;
+  top: 85%;
+  left: 45%;
+  animation-delay: 1s;
+}
+
+.shining-text span strong:nth-of-type(2)::before,
+.shining-text span strong:nth-of-type(2)::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  animation: sparkle 2s infinite ease-in-out;
+}
+
+.shining-text span strong:nth-of-type(2)::before {
+  width: 4px;
+  height: 4px;
+  background-color: #ffd700;
+  top: 50%;
+  left: 55%;
+  animation-delay: 1.2s;
+}
+
+.shining-text span strong:nth-of-type(2)::after {
+  width: 5px;
+  height: 5px;
+  background-color: #ffecb3;
+  top: 30%;
+  left: 65%;
+  animation-delay: 0.8s;
+}
+
+/* Additional sparkles near the end */
+.shining-text span strong:nth-of-type(2)::before {
+  width: 3px;
+  height: 3px;
+  background-color: #fff9c4;
+  top: 60%;
+  left: 75%;
+  animation-delay: 1.5s;
+}
+
+.shining-text span strong:nth-of-type(2)::after {
+  width: 4px;
+  height: 4px;
+  background-color: #ffd740;
+  top: 70%;
+  left: 85%;
+  animation-delay: 1.9s;
+}
+
+/* Final sparkles */
+.shining-text span strong::before {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  width: 3px;
+  height: 3px;
+  background-color: #ffc107;
+  top: 40%;
+  left: 95%;
+  opacity: 0;
+  animation: sparkle 2s infinite ease-in-out 1.3s;
+}
+
+.shining-text span strong::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  width: 4px;
+  height: 4px;
+  background-color: #ffe57f;
+  top: 50%;
+  right: 5%;
+  opacity: 0;
+  animation: sparkle 2s infinite ease-in-out 2s;
+}
+</style>
+
+
+<script>
+// Disable right-click context menu
+document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+}, false);
+
+// Disable Ctrl+U to prevent "view page source"
+document.addEventListener('keydown', function(e) {
+  if (e.ctrlKey && e.key === 'u') {
+    e.preventDefault();
+  }
+});
+
+// Disable Ctrl+Shift+I, F12 to prevent "inspect element"
+document.addEventListener('keydown', function(e) {
+  if ((e.ctrlKey && e.shiftKey && e.key === 'I') || e.key === 'F12') {
+    e.preventDefault();
+  }
+});
+</script>
+	    <script>
+    // Disable right-click context menu
+    document.addEventListener('contextmenu', function(event) {
+      event.preventDefault();
     });
 
-    // Disable Ctrl+Shift+I, F12 to prevent "inspect element"
-    document.addEventListener('keydown', function(e) {
-      if ((e.ctrlKey && e.shiftKey && e.key === 'I') || e.key === 'F12') {
-        e.preventDefault();
+    // Disable keyboard shortcuts for copying, printing, and other actions
+    document.addEventListener('keydown', function(event) {
+      // Block common copy shortcuts: Ctrl+C, Ctrl+X, Ctrl+S, Ctrl+P
+      if ((event.ctrlKey || event.metaKey) && (event.key === 'c' || event.key === 'x' || event.key === 's' || event.key === 'p')) {
+        event.preventDefault();
       }
     });
   </script>
-</head>
-<body>
-  <div class="container">
-    <a href="https://our-writing-class.vercel.app/" class="home-button">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-        <polyline points="9 22 9 12 15 12 15 22"></polyline>
-      </svg>
-      Home
-    </a>
-    <h1 class="title">Submit Your Assignment ✍🏻</h1>
-    <p class="description">
-      Howdy, writer! Welcome to the assignment submission page. This is your chance to shine and share your narrative writing with the class. I'm so excited to read your work and provide feedback. Just pour your heart into the text area below, and hit that submit button when you're ready. Let's do this!
-    </p>
-    <!-- Class and Name dropdowns -->
-    <label class="dropdown-label" for="class-dropdown">Class:</label>
-    <select id="class-dropdown" class="dropdown">
-      <option value="TEFL 402">TEFL 402</option>
-    </select>
-
-    <label class="dropdown-label" for="name-dropdown">Name:</label>
-    <select id="name-dropdown" class="dropdown">
-      <option value="" disabled selected>Select your name</option>
-      <option>Dr. Behzadpoor</option>
-      <option>Ali Tahavvory</option>
-      <option>AmirAli Hashemi</option>
-      <option>Asra Bakhtar</option>
-      <option>Ata Aghamali</option>
-      <option>Farzane Hamdi</option>
-      <option>Leyla Ne'mati</option>
-      <option>Maryam Germchi</option>
-      <option>Nahid Mohammadi</option>
-      <option>Sana Ja'farkhani</option>
-      <option>Sahar Seraj</option>
-      <option>Tohid Sabbagh</option>
-      <option>Zahra Sa'adatKhah</option>
-      <option>Zahra ---</option>
-    </select>
-
-    <div class="topic">
-      <h2 class="topic-title">Topic: ---</h2>
-      <p>Craft your narrative based on the topic above.</p>
-    </div>
-    <textarea class="text-area" placeholder="Firstly, introduce your main character and the setting...
-
-Next, describe the conflict or challenge they are facing...
-
-Then, explain how the character tries to overcome the obstacle...
-
-Finally, conclude by sharing the resolution or lesson learned."></textarea>
-
-    <!-- React root div -->
-    <div id="submit-button-root"></div>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.18/dist/index.min.js"></script>
-
-<!-- React component with fixed validation -->
-<script type="text/babel">
-  const TelegramIntegration = () => {
-    const [submittedText, setSubmittedText] = React.useState('');
-    const [isSubmitting, setIsSubmitting] = React.useState(false);
-    const [submissionStatus, setSubmissionStatus] = React.useState(null);
-
-    const handleSubmit = async () => {
-      const textareaValue = document.querySelector('.text-area').value.trim();
-      const nameDropdown = document.getElementById('name-dropdown').value;
-      const classDropdown = document.getElementById('class-dropdown').value;
-
-      // Clear previous status before new submission attempt
-      setSubmissionStatus(null);
-
-      // Validation checks
-      if (!textareaValue) {
-        setSubmissionStatus("empty");
-        return;
-      }
-      if (!nameDropdown) {
-        setSubmissionStatus("nameEmpty");
-        return;
-      }
-
-      setIsSubmitting(true);
-
-      try {
-        const response = await axios.post('/api/submitAssignment', {
-          message: `Class: ${classDropdown}\nName: ${nameDropdown}\n\n${textareaValue}`,
-        });
-
-        if (response.data.success) {
-          setSubmittedText(textareaValue);
-          setSubmissionStatus("success");
-
-          // Trigger confetti effect
-          const confettiSettings = { target: 'confetti-canvas' };
-          const confetti = new ConfettiGenerator(confettiSettings);
-          confetti.render();
-          setTimeout(() => confetti.clear(), 3000);
-        } else {
-          setSubmissionStatus("error");
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        setSubmissionStatus("error");
-      } finally {
-        setIsSubmitting(false);
-      }
-    };
-
-    return (
-      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-        <button
-          className="submit-button"
-          onClick={handleSubmit}
-          disabled={isSubmitting}
-          style={{ opacity: isSubmitting ? 0.7 : 1 }}
-        >
-          {isSubmitting ? 'Submitting...' : 'Submit Assignment'}
-        </button>
-        {submissionStatus && (
-          <span style={{
-            color: submissionStatus === "success" ? "#4CAF50" : "#f44336",
-            fontWeight: '600',
-            fontSize: '16px'
-          }}>
-            {submissionStatus === "success" ? "Submitted Successfully!" :
-             submissionStatus === "nameEmpty" ? "Please select your name!" :
-             submissionStatus === "empty" ? "Please write something before submitting!" :
-             "An error occurred while submitting."}
-          </span>
-        )}
-      </div>
-    );
-  };
-
-  // Render the React component
-  ReactDOM.render(
-    <TelegramIntegration />,
-    document.getElementById('submit-button-root')
-  );
-</script>
-<canvas id="confetti-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999;"></canvas>
-</body>
-</html>
+</body></html>
