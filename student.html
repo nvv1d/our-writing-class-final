@@ -254,12 +254,17 @@
       0%, 100% { transform: translate(-50%, 0); }
       50% { transform: translate(-50%, -10px); }
     }
-        @media (max-width: 640px) {
-    /* Featured Card Adjustments */
-    .featured-card {
-        padding: 1rem;
-        text-align: left; /* Left-align text for better readability */
-    }
+	  
+@media (max-width: 640px) {
+  .home-button {
+    top: 0.5rem;
+    left: 0.5rem;
+  }
+
+  .featured-card h2 {
+    margin-top: 2rem;
+  }
+}
 
     /* Font size adjustments for headings and student name */
     .featured-card h2 {
