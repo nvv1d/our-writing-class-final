@@ -81,10 +81,9 @@
     }
 
     .student-container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+      position: relative;
+      display: inline-block;
+      margin-bottom: 1rem;
     }
 
     .student-name {
@@ -255,17 +254,12 @@
       0%, 100% { transform: translate(-50%, 0); }
       50% { transform: translate(-50%, -10px); }
     }
-	  
-@media (max-width: 640px) {
-  .home-button {
-    top: 0.5rem;
-    left: 0.5rem;
-  }
-
-  .featured-card h2 {
-    margin-top: 2rem;
-  }
-}
+        @media (max-width: 640px) {
+    /* Featured Card Adjustments */
+    .featured-card {
+        padding: 1rem;
+        text-align: left; /* Left-align text for better readability */
+    }
 
     /* Font size adjustments for headings and student name */
     .featured-card h2 {
@@ -298,13 +292,13 @@
     <div class="container mx-auto px-4 py-8">
       <div class="featured-card">
                 <!-- Home Button inside featured card -->
-    <a href="https://our-writing-class.vercel.app/" class="home-button sm:top-4 sm:left-4">
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-    <polyline points="9 22 9 12 15 12 15 22"></polyline>
-  </svg>
-  Home
-</a>
+    <a href="https://our-writing-class.vercel.app/" class="home-button">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+      </svg>
+      Home
+    </a>
             <h2 class="title" style="display: inline-flex; align-items: center;">
   Student of the Week
   <img src="https://em-content.zobj.net/source/microsoft-teams/363/glowing-star_1f31f.png" 
@@ -319,7 +313,8 @@
                     <div class="crown-emoji" aria-label="Crown emoji">
   <img src="https://em-content.zobj.net/source/telegram/386/crown_1f451.webp" alt="Crown emoji">
 </div>
-          <p class="student-name">CuteChe</p>
+          <br>
+          <p class="student-name">   CuteChe</p>
         </div>
         <p class="font-normal text-sm">This week's featured student, [Student Name], has impressed us all with their exceptional writing skills and creative flair. Their piece, titled '[Title]', captures the essence of our class theme in a truly inspiring way. We're thrilled to showcase their talent and celebrate their achievement.</p>
           <br> <!-- Adds space between the title and the crown emoji -->
