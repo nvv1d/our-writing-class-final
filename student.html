@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="en">
 <head>
-      <!-- Google Fonts -->
+    <!-- Google Fonts -->
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
     <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Arimo:400,400i,500,500i,600,600i,700,700i">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta charset="utf-8">
-  <title>Student of the Week</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.16/tailwind.min.css">
-  <style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>Student of the Week</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.16/tailwind.min.css">
+    <style>
+        /* General Page Styling */
         html {
-    scroll-behavior: smooth;
-}
-            /* Disable text selection across the entire page */
+            scroll-behavior: smooth;
+        }
+           /* Disable text selection across the entire page */
     body {
       -webkit-user-select: none; /* Chrome, Safari */
       -moz-user-select: none;    /* Firefox */
@@ -46,55 +47,77 @@
       overflow-x: hidden;
     }
 
-    .featured-card {
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      padding: 2rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-            .home-button {
-      position: absolute;
-      top: 1rem;
-      left: 2rem;
-      background-color: #e3b377;
-      color: white;
-      padding: 8px 16px;
-      border-radius: 5px;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      transition: background-color 0.3s ease;
-    }
+        /* Featured Card */
+        .featured-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+  /* Featured Card Adjustments */
+  .featured-card h2 {
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+    color: #2c3e50;
+    font-weight: bold; /* Make Student of the Week title bold */
+  }
+        .home-button {
+            position: absolute;
+            top: 1rem;
+            left: 2rem;
+            background-color: #e3b377;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .home-button:hover {
+            background-color: #d6a462;
+        }
 
-    .home-button:hover {
-      background-color: #d6a462;
-    }
+        /* Student Container and Crown Positioning */
+        .student-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 2rem;
+        }
+ /* Crown Emoji Position and Size */
+  .crown-emoji {
+    position: absolute;
+    top: -2.5rem; /* Adjust this to control how far above the name the crown sits */
+    left: 50%;
+    transform: translateX(-50%);
+    animation: float 2s ease-in-out infinite;
+  }
 
-    .featured-card h2 {
-      font-size: 1.75rem; /* Smaller font for title */
-      margin-bottom: 1rem;
-      color: #2c3e50;
-    }
+  /* Set the crown image size explicitly */
+  .crown-emoji img {
+    width: 45px; /* Set width */
+    height: 45px; /* Set height */
+  }
 
-    .student-container {
-      position: relative;
-      display: inline-block;
-      margin-bottom: 1rem;
-    }
-
-    .student-name {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #e3b377;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Enhanced Star Shine Effect */
+  /* Floating animation remains unchanged */
+  @keyframes float {
+    0%, 100% { transform: translate(-50%, 0); }
+    50% { transform: translate(-50%, -10px); }
+  }
+        .student-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e3b377;
+            position: relative;
+            text-align: center;
+        }
+   /* Enhanced Star Shine Effect */
     .student-name {
       font-size: 1.5rem;
       font-weight: bold;
@@ -157,190 +180,121 @@
       }
     }
 
-    .student-writing {
-      font-size: 1rem; /* Smaller font */
-      line-height: 1.6;
-      text-align: justify;
-      color: #333;
-      font-weight: normal; /* Regular weight for description */
-    }
+        
+/* Adjust the Hall of Fame section placement */
+.hall-of-fame {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), /* Standard soft shadow */
+              0 0 20px rgba(255, 223, 84, 0.6); /* Yellowish glow effect */
+  padding: 1.5rem;
+  margin-top: 60px; /* Adjusted margin to move it lower */
+  text-align: center;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  overflow: hidden;
+  animation: spotlight 3s ease-in-out infinite alternate;
+}
 
-    .hall-of-fame {
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      padding: 1.5rem;
-      margin-top: 50px;
-      text-align: center;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-      position: relative;
-      overflow: hidden;
-      animation: spotlight 3s ease-in-out infinite alternate;
-    }
+ .hall-of-fame h3 {
+    font-size: 1.5rem;
+    font-weight: bold; /* Make Hall of Fame title bold */
+    color: #2c3e50;
+    margin-bottom: 1rem;
+  }
 
-    /* Spotlight Effect */
-    .hall-of-fame h3 {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #2c3e50;
-      margin-bottom: 1rem; /* Space between title and names */
-    }
+  /* Align Hall of Fame list items to the left */
+  .hall-of-fame ol {
+    list-style: none;
+    padding-left: 0;
+    text-align: left; /* Left-aligns the list items */
+  }
 
-    /* Spotlight Keyframe Animation */
-    @keyframes spotlight {
-      0% {
-        background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.3) 10%, rgba(0, 0, 0, 0.05) 70%);
-        box-shadow: 0 0 20px rgba(255, 223, 84, 0.6);
-      }
-      50% {
-        background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.5) 20%, rgba(0, 0, 0, 0.05) 60%);
-        box-shadow: 0 0 30px rgba(255, 223, 84, 0.7);
-      }
-      100% {
-        background: radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.3) 15%, rgba(0, 0, 0, 0.05) 80%);
-        box-shadow: 0 0 40px rgba(255, 223, 84, 0.8);
-      }
-    }
-
-.hall-of-fame li {
+  .hall-of-fame li {
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
     color: black;
     display: flex;
     align-items: center;
-}
+    gap: 0.5rem; /* Adjust gap as needed */
+  }
 
-.hall-of-fame li::before {
+  .hall-of-fame li::before {
     content: "🏅";
-    margin-right: 8px;
     font-size: 1.2rem;
     color: #e3b377;
-}
-    /* Custom list styling */
-    .hall-of-fame ol {
-      list-style: none;
-      padding-left: 0;
-      text-align: left;
-    }
+  }
 
-    .hall-of-fame li {
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-      color: black; /* Black color for Week # text */
-    }
+  .hall-of-fame li span {
+    font-weight: normal;
+    color: black;
+  }
 
-    .hall-of-fame li span {
-      font-weight: normal; /* Unbold the Week # */
-      color: black;
-    }
-
-    .hall-of-fame li b {
-      color: #e3b377; /* Orange color for student names */
-    }
-
-    /* Animated Crown Emoji */
-    .crown-emoji {
-      font-size: 2rem;
-      position: absolute;
-      top: -2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: float 2s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translate(-50%, 0); }
-      50% { transform: translate(-50%, -10px); }
-    }
+  .hall-of-fame li b {
+    color: #e3b377;
+  }
+        /* Mobile Styling */
         @media (max-width: 640px) {
-    /* Featured Card Adjustments */
-    .featured-card {
-        padding: 1rem;
-        text-align: left; /* Left-align text for better readability */
-    }
-
-    /* Font size adjustments for headings and student name */
-    .featured-card h2 {
-        font-size: 1.5rem;
-    }
-    
-    .student-name {
-        font-size: 1.25rem;
-    }
-
-    /* Hall of Fame section adjustments */
-    .hall-of-fame {
-        padding: 1rem;
-    }
-
-    .hall-of-fame h3 {
-        font-size: 1.5rem;
-    }
-
-    /* Font size adjustments for list items */
-    .hall-of-fame li {
-        font-size: 1rem;
-    }
-}
-
-  </style>
+            .featured-card {
+                padding: 1rem;
+                text-align: left;
+            }
+            .student-name {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="min-h-screen flex items-center justify-center relative overflow-hidden">
-    <div class="container mx-auto px-4 py-8">
-      <div class="featured-card">
-                <!-- Home Button inside featured card -->
-    <a href="https://our-writing-class.vercel.app/" class="home-button">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-        <polyline points="9 22 9 12 15 12 15 22"></polyline>
-      </svg>
-      Home
-    </a>
-            <h2 class="title" style="display: inline-flex; align-items: center;">
-  Student of the Week
-  <img src="https://em-content.zobj.net/source/microsoft-teams/363/glowing-star_1f31f.png" 
-       alt="Star" 
-       style="width: 30px; height: 30px; margin-left: 8px;">
-</h2>
-              <br> <!-- Adds space between the title and the crown emoji -->
-            <br> <!-- Adds space between the title and the crown emoji -->
-            <br> <!-- Adds space between the title and the crown emoji -->
-        <!-- Container to group the crown and student name -->
-        <div class="student-container">
+    <div class="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div class="container mx-auto px-4 py-8">
+            <div class="featured-card">
+                <!-- Home Button -->
+                <a href="https://our-writing-class.vercel.app/" class="home-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                    Home
+                </a>
+                <h2 class="title" style="display: inline-flex; align-items: center;">
+                    Student of the Week
+                    <img src="https://em-content.zobj.net/source/microsoft-teams/363/glowing-star_1f31f.png" alt="Star" style="width: 30px; height: 30px; margin-left: 8px;">
+                </h2>
+                <br>
+                
+                <!-- Student Container with Crown and Name -->
+                <div class="student-container">
                     <div class="crown-emoji" aria-label="Crown emoji">
-  <img src="https://em-content.zobj.net/source/telegram/386/crown_1f451.webp" alt="Crown emoji">
-</div>
-          <br>
-          <p class="student-name">   CuteChe</p>
+                        <img src="https://em-content.zobj.net/source/telegram/386/crown_1f451.webp" alt="Crown emoji">
+                    </div>
+                    <p class="student-name">CuteChe</p>
+                </div>
+                
+                <!-- Description Text -->
+                <p class="font-normal text-sm">This week's featured student, [Student Name], has impressed us all with their exceptional writing skills and creative flair. Their piece, titled '[Title]', captures the essence of our class theme in a truly inspiring way. We're thrilled to showcase their talent and celebrate their achievement.</p>
+<br>
+                <p class="student-writing">[Student's writing will be added here]</p>
+            </div>
+            <!-- Hall of Fame Section -->
+            <div class="hall-of-fame mt-16">
+                <h3 class="title" style="display: inline-flex; align-items: center;">
+                    Hall of Fame
+                    <img src="https://em-content.zobj.net/source/telegram/386/trophy_1f3c6.webp" alt="trophy" style="width: 30px; height: 30px; margin-left: 8px;">
+                </h3>
+                <ol>
+                    <li><span>Week #1:</span> <b>[Student Name]</b></li>
+                    <li><span>Week #2:</span> <b>---</b></li>
+                    <li><span>Week #3:</span> <b>---</b></li>
+                    <li><span>Week #4:</span> <b>---</b></li>
+                    <li><span>Week #5:</span> <b>---</b></li>
+                </ol>
+            </div>
         </div>
-        <p class="font-normal text-sm">This week's featured student, [Student Name], has impressed us all with their exceptional writing skills and creative flair. Their piece, titled '[Title]', captures the essence of our class theme in a truly inspiring way. We're thrilled to showcase their talent and celebrate their achievement.</p>
-          <br> <!-- Adds space between the title and the crown emoji -->
-            <p class="student-writing">
-          [Student's writing will be added here]
-        </p>
-      </div>
-
-      <div class="hall-of-fame mt-16">
-<h3 class="title" style="display: inline-flex; align-items: center;">
-  Hall of Fame
-  <img src="https://em-content.zobj.net/source/telegram/386/trophy_1f3c6.webp" 
-       alt="trophy" 
-       style="width: 30px; height: 30px; margin-left: 8px;">
-</h3>
-        <ol>
-          <li><span>Week #1:</span> <b> [Student Name]</b></li>
-          <li><span>Week #2:</span> <b> ---</b></li>
-          <li><span>Week #3:</span> <b> ---</b></li>
-          <li><span>Week #4:</span> <b> ---</b></li>
-          <li><span>Week #5:</span> <b> ---</b></li>
-        </ol>
-      </div>
     </div>
-  </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
       <script>
