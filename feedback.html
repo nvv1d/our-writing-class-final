@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="en">
+<head>
+  <!-- Google Fonts -->
+  <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+  <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Arimo:400,400i,500,500i,600,600i,700,700i">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <title>Submit Your Feedback</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
+  <!-- React and dependencies -->
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <style>
+    body {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      background-color: rgba(247, 247, 247, 0.8);
+    }
+
+    img {
+      pointer-events: none;
+      -webkit-user-drag: none;
+      user-drag: none;
+    }
+
+    p, h1, h2, h3, h4, h5, h6 {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    .home-button {
+      position: absolute;
+      top: 1rem;
+      left: 2rem;
+      background-color: #e3b377;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .home-button:hover {
+      background-color: #d6a462;
+    }
+
+    .title {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 1.5rem;
+      padding-top: 2rem;
+    }
+
+    .description {
+      text-align: justify;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      color: #333;
+      letter-spacing: 0.2px;
+    }
+
+    .topic {
+      background-color: rgba(227, 179, 119, 0.2);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), /* Standard soft shadow */
+                  0 0 20px rgba(255, 223, 84, 0.4); /* Yellowish glow effect */
+    }
+
+    .topic-title {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: #e3b377;
+      margin-bottom: 0.5rem;
+    }
+
+    .text-area {
+      width: 100%;
+      height: 400px;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-family: inherit;
+      resize: none;
+      outline: none;
+      transition: border-color 0.3s ease;
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .text-area::placeholder {
+      color: #ccc;
+      font-style: italic;
+    }
+
+    .text-area:focus {
+      border-color: #e3b377;
+    }
+
+    .submit-button {
+      background-color: #e3b377;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      display: inline-block;
+      margin-top: 1.5rem;
+      border: none;
+      cursor: pointer;
+    }
+
+    .submit-button:hover {
+      background-color: #d6a462;
+    }
+
+    .submit-message {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: #2c3e50;
+      display: inline-block;
+      margin-left: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        @apply px-6 py-6;
+      }
+
+      .title {
+        @apply text-xl pt-6 ml-12;
+      }
+
+      .description {
+        @apply text-base leading-8;
+      }
+
+      .submit-button {
+        @apply px-5 py-2.5;
+      }
+
+      .home-button {
+        @apply top-2 left-4;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="https://our-writing-class.vercel.app/" class="home-button">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+      </svg>
+      Home
+    </a>
+    <h1 class="title">Submit Your Anonymous Feedback</h1>
+    <p class="description">
+      Welcome! This page allows you to share your anonymous feedback. We value your opinions and insights. Please take a moment to provide your thoughts, and click the submit button when you're done.
+    </p>
+
+    <div class="topic">
+      <h2 class="topic-title">Topic: Feedback</h2>
+      <p>Please provide any suggestions or comments you may have.</p>
+    </div>
+
+    <textarea class="text-area" placeholder="Write your feedback here..."></textarea>
+
+    <!-- React root div -->
+    <div id="submit-button-root"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.18/dist/index.min.js"></script>
+
+  <script type="text/babel">
+    const FeedbackForm = () => {
+      const [submittedText, setSubmittedText] = React.useState('');
+      const [isSubmitting, setIsSubmitting] = React.useState(false);
+      const [submissionStatus, setSubmissionStatus] = React.useState(null);
+
+      const handleSubmit = async () => {
+        const textareaValue = document.querySelector('.text-area').value.trim();
+
+        // Clear previous status before new submission attempt
+        setSubmissionStatus(null);
+
+        // Validation check
+        if (!textareaValue) {
+          setSubmissionStatus("empty");
+          return;
+        }
+
+        setIsSubmitting(true);
+
+        try {
+          const response = await axios.post('/api/submitFeedback', {
+            message: `Anonymous Feedback: \n\n${textareaValue}`,
+          });
+
+          if (response.data.success) {
+            setSubmittedText(textareaValue);
+            setSubmissionStatus("success");
+
+            // Trigger confetti effect
+            const confettiSettings = { target: 'confetti-canvas' };
+            const confetti = new ConfettiGenerator(confettiSettings);
+            confetti.render();
+
+            setTimeout(() => {
+              window.location.href = "https://our-writing-class.vercel.app/";
+            }, 2500);
+          } else {
+            setSubmissionStatus("error");
+          }
+        } catch (error) {
+          console.error('Error submitting feedback:', error);
+          setSubmissionStatus("error");
+        } finally {
+          setIsSubmitting(false);
+        }
+      };
+
+      return (
+        <div>
+          {submissionStatus === "empty" && (
+            <p className="submit-message text-red-600">Please write some feedback before submitting.</p>
+          )}
+          {submissionStatus === "success" && (
+            <p className="submit-message text-green-600">Thank you for your feedback!</p>
+          )}
+          {submissionStatus === "error" && (
+            <p className="submit-message text-red-600">Oops! Something went wrong. Please try again later.</p>
+          )}
+          <button className="submit-button" onClick={handleSubmit} disabled={isSubmitting}>
+            {isSubmitting ? 'Submitting...' : 'Submit Feedback'}
+          </button>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<FeedbackForm />, document.getElementById('submit-button-root'));
+  </script>
+</body>
+</html>
