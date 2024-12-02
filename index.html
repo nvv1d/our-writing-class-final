@@ -132,6 +132,67 @@ h3 img {
   margin-top: -0.6rem; /* This will push the images slightly up */
 }
   </style>
+	<style>
+        /* Floating Icon Styles */
+        #floating-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #007bff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            cursor: pointer;
+            z-index: 1000;
+            animation: shake 2s infinite, float 3s ease-in-out infinite;
+            transition: all 0.3s ease;
+        }
+
+        #floating-icon img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        /* Shake Animation */
+        @keyframes shake {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            10%, 30%, 50%, 70%, 90% { transform: translate(-5px, 0) rotate(-5deg); }
+            20%, 40%, 60%, 80% { transform: translate(5px, 0) rotate(5deg); }
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Hover Effect */
+        #floating-icon:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #floating-icon {
+                bottom: 15px;
+                right: 15px;
+                width: 50px;
+                height: 50px;
+            }
+
+            #floating-icon img {
+                width: 35px;
+                height: 35px;
+            }
+        }
+    </style>
+	
 </head>
   <body data-home-page="https://website6379576.nicepage.io/Copy-of-Page-18.html?version=ffe8a8d3-3611-839d-2d49-f1a0fde02c43" data-home-page-title="Copy of Page 18" data-path-to-root="/" data-include-products="false" class="u-body u-xl-mode" data-lang="en"> 
     <section class="u-align-center u-clearfix u-container-align-center u-valign-top-sm u-valign-top-xs u-section-1" id="sec-64e1">
@@ -415,4 +476,23 @@ document.addEventListener('keydown', function(e) {
       }
     });
   </script>
-</body></html>
+
+	      <!-- Floating Icon (add this to the bottom of your existing body content) -->
+    <div id="floating-icon">
+        <img src="https://em-content.zobj.net/source/microsoft-teams/363/graduation-cap_1f3a9.png" alt="Important Document" title="Click to view document">
+    </div>
+
+    <script>
+        // Add event listener to the floating icon
+        document.getElementById('floating-icon').addEventListener('click', function() {
+            // Replace this URL with the actual public sharing link to your Google Drive PDF
+            const pdfUrl = 'https://drive.google.com/file/d/YOUR_FILE_ID/view?usp=sharing';
+            
+            // Open the PDF in a new tab
+            window.open(pdfUrl, '_blank');
+        });
+    </script>
+	  
+</body>
+
+</html>
