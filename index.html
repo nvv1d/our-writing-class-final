@@ -483,14 +483,11 @@ document.addEventListener('keydown', function(e) {
 </div>
 
     <script>
-        // Add event listener to the floating icon
-        document.getElementById('floating-icon').addEventListener('click', function() {
-            // Replace this URL with the actual public sharing link to your Google Drive PDF
-            const pdfUrl = 'https://drive.google.com/file/d/YOUR_FILE_ID/view?usp=sharing';
-            
-            // Open the PDF in a new tab
-            window.open(pdfUrl, '_blank');
-        });
+        // Modify the floating icon to open Lessonplan.html
+document.getElementById('floating-icon').addEventListener('click', function() {
+    // Open the Lessonplan.html page in the same tab
+    window.location.href = 'Lessonplan.html';
+});
     </script>
 	  
 </body>
