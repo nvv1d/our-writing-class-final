@@ -136,11 +136,11 @@ h3 img {
         /* Floating Icon Styles */
         #floating-icon {
             position: fixed;
-            bottom: 20px;
+            top: 20px;
             right: 20px;
             width: 60px;
             height: 60px;
-            background-color: #007bff;
+            background-color: #e3b377; /* Matching the website's orange-ish color */
             border-radius: 50%;
             display: flex;
             justify-content: center;
@@ -173,14 +173,14 @@ h3 img {
 
         /* Hover Effect */
         #floating-icon:hover {
-            background-color: #0056b3;
+            background-color: #d4a066; /* Slightly darker shade for hover state */
             transform: scale(1.1);
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
             #floating-icon {
-                bottom: 15px;
+                top: 15px;
                 right: 15px;
                 width: 50px;
                 height: 50px;
@@ -477,10 +477,10 @@ document.addEventListener('keydown', function(e) {
     });
   </script>
 
-	      <!-- Floating Icon (add this to the bottom of your existing body content) -->
-    <div id="floating-icon">
-        <img src="https://github.com/nvv1d/our-writing-class-final/blob/main/appointment%20(2).png" title="Click to view document">
-    </div>
+	      <!-- Floating Icon (moved to upper right) -->
+<div id="floating-icon">
+    <img src="https://imgurl.ir/uploads/i646239_appointment__2_-removebg-preview.png" title="Click to view document">
+</div>
 
     <script>
         // Add event listener to the floating icon
