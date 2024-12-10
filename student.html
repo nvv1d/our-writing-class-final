@@ -193,48 +193,49 @@
         
 /* Adjust the Hall of Fame section placement */
 .hall-of-fame {
-    background-color: #fff; /* Match scoreboard background */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    padding: 1.5rem; /* Uniform padding */
-    margin-top: 2rem; /* Adjust vertical spacing */
-    text-align: center;
-    max-width: 600px; /* Limit width for consistency */
-    margin-left: auto;
-    margin-right: auto;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), /* Standard soft shadow */
+              0 0 20px rgba(255, 223, 84, 0.6); /* Yellowish glow effect */
+  padding: 1.5rem;
+  margin-top: 60px; /* Adjusted margin to move it lower */
+  text-align: center;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  overflow: hidden;
+  animation: spotlight 3s ease-in-out infinite alternate;
 }
 
-.hall-of-fame h3 {
-    font-size: 1.5rem; /* Match scoreboard title size */
-    font-weight: bold; /* Bold title */
-    color: #2c3e50; /* Dark title color */
-    margin-bottom: 1rem; /* Space below title */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px; /* Space between text and icon */
-}
+ .hall-of-fame h3 {
+    font-size: 1.5rem;
+    font-weight: bold; /* Make Hall of Fame title bold */
+    color: #2c3e50;
+    margin-bottom: 1rem;
+  }
 
-.hall-of-fame ol {
+  /* Align Hall of Fame list items to the left */
+  .hall-of-fame ol {
     list-style: none;
     padding-left: 0;
-    text-align: left; /* Align content to the left for readability */
-}
+    text-align: left; /* Left-aligns the list items */
+  }
 
-.hall-of-fame li {
-    font-size: 1.1rem; /* Match scoreboard list size */
+  .hall-of-fame li {
+    font-size: 1.1rem;
     margin-bottom: 0.5rem;
     color: black;
     display: flex;
     align-items: center;
-    gap: 0.5rem; /* Space between bullet and text */
-}
+    gap: 0.5rem; /* Adjust gap as needed */
+  }
 
-.hall-of-fame li::before {
-    content: "🏆"; /* Use a similar icon as the scoreboard */
-    font-size: 1.2rem; /* Size of the trophy */
-    color: #e3b377; /* Gold color for the trophy */
-}
+  .hall-of-fame li::before {
+    content: "🏅";
+    font-size: 1.2rem;
+    color: #e3b377;
+  }
 
   .hall-of-fame li span {
     font-weight: normal;
@@ -244,7 +245,6 @@
   .hall-of-fame li b {
     color: #e3b377;
   }
-	    
 .scoreboard-section {
     background-color: #fff;
     border-radius: 10px;
