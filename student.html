@@ -331,37 +331,34 @@
 }
     </style>
 </head>
-<body class="bg-gray-100">
+<body>
     <div class="min-h-screen flex items-center justify-center relative overflow-hidden">
-        <div class="container mx-auto px-8 py-8 max-w-4xl">
-            <div class="featured-card bg-white shadow-lg rounded-lg p-6">
-                <a href="https://our-writing-class.vercel.app/" class="home-button inline-flex items-center mb-4 text-blue-600 hover:text-blue-800">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
-                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                        <polyline points="9 22 9 12 15 12 15 22" />
+        <div class="container mx-auto px-4 py-8">
+            <div class="featured-card">
+                <!-- Home Button -->
+                <a href="https://our-writing-class.vercel.app/" class="home-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
                     </svg>
                     Home
                 </a>
-                <h2 id="student-of-the-week" class="title text-2xl font-bold mb-4 flex items-center">
-                    Student of the Week 🌟
-                </h2>
-
-                <div class="student-container flex items-center space-x-4 mb-4">
+                <h2 class="title" style="display: inline-flex; align-items: center;">Student of the Week🌟</h2>
+                <br>
+                
+                <!-- Student Container with Crown and Name -->
+                <div class="student-container">
                     <div class="crown-emoji" aria-label="Crown emoji">
-                        <img src="https://em-content.zobj.net/source/telegram/386/crown_1f451.webp" alt="Crown" class="w-12 h-12">
+                        <img src="https://em-content.zobj.net/source/telegram/386/crown_1f451.webp" alt="Crown emoji">
                     </div>
-                    <div class="student-name text-xl font-semibold">
-                        CuteChe
-                    </div>
+                    <p class="student-name">CuteChe</p>
                 </div>
-
-                <p class="text-gray-700 mb-4">
-                    This week's featured student, [Student Name], has impressed us all with their exceptional writing skills and creative flair. Their piece, titled '[Title]', captures the essence of our class theme in a truly inspiring way. We're thrilled to showcase their talent and celebrate their achievement.
-                </p>
-
-                <div class="student-writing bg-gray-50 p-4 rounded-lg mb-6">
-                    [Student's writing will be added here]
-                </div>
+                
+                <!-- Description Text -->
+                <p class="font-normal text-sm" style="display: inline-flex; align-items: left; text-align: justify; direction: ltr;">This week's featured student, [Student Name], has impressed us all with their exceptional writing skills and creative flair. Their piece, titled '[Title]', captures the essence of our class theme in a truly inspiring way. We're thrilled to showcase their talent and celebrate their achievement.</p>
+<br>
+                <p class="student-writing" style="display: inline-flex; align-items: left; text-align: justify; direction: ltr;">[Student's writing will be added here]</p>
+            </div>
 		<div class="scoreboard-section">
     <h3>
         Class Scoreboard
