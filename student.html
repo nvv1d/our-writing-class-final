@@ -235,7 +235,7 @@
   .hall-of-fame li b {
     color: #e3b377;
   }
-	    .scoreboard-section {
+.scoreboard-section {
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -289,6 +289,46 @@
     font-weight: bold;
     color: #e3b377;
 }
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    margin: 0 2px;
+    position: relative;
+}
+
+.badge:hover .badge-tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.badge-tooltip {
+    visibility: hidden;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.2s;
+    z-index: 10;
+}
+
+.badge-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}
     </style>
 </head>
 <body>
@@ -338,31 +378,68 @@
                 <td>1</td>
                 <td>Student A</td>
                 <td class="score">⭐ 25</td>
-                <td>🏆 🎨 ✍️</td>
+                <td>
+                    <span class="badge">
+                        🏆
+                        <span class="badge-tooltip">Top Performer</span>
+                    </span>
+                    <span class="badge">
+                        🎨
+                        <span class="badge-tooltip">Creative Excellence</span>
+                    </span>
+                    <span class="badge">
+                        ✍️
+                        <span class="badge-tooltip">Outstanding Writer</span>
+                    </span>
+                </td>
             </tr>
             <tr>
                 <td>2</td>
                 <td>Student B</td>
                 <td class="score">⭐ 20</td>
-                <td>🎨 ✍️</td>
+                <td>
+                    <span class="badge">
+                        🎨
+                        <span class="badge-tooltip">Creative Excellence</span>
+                    </span>
+                    <span class="badge">
+                        ✍️
+                        <span class="badge-tooltip">Outstanding Writer</span>
+                    </span>
+                </td>
             </tr>
             <tr>
                 <td>3</td>
                 <td>Student C</td>
                 <td class="score">⭐ 18</td>
-                <td>✍️</td>
+                <td>
+                    <span class="badge">
+                        ✍️
+                        <span class="badge-tooltip">Outstanding Writer</span>
+                    </span>
+                </td>
             </tr>
             <tr>
                 <td>4</td>
                 <td>Student D</td>
                 <td class="score">⭐ 15</td>
-                <td>🎨</td>
+                <td>
+                    <span class="badge">
+                        🎨
+                        <span class="badge-tooltip">Creative Excellence</span>
+                    </span>
+                </td>
             </tr>
             <tr>
                 <td>5</td>
                 <td>Student E</td>
                 <td class="score">⭐ 12</td>
-                <td>✍️</td>
+                <td>
+                    <span class="badge">
+                        ✍️
+                        <span class="badge-tooltip">Outstanding Writer</span>
+                    </span>
+                </td>
             </tr>
         </tbody>
     </table>
