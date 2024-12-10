@@ -235,6 +235,60 @@
   .hall-of-fame li b {
     color: #e3b377;
   }
+	    .scoreboard-section {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-top: 60px;
+    text-align: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.scoreboard-section h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.scoreboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.scoreboard-table th,
+.scoreboard-table td {
+    padding: 0.75rem;
+    text-align: center;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.scoreboard-table th {
+    background-color: rgba(227, 179, 119, 0.1);
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.scoreboard-table tr:nth-child(even) {
+    background-color: rgba(247, 250, 252, 0.5);
+}
+
+.scoreboard-table tr:hover {
+    background-color: rgba(227, 179, 119, 0.05);
+}
+
+.score {
+    font-weight: bold;
+    color: #e3b377;
+}
     </style>
 </head>
 <body>
@@ -265,6 +319,54 @@
 <br>
                 <p class="student-writing" style="display: inline-flex; align-items: left; text-align: justify; direction: ltr;">[Student's writing will be added here]</p>
             </div>
+		<div class="scoreboard-section">
+    <h3>
+        Class Scoreboard
+        <img src="https://em-content.zobj.net/source/telegram/386/star_2b50.webp" alt="star" style="width: 30px; height: 30px;">
+    </h3>
+    <table class="scoreboard-table">
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Student</th>
+                <th>Stars</th>
+                <th>Badges</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Student A</td>
+                <td class="score">⭐ 25</td>
+                <td>🏆 🎨 ✍️</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Student B</td>
+                <td class="score">⭐ 20</td>
+                <td>🎨 ✍️</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Student C</td>
+                <td class="score">⭐ 18</td>
+                <td>✍️</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Student D</td>
+                <td class="score">⭐ 15</td>
+                <td>🎨</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Student E</td>
+                <td class="score">⭐ 12</td>
+                <td>✍️</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
             <!-- Hall of Fame Section -->
             <div class="hall-of-fame mt-16">
                 <h3 class="title" style="display: inline-flex; align-items: center;">
