@@ -31,6 +31,52 @@
     <meta data-intl-tel-input-cdn-path="intlTelInput/">
 	
 	<style>
+		        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .word-of-day {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            max-width: 300px;
+        }
+
+        .word-title {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .word {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .pronunciation {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .definition {
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        .example {
+            font-size: 0.9em;
+            color: #666;
+            font-style: italic;
+        }
     /* Disable text selection across the entire page */
     body {
       -webkit-user-select: none; /* Chrome, Safari */
@@ -197,6 +243,13 @@ h3 img {
   <body data-home-page="https://website6379576.nicepage.io/Copy-of-Page-18.html?version=ffe8a8d3-3611-839d-2d49-f1a0fde02c43" data-home-page-title="Copy of Page 18" data-path-to-root="/" data-include-products="false" class="u-body u-xl-mode" data-lang="en"> 
     <section class="u-align-center u-clearfix u-container-align-center u-valign-top-sm u-valign-top-xs u-section-1" id="sec-64e1">
       <div class="u-expanded-width u-grey-10 u-shape u-shape-rectangle u-shape-1"></div>
+	        <div class="word-of-day">
+        <div class="word-title">WORD OF THE DAY</div>
+        <div class="word" id="wordDisplay"></div>
+        <div class="pronunciation" id="pronunciationDisplay"></div>
+        <div class="definition" id="definitionDisplay"></div>
+        <div class="example" id="exampleDisplay"></div>
+    </div>
 <h5 class="u-custom-font u-font-montserrat u-text u-text-1">Welcome to</h5>
 <h1 class="u-text u-text-2">Our Writing Class</h1>
       <div class="u-list u-list-1">
@@ -489,7 +542,53 @@ document.getElementById('floating-icon').addEventListener('click', function() {
     window.location.href = 'https://our-writing-class.vercel.app/lessonplan.html';
 });
     </script>
-	  
+	      <script>
+        const words = [
+            {
+                word: "Ephemeral",
+                pronunciation: "/əˈfem(ə)rəl/",
+                definition: "adj. lasting for a very short time",
+                example: "The morning dew was ephemeral, disappearing as soon as the sun rose."
+            },
+            {
+                word: "Serendipity",
+                pronunciation: "/ˌserənˈdipədē/",
+                definition: "n. the occurrence and development of events by chance in a happy or beneficial way",
+                example: "Finding my dream job while getting lost in the city was pure serendipity."
+            },
+            {
+                word: "Eloquent",
+                pronunciation: "/ˈeləkwənt/",
+                definition: "adj. fluent or persuasive in speaking or writing",
+                example: "Her eloquent speech moved the entire audience to tears."
+            },
+            {
+                word: "Resilient",
+                pronunciation: "/rəˈzilyənt/",
+                definition: "adj. able to withstand or recover quickly from difficult conditions",
+                example: "The resilient community rebuilt their town after the natural disaster."
+            },
+            {
+                word: "Pragmatic",
+                pronunciation: "/praɡˈmadik/",
+                definition: "adj. dealing with things sensibly and realistically",
+                example: "We need a pragmatic approach to solve this complex problem."
+            }
+        ];
+
+        function setWordOfDay() {
+            const today = new Date();
+            const index = today.getDate() % words.length;
+            const wordOfDay = words[index];
+            
+            document.getElementById('wordDisplay').textContent = wordOfDay.word;
+            document.getElementById('pronunciationDisplay').textContent = wordOfDay.pronunciation;
+            document.getElementById('definitionDisplay').textContent = wordOfDay.definition;
+            document.getElementById('exampleDisplay').textContent = wordOfDay.example;
+        }
+
+        setWordOfDay();
+    </script>
 </body>
 
 </html>
