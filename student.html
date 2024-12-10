@@ -60,26 +60,27 @@
     margin: 0 auto; /* Center the card */
 }
   /* Featured Card Adjustments */
-  .featured-card h2 {
+.featured-card h2 {
     font-size: 1.75rem;
-    margin-bottom: 2rem;
+    margin: 3rem 0 2rem; /* Add top margin to move title below the button */
     color: #2c3e50;
-    font-weight: bold; /* Make Student of the Week title bold */
-  }
-        .home-button {
-            position: absolute;
-            top: 1rem;
-            left: 2rem;
-            background-color: #e3b377;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 5px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            transition: background-color 0.3s ease;
-        }
+    font-weight: bold;
+}
+.home-button {
+    position: absolute;
+    top: 1rem;
+    left: 1rem; /* Reduce left margin to avoid excessive alignment */
+    background-color: #e3b377;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: background-color 0.3s ease;
+    z-index: 10; /* Ensure it stays above other elements */
+}
         .home-button:hover {
             background-color: #d6a462;
         }
