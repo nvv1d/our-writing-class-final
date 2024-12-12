@@ -308,119 +308,12 @@ Explain the emotional connection or meaning this place has for you...
 	
 Use rich, descriptive language to help readers experience the place through your words."></textarea>
 
-    <!-- React root div -->
-    <div id="submit-button-root"></div>
-  </div>
+        <!-- React root div -->
+        <div id="submit-button-root"></div>
+    </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.18/dist/index.min.js"></script>
-
-<!-- React component with fixed validation -->
-<script type="text/babel">
-  const TelegramIntegration = () => {
-    const [submittedText, setSubmittedText] = React.useState('');
-    const [isSubmitting, setIsSubmitting] = React.useState(false);
-    const [submissionStatus, setSubmissionStatus] = React.useState(null);
-
-    const handleSubmit = async () => {
-      const textareaValue = document.querySelector('.text-area').value.trim();
-      const nameDropdown = document.getElementById('name-dropdown').value;
-      const classDropdown = document.getElementById('class-dropdown').value;
-
-      // Clear previous status before new submission attempt
-      setSubmissionStatus(null);
-
-      // Validation checks
-      if (!textareaValue) {
-        setSubmissionStatus("empty");
-        return;
-      }
-      if (!nameDropdown) {
-        setSubmissionStatus("nameEmpty");
-        return;
-      }
-
-      setIsSubmitting(true);
-
-      try {
-        const response = await axios.post('/api/submitAssignment', {
-          message: `Class: ${classDropdown}\nName: ${nameDropdown}\n\n${textareaValue}`,
-        });
-
-        if (response.data.success) {
-          setSubmittedText(textareaValue);
-          setSubmissionStatus("success");
-
-          // Trigger confetti effect
-          const confettiSettings = { target: 'confetti-canvas' };
-          const confetti = new ConfettiGenerator(confettiSettings);
-          confetti.render();
-          setTimeout(() => confetti.clear(), 3000);
-        } else {
-          setSubmissionStatus("error");
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        setSubmissionStatus("error");
-      } finally {
-        setIsSubmitting(false);
-      }
-    };
-
-    return (
-      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-        <button
-          className="submit-button"
-          onClick={handleSubmit}
-          disabled={isSubmitting}
-          style={{ opacity: isSubmitting ? 0.7 : 1 }}
-        >
-          {isSubmitting ? 'Submitting...' : 'Submit Assignment'}
-        </button>
-        {submissionStatus && (
-          <span style={{
-            color: submissionStatus === "success" ? "#4CAF50" : "#f44336",
-            fontWeight: '600',
-            fontSize: '16px'
-          }}>
-            {submissionStatus === "success" ? "Submitted Successfully!" :
-             submissionStatus === "nameEmpty" ? "Please select your name!" :
-             submissionStatus === "empty" ? "Please write something before submitting!" :
-             "An error occurred while submitting."}
-          </span>
-        )}
-      </div>
-    );
-  };
-
-  // Render the React component
-  ReactDOM.render(
-    <TelegramIntegration />,
-    document.getElementById('submit-button-root')
-  );
-      // Function to smoothly scroll dropdown into view on mobile
-function smoothScrollToCenter(element) {
-  const rect = element.getBoundingClientRect();
-  const isMobile = window.innerWidth <= 768;
-
-  if (isMobile) {
-    window.scrollTo({
-      top: rect.top + window.scrollY - (window.innerHeight / 2) + (rect.height / 2),
-      behavior: "smooth",
-    });
-  }
-}
-
-// Attach event listeners to dropdowns
-document.getElementById('class-dropdown').addEventListener('focus', function () {
-  smoothScrollToCenter(this);
-});
-document.getElementById('name-dropdown').addEventListener('focus', function () {
-  smoothScrollToCenter(this);
-});
-
-</script>
-<canvas id="confetti-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999;"></canvas>
-	    
+    <canvas id="confetti-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999;"></canvas>
+    
     <!-- Chat Plugin Component -->
     <div id="chat-plugin-root"></div>
 
@@ -584,5 +477,115 @@ document.getElementById('name-dropdown').addEventListener('focus', function () {
                 </div>
             );
         };
+	    
+        // TelegramIntegration Component
+        const TelegramIntegration = () => {
+            const [submittedText, setSubmittedText] = React.useState('');
+            const [isSubmitting, setIsSubmitting] = React.useState(false);
+            const [submissionStatus, setSubmissionStatus] = React.useState(null);
+
+            const handleSubmit = async () => {
+                const textareaValue = document.querySelector('.text-area').value.trim();
+                const nameDropdown = document.getElementById('name-dropdown').value;
+                const classDropdown = document.getElementById('class-dropdown').value;
+
+                // Clear previous status before new submission attempt
+                setSubmissionStatus(null);
+
+                // Validation checks
+                if (!textareaValue) {
+                    setSubmissionStatus("empty");
+                    return;
+                }
+                if (!nameDropdown) {
+                    setSubmissionStatus("nameEmpty");
+                    return;
+                }
+
+                setIsSubmitting(true);
+
+                try {
+                    const response = await axios.post('/api/submitAssignment', {
+                        message: `Class: ${classDropdown}\nName: ${nameDropdown}\n\n${textareaValue}`,
+                    });
+
+                    if (response.data.success) {
+                        setSubmittedText(textareaValue);
+                        setSubmissionStatus("success");
+
+                        // Trigger confetti effect
+                        const confettiSettings = { target: 'confetti-canvas' };
+                        const confetti = new ConfettiGenerator(confettiSettings);
+                        confetti.render();
+                        setTimeout(() => confetti.clear(), 3000);
+                    } else {
+                        setSubmissionStatus("error");
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    setSubmissionStatus("error");
+                } finally {
+                    setIsSubmitting(false);
+                }
+            };
+
+            return (
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <button
+                        className="submit-button"
+                        onClick={handleSubmit}
+                        disabled={isSubmitting}
+                        style={{ opacity: isSubmitting ? 0.7 : 1 }}
+                    >
+                        {isSubmitting ? 'Submitting...' : 'Submit Assignment'}
+                    </button>
+                    {submissionStatus && (
+                        <span style={{
+                            color: submissionStatus === "success" ? "#4CAF50" : "#f44336",
+                            fontWeight: '600',
+                            fontSize: '16px'
+                        }}>
+                            {submissionStatus === "success" ? "Submitted Successfully!" :
+                             submissionStatus === "nameEmpty" ? "Please select your name!" :
+                             submissionStatus === "empty" ? "Please write something before submitting!" :
+                             "An error occurred while submitting."}
+                        </span>
+                    )}
+                </div>
+            );
+        };
+
+        // Smooth scroll function for dropdowns
+        function smoothScrollToCenter(element) {
+            const rect = element.getBoundingClientRect();
+            const isMobile = window.innerWidth <= 768;
+
+            if (isMobile) {
+                window.scrollTo({
+                    top: rect.top + window.scrollY - (window.innerHeight / 2) + (rect.height / 2),
+                    behavior: "smooth",
+                });
+            }
+        }
+
+        // Render components
+        ReactDOM.render(
+            <TelegramIntegration />,
+            document.getElementById('submit-button-root')
+        );
+
+        ReactDOM.render(
+            <ChatPlugin />,
+            document.getElementById('chat-plugin-root')
+        );
+
+        // Event listeners for dropdown scrolling
+        document.getElementById('class-dropdown').addEventListener('focus', function () {
+            smoothScrollToCenter(this);
+        });
+        document.getElementById('name-dropdown').addEventListener('focus', function () {
+            smoothScrollToCenter(this);
+        });
+    </script>
 </body>
 </html>
