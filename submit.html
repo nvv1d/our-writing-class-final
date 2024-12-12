@@ -298,117 +298,281 @@ Explain the emotional connection or meaning this place has for you...
 	
 Use rich, descriptive language to help readers experience the place through your words."></textarea>
 
-    <!-- React root div -->
-    <div id="submit-button-root"></div>
-  </div>
+        <!-- React root div for submission -->
+        <div id="submit-button-root"></div>
+    </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.18/dist/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.18/dist/index.min.js"></script>
 
-<!-- React component with fixed validation -->
-<script type="text/babel">
-  const TelegramIntegration = () => {
-    const [submittedText, setSubmittedText] = React.useState('');
-    const [isSubmitting, setIsSubmitting] = React.useState(false);
-    const [submissionStatus, setSubmissionStatus] = React.useState(null);
+    <!-- React component for Submission -->
+    <script type="text/babel">
+        const TelegramIntegration = () => {
+            const [submittedText, setSubmittedText] = React.useState('');
+            const [isSubmitting, setIsSubmitting] = React.useState(false);
+            const [submissionStatus, setSubmissionStatus] = React.useState(null);
 
-    const handleSubmit = async () => {
-      const textareaValue = document.querySelector('.text-area').value.trim();
-      const nameDropdown = document.getElementById('name-dropdown').value;
-      const classDropdown = document.getElementById('class-dropdown').value;
+            const handleSubmit = async () => {
+                const textareaValue = document.querySelector('.text-area').value.trim();
+                const nameDropdown = document.getElementById('name-dropdown').value;
+                const classDropdown = document.getElementById('class-dropdown').value;
 
-      // Clear previous status before new submission attempt
-      setSubmissionStatus(null);
+                setSubmissionStatus(null);
 
-      // Validation checks
-      if (!textareaValue) {
-        setSubmissionStatus("empty");
-        return;
-      }
-      if (!nameDropdown) {
-        setSubmissionStatus("nameEmpty");
-        return;
-      }
+                if (!textareaValue) {
+                    setSubmissionStatus("empty");
+                    return;
+                }
+                if (!nameDropdown) {
+                    setSubmissionStatus("nameEmpty");
+                    return;
+                }
 
-      setIsSubmitting(true);
+                setIsSubmitting(true);
 
-      try {
-        const response = await axios.post('/api/submitAssignment', {
-          message: `Class: ${classDropdown}\nName: ${nameDropdown}\n\n${textareaValue}`,
-        });
+                try {
+                    const response = await axios.post('/api/submitAssignment', {
+                        message: `Class: ${classDropdown}\nName: ${nameDropdown}\n\n${textareaValue}`,
+                    });
 
-        if (response.data.success) {
-          setSubmittedText(textareaValue);
-          setSubmissionStatus("success");
+                    if (response.data.success) {
+                        setSubmittedText(textareaValue);
+                        setSubmissionStatus("success");
 
-          // Trigger confetti effect
-          const confettiSettings = { target: 'confetti-canvas' };
-          const confetti = new ConfettiGenerator(confettiSettings);
-          confetti.render();
-          setTimeout(() => confetti.clear(), 3000);
-        } else {
-          setSubmissionStatus("error");
+                        const confettiSettings = { target: 'confetti-canvas' };
+                        const confetti = new ConfettiGenerator(confettiSettings);
+                        confetti.render();
+                        setTimeout(() => confetti.clear(), 3000);
+                    } else {
+                        setSubmissionStatus("error");
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    setSubmissionStatus("error");
+                } finally {
+                    setIsSubmitting(false);
+                }
+            };
+
+            return (
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <button
+                        className="submit-button"
+                        onClick={handleSubmit}
+                        disabled={isSubmitting}
+                        style={{ opacity: isSubmitting ? 0.7 : 1 }}
+                    >
+                        {isSubmitting ? 'Submitting...' : 'Submit Assignment'}
+                    </button>
+                    {submissionStatus && (
+                        <span style={{
+                            color: submissionStatus === "success" ? "#4CAF50" : "#f44336",
+                            fontWeight: '600',
+                            fontSize: '16px'
+                        }}>
+                            {submissionStatus === "success" ? "Submitted Successfully!" :
+                             submissionStatus === "nameEmpty" ? "Please select your name!" :
+                             submissionStatus === "empty" ? "Please write something before submitting!" :
+                             "An error occurred while submitting."}
+                        </span>
+                    )}
+                </div>
+            );
+        };
+
+        ReactDOM.render(
+            <TelegramIntegration />,
+            document.getElementById('submit-button-root')
+        );
+    </script>
+
+    <!-- Chat Plugin React Component -->
+    <div id="chat-plugin-root"></div>
+    <script type="text/babel">
+        const ChatPlugin = () => {
+            const [isOpen, setIsOpen] = React.useState(false);
+            const [messages, setMessages] = React.useState([]);
+            const [inputMessage, setInputMessage] = React.useState('');
+            const [username, setUsername] = React.useState('');
+            const [isUsernameSet, setIsUsernameSet] = React.useState(false);
+            const messagesEndRef = React.useRef(null);
+
+            const scrollToBottom = () => {
+                messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+            };
+
+            React.useEffect(() => {
+                scrollToBottom();
+            }, [messages]);
+
+            React.useEffect(() => {
+                const channel = supabase
+                    .channel('chat-room')
+                    .on(
+                        'broadcast', 
+                        { event: 'new-message' }, 
+                        (payload) => {
+                            setMessages(prevMessages => [...prevMessages, payload.payload]);
+                        }
+                    )
+                    .subscribe();
+
+                return () => {
+                    supabase.removeChannel(channel);
+                };
+            }, []);
+
+            const sendMessage = () => {
+                if (inputMessage.trim()) {
+                    const messageObject = {
+                        username,
+                        text: inputMessage,
+                        timestamp: new Date().toISOString()
+                    };
+
+                    supabase
+                        .channel('chat-room')
+                        .send({
+                            type: 'broadcast',
+                            event: 'new-message',
+                            payload: messageObject
+                        });
+
+                    setInputMessage('');
+                }
+            };
+
+            const handleKeyPress = (e) => {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            };
+
+            const setUsernameFn = () => {
+                if (username.trim()) {
+                    setIsUsernameSet(true);
+                }
+            };
+
+            return (
+                <div className="fixed bottom-4 right-4 z-50">
+                    {!isOpen ? (
+                        <button 
+                            onClick={() => setIsOpen(true)}
+                            className="bg-[#e3b377] text-white p-3 rounded-full shadow-lg hover:bg-[#d6a462] transition-colors"
+                        >
+                            {React.createElement(lucide.MessageCircle, { size: 24 })}
+                        </button>
+                    ) : (
+                        <div 
+                            className="w-80 h-[500px] bg-white rounded-lg shadow-xl border flex flex-col"
+                            style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)' }}
+                        >
+                            <div 
+                                className="bg-[#e3b377] text-white p-4 flex justify-between items-center rounded-t-lg"
+                            >
+                                <h2 className="text-lg font-semibold">Community Chat</h2>
+                                <button 
+                                    onClick={() => setIsOpen(false)}
+                                    className="hover:bg-[#d6a462] p-1 rounded"
+                                >
+                                    {React.createElement(lucide.X, { size: 20 })}
+                                </button>
+                            </div>
+
+                            {!isUsernameSet ? (
+                                <div className="p-4 flex flex-col space-y-2">
+                                    <input 
+                                        type="text"
+                                        value={username}
+                                        onChange={(e) => setUsername(e.target.value)}
+                                        placeholder="Enter your name"
+                                        className="w-full p-2 border rounded focus:border-[#e3b377]"
+                                    />
+                                    <button 
+                                        onClick={setUsernameFn}
+                                        className="bg-[#e3b377] text-white p-2 rounded hover:bg-[#d6a462]"
+                                    >
+                                        Start Chatting
+                                    </button>
+                                </div>
+                            ) : (
+                                <>
+                                    <div className="flex-grow overflow-y-auto p-4 space-y-2" style={{backgroundColor: 'rgba(247, 247, 247, 0.8)'}}>
+                                        {messages.map((msg, index) => (
+                                            <div 
+                                                key={index} 
+                                                className={`p-2 rounded max-w-[80%] ${
+                                                    msg.username === username 
+                                                    ? 'bg-[#e3b377]/20 self-end ml-auto' 
+                                                    : 'bg-gray-100'
+                                                }`}
+                                            >
+                                                <div className="font-semibold text-xs text-gray-600">{msg.username}</div>
+                                                <div>{msg.text}</div>
+                                            </div>
+                                        ))}
+                                        <div ref={messagesEndRef} />
+                                    </div>
+                                    
+                                    <div className="p-4 flex space-x-2">
+                                        <input 
+                                            type="text"
+                                            value={inputMessage}
+                                            onChange={(e) => setInputMessage(e.target.value)}
+                                            onKeyPress={handleKeyPress}
+                                            placeholder="Type a message..."
+                                            className="flex-grow p-2 border rounded focus:border-[#e3b377]"
+                                        />
+                                        <button 
+                                            onClick={sendMessage}
+                                            className="bg-[#e3b377] text-white p-2 rounded hover:bg-[#d6a462]"
+                                        >
+                                            {React.createElement(lucide.Send, { size: 20 })}
+                                        </button>
+                                    </div>
+                                </>
+                            )}
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        // Initialize Supabase Client
+        const supabaseClient = supabase.createClient(
+          'https://mbchxsivzwtptpjkywzp.supabase.co', 
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1iY2h4c2l2end0cHRwamt5d3pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQwMjk2MTYsImV4cCI6MjA0OTYwNTYxNn0.u0K_Las2AXemf1YFv6Z-IO46KgEWVZlWMcyILSrnJgk'
+        );
+
+        // Render the React component
+        ReactDOM.render(
+            <ChatPlugin />,
+            document.getElementById('chat-plugin-root')
+        );
+    </script>
+
+    <canvas id="confetti-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999;"></canvas>
+    
+    <!-- Smooth scroll function -->
+    <script>
+        function smoothScrollToCenter(element) {
+            const rect = element.getBoundingClientRect();
+            const isMobile = window.innerWidth <= 768;
+
+            if (isMobile) {
+                window.scrollTo({
+                    top: rect.top + window.scrollY - (window.innerHeight / 2) + (rect.height / 2),
+                    behavior: "smooth",
+                });
+            }
         }
-      } catch (error) {
-        console.error('Error:', error);
-        setSubmissionStatus("error");
-      } finally {
-        setIsSubmitting(false);
-      }
-    };
 
-    return (
-      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-        <button
-          className="submit-button"
-          onClick={handleSubmit}
-          disabled={isSubmitting}
-          style={{ opacity: isSubmitting ? 0.7 : 1 }}
-        >
-          {isSubmitting ? 'Submitting...' : 'Submit Assignment'}
-        </button>
-        {submissionStatus && (
-          <span style={{
-            color: submissionStatus === "success" ? "#4CAF50" : "#f44336",
-            fontWeight: '600',
-            fontSize: '16px'
-          }}>
-            {submissionStatus === "success" ? "Submitted Successfully!" :
-             submissionStatus === "nameEmpty" ? "Please select your name!" :
-             submissionStatus === "empty" ? "Please write something before submitting!" :
-             "An error occurred while submitting."}
-          </span>
-        )}
-      </div>
-    );
-  };
-
-  // Render the React component
-  ReactDOM.render(
-    <TelegramIntegration />,
-    document.getElementById('submit-button-root')
-  );
-      // Function to smoothly scroll dropdown into view on mobile
-function smoothScrollToCenter(element) {
-  const rect = element.getBoundingClientRect();
-  const isMobile = window.innerWidth <= 768;
-
-  if (isMobile) {
-    window.scrollTo({
-      top: rect.top + window.scrollY - (window.innerHeight / 2) + (rect.height / 2),
-      behavior: "smooth",
-    });
-  }
-}
-
-// Attach event listeners to dropdowns
-document.getElementById('class-dropdown').addEventListener('focus', function () {
-  smoothScrollToCenter(this);
-});
-document.getElementById('name-dropdown').addEventListener('focus', function () {
-  smoothScrollToCenter(this);
-});
-
-</script>
-<canvas id="confetti-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999;"></canvas>
+        document.getElementById('class-dropdown').addEventListener('focus', function () {
+            smoothScrollToCenter(this);
+        });
+        document.getElementById('name-dropdown').addEventListener('focus', function () {
+            smoothScrollToCenter(this);
+        });
+    </script>
 </body>
 </html>
