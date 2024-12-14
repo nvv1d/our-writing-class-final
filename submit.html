@@ -267,12 +267,12 @@ document.addEventListener('keydown', function(e) {
   <option value="Asra Bakhtar">Asra Bakhtar</option>
   <option value="Ata Aghamali">Ata Aghamali</option>
   <option value="Farzane Hamdi">Farzane Hamdi</option>
-  <option value="Leyla Ne'mati" data-prank="Leila Neymati">Leyla Ne'mati</option>
+  <option value="Leila Nemati" data-prank="Leila Neymati">Leila Nemati</option>
   <option value="Maryam Germchi" data-prank="Maryam Bakhshi">Maryam Germchi</option>
   <option value="Nahid Mohammadi">Nahid Mohammadi</option>
   <option value="Sahar Seraj">Sahar Seraj</option>
   <option value="Tohid Sabbagh">Tohid Sabbagh</option>
-  <option value="Zahra Sa'adatKhah">Zahra Sa'adatKhah</option>
+  <option value="Zahra SaadatKhah">Zahra SaadatKhah</option>
 </select>
 
 <script>
@@ -283,7 +283,7 @@ function prankChange(selectElement) {
         selectedOption.textContent = prankValue;
         setTimeout(() => {
             selectedOption.textContent = selectedOption.getAttribute('value');
-        }, 1000); // Reverts back after 1 second
+        }, 2000); // Reverts back after 1 second
     }
 }
 </script>
