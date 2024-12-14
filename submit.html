@@ -258,22 +258,33 @@ document.addEventListener('keydown', function(e) {
       <option value="TEFL 402">TEFL 402</option>
     </select>
 
-    <label class="dropdown-label" for="name-dropdown">Name:</label>
-    <select id="name-dropdown" class="dropdown">
-      <option value="" disabled selected>Select your name</option>
-      <option>Dr. Behzadpoor</option>
-      <option>Ali Tahavvory</option>
-      <option>AmirAli Hashemi</option>
-      <option>Asra Bakhtar</option>
-      <option>Ata Aghamali</option>
-      <option>Farzane Hamdi</option>
-      <option>Leyla Ne'mati</option>
-      <option>Maryam Germchi</option>
-      <option>Nahid Mohammadi</option>
-      <option>Sahar Seraj</option>
-      <option>Tohid Sabbagh</option>
-      <option>Zahra Sa'adatKhah</option>
-    </select>
+<label class="dropdown-label" for="name-dropdown">Name:</label>
+<select id="name-dropdown" class="dropdown" onchange="prankChange(this)">
+  <option value="" disabled selected>Select your name</option>
+  <option value="Dr. Behzadpoor">Dr. Behzadpoor</option>
+  <option value="Ali Tahavvory">Ali Tahavvory</option>
+  <option value="AmirAli Hashemi">AmirAli Hashemi</option>
+  <option value="Asra Bakhtar">Asra Bakhtar</option>
+  <option value="Ata Aghamali">Ata Aghamali</option>
+  <option value="Farzane Hamdi">Farzane Hamdi</option>
+  <option value="Leyla Nemati" data-prank="Leila Neymati">Leyla Nemati</option>
+  <option value="Maryam Germchi" data-prank="Maryam Bakhshi">Maryam Germchi</option>
+  <option value="Nahid Mohammadi">Nahid Mohammadi</option>
+  <option value="Sahar Seraj">Sahar Seraj</option>
+  <option value="Tohid Sabbagh">Tohid Sabbagh</option>
+  <option value="Zahra SaadatKhah">Zahra Sa'adatKhah</option>
+</select>
+
+<script>
+function prankChange(selectElement) {
+    const selectedOption = selectElement.options[selectElement.selectedIndex];
+    const prankValue = selectedOption.getAttribute('data-prank');
+    if (prankValue) {
+        selectedOption.textContent = prankValue;
+        selectedOption.value = prankValue;
+    }
+}
+</script>
 
 <div class="topic">
   <h2 class="topic-title">Topic: Describe a Place That Means Something to You</h2>
