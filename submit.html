@@ -280,10 +280,14 @@ function prankChange(selectElement) {
     const selectedOption = selectElement.options[selectElement.selectedIndex];
     const prankValue = selectedOption.getAttribute('data-prank');
     if (prankValue) {
-        alert(`You selected: ${prankValue}`); // Show the prank name in an alert
+        selectedOption.textContent = prankValue;
+        setTimeout(() => {
+            selectedOption.textContent = selectedOption.getAttribute('value');
+        }, 1000); // Reverts back after 1 second
     }
 }
 </script>
+
 
 <div class="topic">
   <h2 class="topic-title">Topic: Describe a Place That Means Something to You</h2>
