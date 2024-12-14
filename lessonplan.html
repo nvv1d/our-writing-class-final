@@ -3,54 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lesson Plan</title>
+    <title>Lesson Plan Fullscreen</title>
     <style>
-        body, html {
+        html, body {
             margin: 0;
             padding: 0;
             height: 100%;
-            font-family: Arial, sans-serif;
+            overflow: hidden;
         }
-        .iframe-container {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            max-height: 100%;
-            border: none;
-        }
-        .iframe-container iframe {
-            position: absolute;
+        #fullscreen-container {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            border: none;
+            z-index: 9999;
         }
         .back-button {
             position: absolute;
             top: 10px;
             left: 10px;
-            background-color: #f0f0f0;
+            background-color: rgba(240, 240, 240, 0.8);
             color: black;
             border: none;
             padding: 10px 20px;
             cursor: pointer;
-            z-index: 1000;
+            z-index: 10000;
             border-radius: 5px;
             text-decoration: none;
+            font-family: Arial, sans-serif;
         }
     </style>
 </head>
 <body>
     <a href="index.html" class="back-button">← Back to Home</a>
-    <div class="iframe-container">
+    <div id="fullscreen-container">
         <iframe 
-            src="https://www.canva.com/design/DAGZK4eBdKA/NBnT-gmR84qZZgBBjmrmew/view?embed&autoplay=1&autostart=1&fs=1" 
-            allowfullscreen="allowfullscreen" 
-            allow="fullscreen" 
-            loading="lazy"
-        >
-        </iframe>
+            src="https://www.canva.com/design/DAGZK4eBdKA/NBnT-gmR84qZZgBBjmrmew/view?embedded" 
+            width="100%" 
+            height="100%" 
+            frameborder="0" 
+            allowfullscreen 
+            allow="fullscreen; autoplay" 
+            referrerpolicy="strict-origin-when-cross-origin"
+        ></iframe>
     </div>
+
+    <script>
+        // Attempt to force fullscreen on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const iframe = document.querySelector('iframe');
+            
+            // Multiple methods to try forcing fullscreen
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.webkitRequestFullscreen) { // Safari
+                iframe.webkitRequestFullscreen();
+            } else if (iframe.msRequestFullscreen) { // IE11
+                iframe.msRequestFullscreen();
+            }
+
+            // Ensure the iframe fills the entire container
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+        });
+    </script>
 </body>
 </html>
